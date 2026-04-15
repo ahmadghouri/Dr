@@ -1,63 +1,79 @@
-import React from 'react';
-import { useUsers, useDeleteUser } from '../hooks/useAdmin';
-import { useUser } from '../../auth/hooks/useAuth';
+import React, { useState } from 'react';
+import { useUser, useLogout } from '../../auth/hooks/useAuth';
 import { Navigate } from 'react-router-dom';
+import Sidebar from './Sidebar';
+import UsersTable from './UsersTable';
+import ServicesManager from './ServicesManager';
+import ProjectsManager from './ProjectsManager';
+import BlogsManager from './BlogsManager';
+import DoctorsManager from './DoctorsManager';
+import AboutManager from './AboutManager';
+import MessagesTable from './MessagesTable';
+import DashboardOverview from './DashboardOverview';
 
 const AdminDashboard: React.FC = () => {
   const { data: currentUser, isLoading: userLoading } = useUser();
-  const { data: users, isLoading: usersLoading } = useUsers();
-  const deleteMutation = useDeleteUser();
+  const [activeTab, setActiveTab] = useState('dashboard');
+  const logout = useLogout();
 
-  if (userLoading) return <div>Loading user profile...</div>;
+  if (userLoading) return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="w-16 h-16 border-4 border-[#00A78E] border-t-[#C1FF72] rounded-full animate-spin"></div>
+    </div>
+  );
+
   if (!currentUser?.isAdmin) return <Navigate to="/" />;
 
-  if (usersLoading) return <div>Loading users...</div>;
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'dashboard': return <DashboardOverview />;
+      case 'users': return <UsersTable />;
+      case 'services': return <ServicesManager />;
+      case 'projects': return <ProjectsManager />;
+      case 'blogs': return <BlogsManager />;
+      case 'doctors': return <DoctorsManager />;
+      case 'about': return <AboutManager />;
+      case 'contact': return <MessagesTable />;
+      default: return <DashboardOverview />;
+    }
+  };
 
   return (
-    <div className="container mx-auto p-4 pt-20">
-      <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
-      <div className="bg-white shadow-md rounded-lg overflow-hidden">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Admin</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {users?.map((user) => (
-              <tr key={user._id}>
-                <td className="px-6 py-4 whitespace-nowrap">{user.name}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{user.email}</td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {user.isAdmin ? (
-                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                      Yes
-                    </span>
-                  ) : (
-                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
-                      No
-                    </span>
-                  )}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {!user.isAdmin && (
-                    <button
-                      onClick={() => deleteMutation.mutate(user._id)}
-                      className="text-red-600 hover:text-red-900"
-                      disabled={deleteMutation.isPending}
-                    >
-                      Delete
-                    </button>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+    <div className="flex h-screen bg-[#F8FAFC] overflow-hidden pt-20">
+      {/* Fixed Sidebar */}
+      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} logout={logout} />
+      
+      {/* Main Content Area */}
+      <main className="flex-1 overflow-y-auto lg:ml-0">
+        <div className="p-4 sm:p-6 lg:p-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+          {/* Header */}
+          <header className="mb-6 lg:mb-8 pl-12 lg:pl-0">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <h1 className="text-2xl sm:text-3xl font-black text-[#1A1A1A] tracking-tight">
+                  {activeTab === 'dashboard' ? 'Dashboard Overview' : `${activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Management`}
+                </h1>
+                <p className="text-gray-500 mt-1 font-medium text-sm sm:text-base">
+                  {activeTab === 'dashboard' 
+                    ? 'Welcome back! Here\'s what\'s happening with your platform.' 
+                    : 'Manage your website content and data effortlessly.'}
+                </p>
+              </div>
+              <div className="flex items-center space-x-4">
+                <div className="text-right hidden sm:block">
+                  <p className="text-sm font-bold text-[#1A1A1A]">{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                  <p className="text-xs text-gray-400 font-medium">{new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</p>
+                </div>
+              </div>
+            </div>
+          </header>
+          
+          {/* Content */}
+          <div className="bg-white rounded-2xl lg:rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+            {renderContent()}
+          </div>
+        </div>
+      </main>
     </div>
   );
 };

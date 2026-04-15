@@ -1,0 +1,129 @@
+import React from 'react';
+import { 
+  Users, 
+  Stethoscope, 
+  Briefcase, 
+  FileText, 
+  UserPlus, 
+  Info, 
+  MessageSquare,
+  LogOut,
+  LayoutDashboard,
+  ChevronRight,
+  Menu,
+  X
+} from 'lucide-react';
+
+interface SidebarProps {
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+  logout: () => void;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, logout }) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  
+  const menuItems = [
+    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { id: 'users', label: 'Users', icon: Users },
+    { id: 'services', label: 'Services', icon: Stethoscope },
+    { id: 'projects', label: 'Projects', icon: Briefcase },
+    { id: 'blogs', label: 'Blogs', icon: FileText },
+    { id: 'doctors', label: 'Doctors', icon: UserPlus },
+    { id: 'about', label: 'About Us', icon: Info },
+    { id: 'contact', label: 'Messages', icon: MessageSquare },
+  ];
+
+  return (
+    <>
+      {/* Mobile Menu Button */}
+      <button
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        className="lg:hidden fixed top-24 left-4 z-50 w-10 h-10 bg-white rounded-xl shadow-lg flex items-center justify-center text-[#1A1A1A]"
+      >
+        {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+      </button>
+
+      {/* Mobile Overlay */}
+      {isMobileMenuOpen && (
+        <div 
+          className="lg:hidden fixed inset-0 bg-black/50 z-40"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <div className={`fixed lg:static inset-y-0 left-0 z-50 w-72 bg-white border-r border-gray-100 flex flex-col h-full transform transition-transform duration-300 lg:translate-x-0 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      {/* Logo Section */}
+      <div className="p-6">
+        <div className="flex items-center space-x-3">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00A78E] to-[#008F7A] flex items-center justify-center shadow-lg shadow-[#00A78E]/20">
+            <Stethoscope className="text-white" size={22} />
+          </div>
+          <div>
+            <h2 className="text-lg font-black text-[#1A1A1A]">MediZen</h2>
+            <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Admin Panel</p>
+          </div>
+        </div>
+      </div>
+      
+      {/* Navigation */}
+      <nav className="flex-1 overflow-y-auto px-4 py-2">
+        <div className="mb-4 px-2">
+          <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Main Menu</p>
+        </div>
+        <ul className="space-y-1">
+          {menuItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = activeTab === item.id;
+            return (
+              <li key={item.id}>
+                <button
+                  onClick={() => setActiveTab(item.id)}
+                  className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 group ${
+                    isActive 
+                      ? 'bg-[#00A78E] text-white shadow-lg shadow-[#00A78E]/20' 
+                      : 'text-gray-500 hover:bg-gray-50 hover:text-[#1A1A1A]'
+                  }`}
+                >
+                  <div className="flex items-center space-x-3">
+                    <div className={`${isActive ? 'text-white' : 'text-gray-400 group-hover:text-[#00A78E]'} transition-colors`}>
+                      <Icon size={20} />
+                    </div>
+                    <span className="font-bold text-sm">{item.label}</span>
+                  </div>
+                  {isActive && <ChevronRight size={16} className="opacity-70" />}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+      
+      {/* Bottom Section */}
+      <div className="p-4 border-t border-gray-100">
+        <div className="bg-gradient-to-br from-[#1A1A1A] to-[#2D2D2D] rounded-2xl p-4 mb-4">
+          <div className="flex items-center space-x-3 mb-3">
+            <div className="w-10 h-10 rounded-full bg-[#C1FF72] flex items-center justify-center">
+              <span className="text-[#1A1A1A] font-black text-sm">A</span>
+            </div>
+            <div>
+              <p className="text-white font-bold text-sm">Admin User</p>
+              <p className="text-gray-400 text-xs">admin@medizen.com</p>
+            </div>
+          </div>
+        </div>
+        <button
+          onClick={logout}
+          className="w-full flex items-center justify-center space-x-2 px-4 py-3 text-red-500 hover:bg-red-50 rounded-xl transition-all duration-200 font-bold text-sm"
+        >
+          <LogOut size={18} />
+          <span>Sign Out</span>
+        </button>
+      </div>
+    </div>
+    </>
+  );
+};
+
+export default Sidebar;

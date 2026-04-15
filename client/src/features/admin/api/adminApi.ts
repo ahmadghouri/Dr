@@ -1,5 +1,5 @@
 import axiosInstance from '../../../api/axiosInstance';
-import { User } from '../../auth/types';
+import type { User } from '../../auth/api/authApi';
 
 export const getUsers = async (): Promise<User[]> => {
   const response = await axiosInstance.get('/admin/users');
