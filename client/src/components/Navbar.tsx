@@ -17,47 +17,36 @@ const Navbar = () => {
     {
       name: "Home",
       path: "/",
-      hasDropdown: true,
+      hasDropdown: false,
       dropdownItems: [
         { name: "Home 1", path: "/" },
-        { name: "Home 2", path: "/" },
       ],
     },
     {
       name: "Service",
       path: "/services",
-      hasDropdown: true,
-      dropdownItems: [
-        { name: "Service", path: "/services" },
-        { name: "Service Details", path: "/service-details" },
-      ],
+      hasDropdown: false,
+      dropdownItems: [{ name: "All Services", path: "/services" }],
     },
     {
       name: "Projects",
       path: "/projects",
-      hasDropdown: true,
-      dropdownItems: [
-        { name: "Project", path: "/projects" },
-        { name: "Project Details", path: "/project-details" },
-      ],
+      hasDropdown: false,
+      dropdownItems: [{ name: "All Projects", path: "/projects" }],
     },
     {
       name: "Blog",
       path: "/blog",
-      hasDropdown: true,
-      dropdownItems: [
-        { name: "Blog", path: "/blog" },
-        { name: "Blog Details", path: "/blog-details" },
-      ],
+      hasDropdown: false,
+      dropdownItems: [{ name: "All Blogs", path: "/blog" }],
     },
     {
       name: "Pages",
       path: "/about",
-      hasDropdown: true,
+      hasDropdown: false,
       dropdownItems: [
         { name: "About Us", path: "/about" },
-        { name: "Doctor", path: "/doctors" },
-        { name: "Doctor Details", path: "/doctor-details" },
+        { name: "All Doctors", path: "/doctors" },
         { name: "Pricing", path: "/pricing" },
       ],
     },
@@ -67,6 +56,11 @@ const Navbar = () => {
   if (user?.isAdmin) {
     navLinks.push({ name: "Admin", path: "/admin", hasDropdown: false });
   }
+
+  const handleLogout = () => {
+    logout();
+    setIsOpen(false);
+  };
 
   return (
     <nav className="bg-white border-b border-gray-50 py-4 px-6 md:px-12 sticky top-0 z-50">
@@ -167,53 +161,8 @@ const Navbar = () => {
               </AnimatePresence>
             </div>
           ))}
-
-          {/* Search Icon */}
-          {/* <div className="ml-4 w-11 h-11 border border-gray-100 bg-gray-50/30 rounded-full flex items-center justify-center cursor-pointer hover:bg-[#00A78E] hover:text-white transition-all duration-300 group">
-            <Search className="w-5 h-5 text-gray-500 group-hover:text-white transition-colors" />
-          </div> */}
         </div>
 
-        {/* Contact Info (Right Side) */}
-        <div className="hidden lg:flex items-center space-x-6">
-          <div className="flex items-center space-x-4">
-            <div className="relative group cursor-pointer">
-              <div className="w-14 h-14 flex items-center justify-center bg-[#F4F9F8] rounded-full transition-transform group-hover:scale-110 duration-300">
-                <MessageCircle className="w-8 h-8 text-[#00A78E]" />
-              </div>
-              <div className="absolute top-2 right-2 w-3 h-3 bg-[#00A78E] rounded-full border-2 border-white"></div>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-[14px] text-gray-500 font-medium">
-                Need help?
-              </span>
-              <span className="text-[20px] font-extrabold text-[#1A1A1A] leading-tight">
-                +92 300 3968500
-              </span>
-            </div>
-          </div>
-
-          {user ? (
-            <div className="flex items-center space-x-4">
-              <span className="text-sm font-medium text-gray-700">
-                Hi, {user.name}
-              </span>
-              <button
-                onClick={logout}
-                className="px-6 py-2 bg-red-500 text-white font-bold rounded-full hover:bg-red-600 transition-colors"
-              >
-                Logout
-              </button>
-            </div>
-          ) : (
-            <Link
-              to="/login"
-              className="px-8 py-3 bg-[#00A78E] text-white font-bold rounded-full hover:bg-[#008F7A] transition-all duration-300 shadow-lg shadow-[#00A78E]/20"
-            >
-              Login
-            </Link>
-          )}
-        </div>
 
         {/* Mobile Menu Button */}
         <div className="lg:hidden flex items-center">

@@ -1,12 +1,36 @@
 import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import PageHero from './components/PageHero';
+import { useService } from './features/services/hooks/useServices';
 import { ChevronRight, Phone, Facebook, Twitter, Instagram, Linkedin, FileText, Download, Stethoscope, Droplets } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const ServiceDetailsPage = () => {
+  const { id } = useParams<{ id: string }>();
+  const { data: service, isLoading, error } = useService(id || '');
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white pt-20">
+        <div className="w-12 h-12 border-4 border-[#00A78E] border-t-[#C1FF72] rounded-full animate-spin"></div>
+      </div>
+    );
+  }
+
+  if (error || !service) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white pt-20">
+        <div className="text-center space-y-4">
+          <h2 className="text-2xl font-black text-[#1A1A1A]">Service not found</h2>
+          <p className="text-gray-500">The service you are looking for does not exist or has been removed.</p>
+        </div>
+      </div>
+    );
+  }
 
   const categories = [
     { name: 'A Tradition of Healing', count: '02' },
@@ -28,41 +52,66 @@ const ServiceDetailsPage = () => {
             {/* Header Text */}
             <div className="space-y-6">
               <h2 className="text-[42px] font-black text-[#1A1A1A] leading-tight">
-                A healthy tomorrow starts today
+                {service.title}
               </h2>
               <p className="text-gray-500 text-lg leading-relaxed">
-                Medical services are an essential part of our lives, offering care and treatment for various health conditions. These services encompass a wide range of specialties, including primary care, pediatrics, cardiology.
+                {service.description}
               </p>
             </div>
 
             {/* Main Image */}
             <div className="rounded-[40px] overflow-hidden shadow-xl">
               <img 
-                src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2080&auto=format&fit=crop" 
-                alt="Medical Care" 
+                src={service.image} 
+                alt={service.title} 
                 className="w-full h-[450px] object-cover"
               />
             </div>
 
-            {/* Senior Care Section */}
-            <div className="space-y-8">
-              <h3 className="text-[32px] font-black text-[#1A1A1A]">
-                Senior Care Coordination
-              </h3>
-              <ul className="space-y-4">
-                {[
-                  'Dental operations involve various procedures performed by dentists',
-                  'Medical services are an essential part of our lives, offering care',
-                  'These services encompass a wide range of specialties, including primary care, pediatrics, cardiology',
-                  'Empowering Health, Empowering Lives Expert Care, Trusted Results'
-                ].map((point, i) => (
-                  <li key={i} className="flex items-start space-x-3 text-gray-500 font-medium text-lg">
-                    <ChevronRight className="w-6 h-6 text-[#00A78E] flex-shrink-0 mt-0.5" />
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {/* Detailed Description */}
+            {service.detailedDescription && (
+              <div className="space-y-6">
+                <p className="text-gray-500 text-lg leading-relaxed whitespace-pre-wrap">
+                  {service.detailedDescription}
+                </p>
+              </div>
+            )}
+
+            {/* Features Section */}
+            {service.features && service.features.length > 0 && (
+              <div className="space-y-8">
+                <h3 className="text-[32px] font-black text-[#1A1A1A]">
+                  Key Features
+                </h3>
+                <ul className="space-y-4">
+                  {service.features.map((point: string, i: number) => (
+                    <li key={i} className="flex items-start space-x-3 text-gray-500 font-medium text-lg">
+                      <ChevronRight className="w-6 h-6 text-[#00A78E] flex-shrink-0 mt-0.5" />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Benefits Section */}
+            {service.benefits && service.benefits.length > 0 && (
+              <div className="space-y-8">
+                <h3 className="text-[32px] font-black text-[#1A1A1A]">
+                  Service Benefits
+                </h3>
+                <ul className="space-y-4">
+                  {service.benefits.map((benefit: string, i: number) => (
+                    <li key={i} className="flex items-start space-x-3 text-gray-500 font-medium text-lg">
+                      <div className="w-6 h-6 bg-[#C1FF72] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                        <ChevronRight className="w-4 h-4 text-[#1A1A1A]" />
+                      </div>
+                      <span>{benefit}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {/* Holistic Health Section */}
             <div className="space-y-6">

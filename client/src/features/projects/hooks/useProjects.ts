@@ -1,0 +1,67 @@
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  getProjects,
+  getProjectById,
+  createProject,
+  updateProject,
+  deleteProject,
+} from "../api/projectApi";
+import { toast } from "react-hot-toast";
+
+export const useProjects = () => {
+  return useQuery({
+    queryKey: ["projects"],
+    queryFn: getProjects,
+  });
+};
+
+export const useProject = (id: string) => {
+  return useQuery({
+    queryKey: ["projects", id],
+    queryFn: () => getProjectById(id),
+    enabled: !!id,
+  });
+};
+
+export const useCreateProject = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: createProject,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["projects"] });
+      toast.success("Project created successfully");
+    },
+    onError: (error: any) => {
+      toast.error(error.response?.data?.message || "Failed to create project");
+    },
+  });
+};
+
+export const useUpdateProject = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: FormData }) =>
+      updateProject(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["projects"] });
+      toast.success("Project updated successfully");
+    },
+    onError: (error: any) => {
+      toast.error(error.response?.data?.message || "Failed to update project");
+    },
+  });
+};
+
+export const useDeleteProject = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: deleteProject,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["projects"] });
+      toast.success("Project deleted successfully");
+    },
+    onError: (error: any) => {
+      toast.error(error.response?.data?.message || "Failed to delete project");
+    },
+  });
+};

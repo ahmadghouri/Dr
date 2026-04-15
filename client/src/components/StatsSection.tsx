@@ -1,8 +1,10 @@
 import React from 'react';
+import { useAbout } from '../features/about/hooks/useAbout';
 
 const StatsSection = () => {
-  const stats = [
-    { value: "600+", label: "Complte Project" },
+  const { data: about } = useAbout();
+  const stats = about?.stats || [
+    { value: "600+", label: "Complete Project" },
     { value: "200+", label: "Team Member" },
     { value: "500k+", label: "Clients Reviews" }
   ];

@@ -1,8 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Mail } from 'lucide-react';
+import { useSendContact } from '../features/contact/hooks/useContact';
 
 const ContactFormSection = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: ''
+  });
+
+  const sendContactMutation = useSendContact();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    sendContactMutation.mutate(formData, {
+      onSuccess: () => {
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: ''
+        });
+      }
+    });
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
   return (
     <section className="py-20 bg-white">
       <div className="max-w-[1440px] mx-auto px-6 md:px-12">
@@ -26,13 +56,17 @@ const ContactFormSection = () => {
                 </span>
               </h2>
 
-              <form className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Name Input */}
                   <div className="relative group">
                     <input
                       type="text"
+                      name="name"
                       placeholder="Your Name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
                       className="w-full px-8 py-5 bg-[#F9FAFB] rounded-full border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-bold text-lg outline-none transition-all"
                     />
                   </div>
@@ -41,7 +75,11 @@ const ContactFormSection = () => {
                   <div className="relative group">
                     <input
                       type="email"
+                      name="email"
                       placeholder="Your Email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
                       className="w-full px-8 py-5 bg-[#F9FAFB] rounded-full border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-bold text-lg outline-none transition-all"
                     />
                     <Mail className="absolute right-8 top-1/2 -translate-y-1/2 w-6 h-6 text-[#00A78E] opacity-40 group-focus-within:opacity-100 transition-opacity" />
@@ -51,7 +89,10 @@ const ContactFormSection = () => {
                   <div className="relative group">
                     <input
                       type="tel"
+                      name="phone"
                       placeholder="Phone Number"
+                      value={formData.phone}
+                      onChange={handleChange}
                       className="w-full px-8 py-5 bg-[#F9FAFB] rounded-full border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-bold text-lg outline-none transition-all"
                     />
                   </div>
@@ -60,7 +101,10 @@ const ContactFormSection = () => {
                   <div className="relative group">
                     <input
                       type="text"
+                      name="subject"
                       placeholder="Subject"
+                      value={formData.subject}
+                      onChange={handleChange}
                       className="w-full px-8 py-5 bg-[#F9FAFB] rounded-full border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-bold text-lg outline-none transition-all"
                     />
                   </div>
@@ -70,7 +114,11 @@ const ContactFormSection = () => {
                 <div className="relative">
                   <textarea
                     rows={5}
+                    name="message"
                     placeholder="Message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
                     className="w-full px-8 py-6 bg-[#F9FAFB] rounded-[30px] border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-bold text-lg outline-none transition-all resize-none"
                   ></textarea>
                 </div>
@@ -78,9 +126,10 @@ const ContactFormSection = () => {
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="bg-[#00A78E] hover:bg-[#1A1A1A] text-white px-12 py-5 rounded-full font-bold text-lg flex items-center justify-center transition-all duration-500 group shadow-xl shadow-[#00A78E]/20"
+                  disabled={sendContactMutation.isPending}
+                  className="bg-[#00A78E] hover:bg-[#1A1A1A] text-white px-12 py-5 rounded-full font-bold text-lg flex items-center justify-center transition-all duration-500 group shadow-xl shadow-[#00A78E]/20 disabled:opacity-50"
                 >
-                  Book An Appointment
+                  {sendContactMutation.isPending ? 'Sending...' : 'Book An Appointment'}
                   <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
                 </button>
               </form>

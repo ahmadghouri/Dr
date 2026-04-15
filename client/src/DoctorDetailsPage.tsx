@@ -1,28 +1,77 @@
-import { useEffect } from 'react';
-import PageHero from './components/PageHero';
-import { Facebook, Instagram, Twitter, Linkedin, Mail, ArrowRight, ChevronDown } from 'lucide-react';
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import PageHero from "./components/PageHero";
+import { useDoctor } from "./features/doctors/hooks/useDoctors";
+import {
+  Facebook,
+  Instagram,
+  Twitter,
+  Linkedin,
+  Mail,
+  ArrowRight,
+  ChevronDown,
+  Star,
+} from "lucide-react";
 
 const DoctorDetailsPage = () => {
+  const { id } = useParams<{ id: string }>();
+  const { data: doctor, isLoading, error } = useDoctor(id || "");
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white pt-20">
+        <div className="w-12 h-12 border-4 border-[#00A78E] border-t-[#C1FF72] rounded-full animate-spin"></div>
+      </div>
+    );
+  }
+
+  if (error || !doctor) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white pt-20">
+        <div className="text-center space-y-4">
+          <h2 className="text-2xl font-black text-[#1A1A1A]">
+            Doctor not found
+          </h2>
+          <p className="text-gray-500">
+            The doctor you are looking for does not exist or has been removed.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   const infoItems = [
-    { label: 'Expertise', value: 'Cardiac Surgeon' },
-    { label: 'Education', value: 'Dhaka Medical College, 2018' },
-    { label: 'Experience', value: '5 Years Of Experience In Medicine' },
-    { label: 'Profession', value: 'Doctor At Dhaka Medical College, Head OF Biology Department Du' },
-    { label: 'Address', value: 'Mirpur 10 Road 14 House 2, Dhaka' },
-    { label: 'Phone', value: '017458624863' },
-    { label: 'Email', value: 'chirsbekham12@gmail.com' },
-    { label: 'Website', value: 'www.Medizen.com' },
+    { label: "Expertise", value: doctor.expertise },
+    {
+      label: "Education",
+      value: Array.isArray(doctor.education)
+        ? doctor.education.join(", ")
+        : doctor.education || "N/A",
+    },
+    {
+      label: "Experience",
+      value: Array.isArray(doctor.experience)
+        ? doctor.experience.join(", ")
+        : doctor.experience || "N/A",
+    },
+    {
+      label: "Specialization",
+      value: Array.isArray(doctor.specialization)
+        ? doctor.specialization.join(", ")
+        : doctor.specialization || "N/A",
+    },
+    { label: "Working Hours", value: doctor.workingHours || "N/A" },
   ];
 
   const scheduleItems = [
-    { day: 'Saturday-Sunday', time: '9 Am To 5 Pm' },
-    { day: 'Monday-Tuesday', time: '1 Pm To 7 Pm' },
-    { day: 'Wednesday-Thursday', time: '2 Am To 6 Pm' },
-    { day: 'Friday', time: 'Off Day' },
+    {
+      day: "Working Hours",
+      time: doctor.workingHours || "Contact for schedule",
+    },
   ];
 
   return (
@@ -31,20 +80,19 @@ const DoctorDetailsPage = () => {
 
       <section className="py-24 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
         <div className="flex flex-col lg:flex-row gap-12">
-
           {/* Left Column: Bio, Info Table, Form */}
           <div className="lg:w-[65%] space-y-12">
-
             {/* Name & Bio */}
             <div className="space-y-4">
-              <h2 className="text-[42px] font-black text-[#1A1A1A]">Dr. Chirs Bekham</h2>
-              <p className="text-gray-400 font-bold uppercase tracking-wider text-sm">Cardiac Surgeon</p>
+              <h2 className="text-[42px] font-black text-[#1A1A1A]">
+                {doctor.name}
+              </h2>
+              <p className="text-gray-400 font-bold uppercase tracking-wider text-sm">
+                {doctor.expertise}
+              </p>
               <div className="space-y-6">
-                <p className="text-gray-500 text-lg leading-relaxed">
-                  Medical services are an essential part of our lives, offering care and treatment for various health conditions. These services encompass a wide range of specialties, including primary care, pediatrics, cardiology, dermatology, and more. Whether it's a routine check-up or a complex surgical procedure, medical professionals work tirelessly to ensure the well-being of their patients.
-                </p>
-                <p className="text-gray-500 text-lg leading-relaxed">
-                  Medical services are an essential part of our lives, offering care and treatment for various.
+                <p className="text-gray-500 text-lg leading-relaxed whitespace-pre-wrap">
+                  {doctor.biography || doctor.description}
                 </p>
               </div>
             </div>
@@ -52,13 +100,22 @@ const DoctorDetailsPage = () => {
             {/* Info Table Box */}
             <div className="bg-[#F9FAFB] border border-gray-100 rounded-[30px] p-8 md:p-12 space-y-6">
               {infoItems.map((item, index) => (
-                <div key={index} className="flex flex-col md:flex-row md:items-start gap-2 md:gap-8">
+                <div
+                  key={index}
+                  className="flex flex-col md:flex-row md:items-start gap-2 md:gap-8"
+                >
                   <div className="md:w-[150px] shrink-0">
-                    <span className="text-[#1A1A1A] font-black text-lg">{item.label}</span>
+                    <span className="text-[#1A1A1A] font-black text-lg">
+                      {item.label}
+                    </span>
                   </div>
-                  <div className="hidden md:block text-[#1A1A1A] font-black text-lg">:</div>
+                  <div className="hidden md:block text-[#1A1A1A] font-black text-lg">
+                    :
+                  </div>
                   <div>
-                    <span className="text-gray-500 font-medium text-lg">{item.value}</span>
+                    <span className="text-gray-500 font-medium text-lg">
+                      {item.value}
+                    </span>
                   </div>
                 </div>
               ))}
@@ -66,7 +123,9 @@ const DoctorDetailsPage = () => {
 
             {/* Contact Form: Write Your Message */}
             <div className="bg-[#F9FAFB] rounded-[40px] p-10 space-y-8">
-              <h3 className="text-[32px] font-black text-[#1A1A1A]">Write Your Message</h3>
+              <h3 className="text-[32px] font-black text-[#1A1A1A]">
+                Write Your Message
+              </h3>
               <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
                 <textarea
                   placeholder="Message here.."
@@ -113,23 +172,29 @@ const DoctorDetailsPage = () => {
 
           {/* Right Column: Profile Card & Schedule */}
           <div className="lg:w-[35%] space-y-8">
-
             {/* Profile Card */}
             <div className="bg-white rounded-[40px] shadow-2xl shadow-gray-200/50 p-10 text-center space-y-6 border border-gray-50">
               <div className="rounded-[30px] overflow-hidden shadow-lg border-4 border-white inline-block">
                 <img
-                  src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=2070&auto=format&fit=crop"
-                  alt="Doctor Profile"
+                  src={doctor.image}
+                  alt={doctor.name}
                   className="w-64 h-64 object-cover"
                 />
               </div>
               <div className="space-y-2">
-                <h3 className="text-[28px] font-black text-[#1A1A1A]">Dr. Chirs Bekham</h3>
-                <p className="text-gray-400 font-bold uppercase tracking-wider text-sm">Cardiac Surgeon</p>
+                <h3 className="text-[28px] font-black text-[#1A1A1A]">
+                  {doctor.name}
+                </h3>
+                <p className="text-gray-400 font-bold uppercase tracking-wider text-sm">
+                  {doctor.expertise}
+                </p>
               </div>
               <div className="flex items-center justify-center space-x-3">
                 {[Facebook, Instagram, Twitter, Linkedin].map((Icon, i) => (
-                  <div key={i} className="w-12 h-12 border border-gray-100 rounded-full flex items-center justify-center text-gray-400 hover:bg-[#00A78E] hover:text-white hover:border-[#00A78E] transition-all cursor-pointer shadow-sm">
+                  <div
+                    key={i}
+                    className="w-12 h-12 border border-gray-100 rounded-full flex items-center justify-center text-gray-400 hover:bg-[#00A78E] hover:text-white hover:border-[#00A78E] transition-all cursor-pointer shadow-sm"
+                  >
                     <Icon className="w-5 h-5" />
                   </div>
                 ))}
@@ -139,22 +204,32 @@ const DoctorDetailsPage = () => {
             {/* Schedule Card */}
             <div className="bg-white rounded-[40px] shadow-2xl shadow-gray-200/50 p-10 space-y-8 border border-gray-50">
               <div className="space-y-2">
-                <h3 className="text-[32px] font-black text-[#1A1A1A]">Schedule</h3>
-                <p className="text-gray-500 font-medium">Health care is a vital aspect of maintaining overall well-being, encompassing a range</p>
+                <h3 className="text-[32px] font-black text-[#1A1A1A]">
+                  Schedule
+                </h3>
+                <p className="text-gray-500 font-medium">
+                  Health care is a vital aspect of maintaining overall
+                  well-being, encompassing a range
+                </p>
               </div>
 
               <div className="space-y-4">
                 {scheduleItems.map((item, index) => (
-                  <div key={index} className="flex items-center justify-between border border-gray-100 rounded-2xl px-6 py-4">
-                    <span className="text-gray-400 font-bold text-sm">{item.day}</span>
-                    <span className="text-gray-500 font-black text-sm">{item.time}</span>
+                  <div
+                    key={index}
+                    className="flex items-center justify-between border border-gray-100 rounded-2xl px-6 py-4"
+                  >
+                    <span className="text-gray-400 font-bold text-sm">
+                      {item.day}
+                    </span>
+                    <span className="text-gray-500 font-black text-sm">
+                      {item.time}
+                    </span>
                   </div>
                 ))}
               </div>
             </div>
-
           </div>
-
         </div>
       </section>
     </div>
