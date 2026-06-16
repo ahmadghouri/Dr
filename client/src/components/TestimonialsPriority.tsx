@@ -2,7 +2,7 @@ import { ArrowRight, MessageCircle, ArrowLeft, ArrowRight as ArrowRightIcon, Plu
 
 const TestimonialsPriority = () => {
   return (
-    <section className="bg-white pt-24 pb-0 overflow-visible relative">
+    <section className="bg-white pb-0 overflow-visible relative">
       <div className="max-w-7xl mx-auto px-6 relative">
 
         {/* Top Part: Priority Content and Feature Cards */}
@@ -15,7 +15,7 @@ const TestimonialsPriority = () => {
                 Special Care
               </span>
             </div>
-            <h2 className="text-5xl md:text-[64px] font-black text-[#1A1A1A] leading-[1.1] tracking-tight">
+            <h2 className="text-5xl font-black text-[#1A1A1A] leading-[1.1] tracking-tight">
               Your health, our priority <br />
               <span className="relative inline-block">
                 The Healing
@@ -93,26 +93,26 @@ const TestimonialsPriority = () => {
         </div>
 
         {/* Bottom Part: Overlapping Testimonial Card */}
-        <div className="relative z-20 pt-10">
-          <div className="bg-[#C1FF72] rounded-[50px] p-12 md:p-24 relative overflow-hidden shadow-2xl shadow-[#C1FF72]/20 border-4 border-white">
+        <div className="relative z-20 pt-5">
+          <div className="bg-[#C1FF72] rounded-[50px] pt-12 relative overflow-hidden shadow-2xl shadow-[#C1FF72]/20 border-4 border-white">
             {/* World Map Pattern Overlay */}
             <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/world-map.png')] bg-center bg-no-repeat bg-[length:1200px]"></div>
 
             <div className="relative z-10 text-center max-w-5xl mx-auto space-y-12">
               <div className="space-y-5">
                 <p className="text-sm font-black uppercase tracking-[0.3em] text-[#1A1A1A] opacity-50">Clients Testimonial</p>
-                <h2 className="text-5xl md:text-[72px] font-black text-[#1A1A1A] leading-tight tracking-tighter">What Our Users <br /> Are Saying</h2>
+                <h2 className="text-5xl font-black text-[#1A1A1A] leading-tight tracking-tighter">What Our Users <br /> Are Saying</h2>
               </div>
               
               <div className="relative px-10">
-                <p className="text-2xl md:text-[32px] font-black text-[#1A1A1A] leading-[1.4] tracking-tight italic">
+                <p className="text-xl font-black text-[#1A1A1A] leading-[1.4] tracking-tight italic">
                   "Health is wealth, and in the realm of medical health, every life matters. It is a encompasses a wide range of specialties aimed at diagnosing, treating, and preventing diseases and maintaining overall well-being. Medical health for a professionals dedicate their lives to providing care."
                 </p>
               </div>
               
               <div className="pt-4 flex flex-col items-center">
                 <div className="h-[3px] w-16 bg-[#1A1A1A] mb-6 rounded-full"></div>
-                <p className="text-2xl font-black text-[#1A1A1A]">Mukesh Kumar</p>
+                <p className="text-xl font-black text-[#1A1A1A]">Mukesh Kumar</p>
               </div>
 
               {/* Navigation Arrows on sides */}
@@ -130,7 +130,6 @@ const TestimonialsPriority = () => {
 
       </div>
       {/* Spacer for overlapping effect with section below */}
-      <div className="h-48 md:h-64"></div>
     </section>
   );
 };

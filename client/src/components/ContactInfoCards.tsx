@@ -23,7 +23,7 @@ const ContactInfoCards = () => {
 
   return (
     <section className="py-20 bg-[#F9FAFB]">
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12">
+      <div className="max-w-[1280px] mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {contactInfo.map((info, index) => (
             <motion.div
