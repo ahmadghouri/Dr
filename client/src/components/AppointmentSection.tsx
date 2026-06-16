@@ -11,7 +11,7 @@ const AppointmentSection = () => {
           <img 
             src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2080&auto=format&fit=crop" 
             alt="Doctors Consulting" 
-            className="w-full h-[600px] object-cover rounded-[30px] shadow-lg"
+            className="w-full h-150 object-cover rounded-[30px] shadow-lg"
           />
           {/* Subtle floating circles as seen in image */}
           <div className="absolute top-[40%] right-[10%] w-4 h-4 bg-[#00A78E]/40 rounded-full blur-sm"></div>

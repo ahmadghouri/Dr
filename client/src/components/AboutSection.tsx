@@ -25,7 +25,7 @@ const AboutSection = () => {
           </div>
 
           {/* Heading */}
-          <h2 className="text-4xl md:text-6xl font-black text-[#1A1A1A] leading-tight tracking-tight">
+          <h2 className="text-4xl font-black text-[#1A1A1A] leading-tight tracking-tight">
             {about?.title || "Compassionate Care Always There Health First"}
           </h2>
 
@@ -39,7 +39,7 @@ const AboutSection = () => {
           <div className="space-y-8 pt-4">
             {about?.features?.map((feature, index) => (
               <div key={index} className="flex items-start space-x-6 group">
-                <span className="text-2xl font-black text-[#1A1A1A] group-hover:text-[#00A78E] transition-colors">
+                <span className="text-xl font-black text-[#1A1A1A] group-hover:text-[#00A78E] transition-colors">
                   0{index + 1}
                 </span>
                 <div className="space-y-2">
@@ -58,7 +58,7 @@ const AboutSection = () => {
         {/* Right Image Column */}
         <div className="flex-1 relative">
           {/* Decorative Elements */}
-          <div className="absolute top-[20%] left-[-10%] w-64 h-64 border-[30px] border-gray-50 rounded-full opacity-50 z-0 pointer-events-none"></div>
+          <div className="absolute top-[20%] left-[-10%] w-64 h-64 border-30 border-gray-50 rounded-full opacity-50 z-0 pointer-events-none"></div>
           <div className="absolute bottom-[10%] left-[0%] w-24 h-12 bg-[#00A78E] rounded-t-full z-10 pointer-events-none"></div>
           <div className="absolute top-[40%] right-[0%] w-24 h-12 bg-[#C1FF72] rounded-t-full z-10 pointer-events-none rotate-180"></div>
 
@@ -67,7 +67,7 @@ const AboutSection = () => {
             <img
               src={about?.image || Dr}
               alt="MediZen Healthcare"
-              className="w-full h-auto object-cover rounded-[100px] shadow-2xl shadow-black/5"
+              className="w-full max-h-150 object-cover rounded-[100px] shadow-2xl shadow-black/5"
             />
           </div>
         </div>

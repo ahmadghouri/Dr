@@ -35,8 +35,8 @@ const ContactFormSection = () => {
 
   return (
     <section className="py-20 bg-white">
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12">
-        <div className="bg-white rounded-[40px] shadow-2xl shadow-black/5 overflow-hidden flex flex-col lg:flex-row min-h-[700px] border border-gray-50">
+      <div className="max-w-360 mx-auto px-6 md:px-12">
+        <div className="bg-white rounded-[40px] shadow-2xl shadow-black/5 overflow-hidden flex flex-col lg:flex-row min-h-175 border border-gray-50">
           
           {/* Left Side: Contact Form */}
           <div className="flex-1 p-10 md:p-16 lg:p-24 flex flex-col justify-center">

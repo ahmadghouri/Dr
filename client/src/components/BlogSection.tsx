@@ -86,7 +86,7 @@ const BlogSection = () => {
                 }`}
               >
                 {/* Thumbnail */}
-                <div className="w-24 h-24 flex-shrink-0 rounded-2xl overflow-hidden">
+                <div className="w-24 h-24 shrink-0 rounded-2xl overflow-hidden">
                   <img
                     src={blog.image}
                     alt={blog.title}
