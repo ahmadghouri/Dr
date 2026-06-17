@@ -10,19 +10,21 @@ const ServicesPage = () => {
   }, []);
 
   return (
-    <div className="flex flex-col w-full min-h-screen bg-white">
+    <div className="">
       {/* Hero Section for Services Page */}
-      <PageHero
-        title="Our Services"
-        breadcrumb="Services"
-      />
-
+      
+    <PageHero
+      title="Our Services"
+      breadcrumb="Services"
+    />
+ 
       {/* Services Grid Section (Image match) */}
       <ServicesGrid />
 
       {/* Additional Services Info (CTA) */}
       <AppointmentSection />
     </div>
+    
   );
 };
 

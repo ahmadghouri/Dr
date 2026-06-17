@@ -70,7 +70,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, logout }) =>
       {/* Navigation */}
       <nav className="flex-1 overflow-y-auto px-4 py-2">
         <div className="mb-4 px-2">
-          <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Main Menu</p>
+          <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest">Main Menu</p>
         </div>
         <ul className="space-y-1">
           {menuItems.map((item) => {
@@ -90,7 +90,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, logout }) =>
                     <div className={`${isActive ? 'text-white' : 'text-gray-400 group-hover:text-[#00A78E]'} transition-colors`}>
                       <Icon size={20} />
                     </div>
-                    <span className="font-bold text-sm">{item.label}</span>
+                    <span className="font-semibold text-sm">{item.label}</span>
                   </div>
                   {isActive && <ChevronRight size={16} className="opacity-70" />}
                 </button>

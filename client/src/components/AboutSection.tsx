@@ -13,19 +13,19 @@ const AboutSection = () => {
     );
 
   return (
-    <section className="py-24 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center gap-16">
+  <section className="py-12 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-15 flex flex-col lg:flex-row items-center gap-16">
         {/* Left Content Column */}
-        <div className="flex-1 space-y-8">
+        <div className="flex-1 space-y-3">
           {/* Badge */}
           <div className="inline-block">
-            <span className="bg-[#C1FF72] text-[#1A1A1A] px-6 py-2 rounded-full text-sm font-bold shadow-sm shadow-[#C1FF72]/20">
+            <span className="bg-[#C1FF72] text-[#1A1A1A] px-8 py-3 rounded-full text-[16px] font-semibold shadow-sm shadow-[#C1FF72]/20">
               About Us
             </span>
           </div>
 
           {/* Heading */}
-          <h2 className="text-4xl font-black text-[#1A1A1A] leading-tight tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-semibold text-[#1A1A1A] leading-[1.1] tracking-tight">
             {about?.title || "Compassionate Care Always There Health First"}
           </h2>
 
@@ -39,11 +39,11 @@ const AboutSection = () => {
           <div className="space-y-8 pt-4">
             {about?.features?.map((feature, index) => (
               <div key={index} className="flex items-start space-x-6 group">
-                <span className="text-xl font-black text-[#1A1A1A] group-hover:text-[#00A78E] transition-colors">
+                <span className="text-xl font-semibold text-[#1A1A1A] group-hover:text-[#00A78E] transition-colors pt-0.5">
                   0{index + 1}
                 </span>
                 <div className="space-y-2">
-                  <h4 className="text-xl font-extrabold text-[#1A1A1A]">
+                  <h4 className="text-xl font-semibold text-[#1A1A1A]">
                     {feature.title}
                   </h4>
                   <p className="text-gray-500 text-sm leading-relaxed max-w-md">
@@ -56,9 +56,9 @@ const AboutSection = () => {
         </div>
 
         {/* Right Image Column */}
-        <div className="flex-1 relative">
+        <div className="flex-1 relative w-full max-w-[550px] lg:max-w-none">
           {/* Decorative Elements */}
-          <div className="absolute top-[20%] left-[-10%] w-64 h-64 border-30 border-gray-50 rounded-full opacity-50 z-0 pointer-events-none"></div>
+          <div className="absolute top-[20%] left-[-10%] w-64 h-64 border-[30px] border-gray-50 rounded-full opacity-50 z-0 pointer-events-none"></div>
           <div className="absolute bottom-[10%] left-[0%] w-24 h-12 bg-[#00A78E] rounded-t-full z-10 pointer-events-none"></div>
           <div className="absolute top-[40%] right-[0%] w-24 h-12 bg-[#C1FF72] rounded-t-full z-10 pointer-events-none rotate-180"></div>
 
@@ -67,7 +67,7 @@ const AboutSection = () => {
             <img
               src={about?.image || Dr}
               alt="MediZen Healthcare"
-              className="w-full max-h-150 object-cover rounded-[100px] shadow-2xl shadow-black/5"
+              className="w-full max-h-[600px] object-cover rounded-[100px] shadow-2xl shadow-black/5"
             />
           </div>
         </div>

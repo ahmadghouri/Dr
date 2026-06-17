@@ -19,17 +19,17 @@ const BlogSection = () => {
     blogs?.filter((b) => b._id !== featuredBlog?._id).slice(0, 3) || [];
 
   return (
-    <section className="py-24 bg-white">
+    <section className="py-10  bg-white">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header Section */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 gap-8">
           <div className="space-y-6 lg:max-w-2xl">
             <div className="inline-block">
-              <span className="bg-[#C1FF72] text-[#1A1A1A] px-5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
+              <span className="bg-[#C1FF72] text-[#1A1A1A] px-8 py-3 rounded-full text-xs font-semibold uppercase tracking-wider">
                 Latest Blog and news
               </span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-black text-[#1A1A1A] leading-tight">
+            <h2 className="text-4xl md:text-5xl font-semibold text-[#1A1A1A] leading-tight">
               Caring for You, Caring for <br />
               Health{" "}
               <span className="relative inline-block">
@@ -66,7 +66,7 @@ const BlogSection = () => {
 
               {/* Overlay Text */}
               <div className="absolute bottom-10 left-10 right-10">
-                <h3 className="text-2xl md:text-3xl font-black text-white leading-tight max-w-sm">
+                <h3 className="text-2xl md:text-3xl font-semibold text-white leading-tight max-w-sm">
                   {featuredBlog.title}
                 </h3>
               </div>
@@ -96,13 +96,13 @@ const BlogSection = () => {
 
                 {/* Content */}
                 <div className="flex-1">
-                  <h4 className="text-xl font-black text-[#1A1A1A] group-hover:text-[#00A78E] transition-colors duration-300 line-clamp-2">
+                  <h4 className="text-xl font-semibold text-[#1A1A1A] group-hover:text-[#00A78E] transition-colors duration-300 line-clamp-2">
                     {blog.title}
                   </h4>
                 </div>
 
                 {/* Link */}
-                <div className="flex items-center gap-2 text-sm font-bold text-[#1A1A1A] group-hover:text-[#00A78E] transition-colors">
+                <div className="flex items-center gap-2 text-sm font-semibold text-[#1A1A1A] group-hover:text-[#00A78E] transition-colors">
                   <span className="hidden sm:inline">Read More</span>
                   <ArrowRight className="w-4 h-4" />
                 </div>

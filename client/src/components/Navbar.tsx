@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Search, ChevronDown, Menu, X, MessageCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 
 import { useUser, useLogout } from "../features/auth/hooks/useAuth";
 
@@ -13,6 +13,15 @@ const Navbar = () => {
   const { data: user } = useUser();
   const logout = useLogout();
 
+  // 1. Reusable Smooth Scroll Function
+  const handleLinkClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+    setIsOpen(false); // Mobile menu ko click par close karne ke liye
+  };
+
   const navLinks = [
     {
       name: "Home",
@@ -20,6 +29,16 @@ const Navbar = () => {
       hasDropdown: false,
       dropdownItems: [
         { name: "Home 1", path: "/" },
+      ],
+    },
+    {
+      name: "About Us",
+      path: "/about",
+      hasDropdown: false,
+      dropdownItems: [
+        { name: "About Us", path: "/about" },
+        { name: "All Doctors", path: "/doctors" },
+        { name: "Pricing", path: "/pricing" },
       ],
     },
     {
@@ -40,16 +59,7 @@ const Navbar = () => {
       hasDropdown: false,
       dropdownItems: [{ name: "All Blogs", path: "/blog" }],
     },
-    {
-      name: "Pages",
-      path: "/about",
-      hasDropdown: false,
-      dropdownItems: [
-        { name: "About Us", path: "/about" },
-        { name: "All Doctors", path: "/doctors" },
-        { name: "Pricing", path: "/pricing" },
-      ],
-    },
+    
     { name: "Contact", path: "/contact", hasDropdown: false },
   ];
 
@@ -65,17 +75,16 @@ const Navbar = () => {
   return (
     <nav className="bg-white border-b border-gray-50 py-4 px-6 md:px-12 sticky top-0 z-50">
       <div className="max-w-[1440px] mx-auto flex items-center justify-between">
-        {/* Logo Section */}
+        {/* Logo Section - Added onClick for top scroll */}
         <Link
           to="/"
+          onClick={handleLinkClick}
           className="flex items-center space-x-3 cursor-pointer group"
         >
           <div className="w-10 h-10 bg-[#00A78E] rounded-xl flex items-center justify-center shadow-sm shadow-[#00A78E]/20 transition-transform duration-300 group-hover:scale-110">
-            {/* Custom Cross Icon */}
             <div className="relative w-6 h-6">
               <div className="absolute top-1/2 left-0 w-full h-[3px] bg-white -translate-y-1/2 rounded-full"></div>
               <div className="absolute top-0 left-1/2 w-[3px] h-full bg-white -translate-x-1/2 rounded-full"></div>
-              {/* Extra dots for the 'medical' look */}
               <div className="absolute top-1 left-1 w-1 h-1 bg-white rounded-full opacity-40"></div>
               <div className="absolute bottom-1 right-1 w-1 h-1 bg-white rounded-full opacity-40"></div>
             </div>
@@ -102,39 +111,49 @@ const Navbar = () => {
                 if (link.hasDropdown) setActiveDropdown(link.name);
               }}
             >
-              <Link
+              {/* Added onClick={handleLinkClick} to Desktop NavLinks */}
+              <NavLink
                 to={link.path}
+                end={link.path === "/"}
+                onClick={handleLinkClick}
                 className="relative px-4 py-2 flex items-center cursor-pointer"
               >
-                {/* Animated Background Pill */}
-                <AnimatePresence>
-                  {hoveredIndex === index && (
-                    <motion.div
-                      layoutId="nav-hover"
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.95 }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 350,
-                        damping: 30,
-                      }}
-                      className="absolute inset-0 bg-[#F4F9F8] rounded-full z-0"
-                    />
-                  )}
-                </AnimatePresence>
+                {({ isActive }) => (
+                  <>
+                    <AnimatePresence>
+                      {(hoveredIndex === index || isActive) && (
+                        <motion.div
+                          layoutId="nav-hover"
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.95 }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 350,
+                            damping: 30,
+                          }}
+                          className="absolute inset-0 bg-[#F4F9F8] rounded-full z-0"
+                        />
+                      )}
+                    </AnimatePresence>
 
-                <span
-                  className={`relative z-10 text-[17px] font-bold transition-colors duration-300 ${hoveredIndex === index || activeDropdown === link.name ? "text-[#00A78E]" : "text-[#1A1A1A]"}`}
-                >
-                  {link.name}
-                </span>
-                {link.hasDropdown && (
-                  <ChevronDown
-                    className={`relative z-10 ml-1 w-4 h-4 transition-colors duration-300 ${hoveredIndex === index || activeDropdown === link.name ? "text-[#00A78E]" : "text-[#1A1A1A]"}`}
-                  />
+                    <span
+                      className={`relative z-10 text-[17px] font-semibold transition-colors duration-300 ${
+                        hoveredIndex === index || activeDropdown === link.name || isActive ? "text-[#00A78E]" : "text-[#1A1A1A]"
+                      }`}
+                    >
+                      {link.name}
+                    </span>
+                    {link.hasDropdown && (
+                      <ChevronDown
+                        className={`relative z-10 ml-1 w-4 h-4 transition-colors duration-300 ${
+                          hoveredIndex === index || activeDropdown === link.name || isActive ? "text-[#00A78E]" : "text-[#1A1A1A]"
+                        }`}
+                      />
+                    )}
+                  </>
                 )}
-              </Link>
+              </NavLink>
 
               {/* Dropdown Menu */}
               <AnimatePresence>
@@ -147,14 +166,24 @@ const Navbar = () => {
                     className="absolute top-full left-0 mt-2 w-56 bg-white rounded-2xl shadow-2xl shadow-black/10 border border-gray-50 py-3 z-[60]"
                   >
                     {link.dropdownItems.map((item) => (
-                      <Link
+                      <NavLink
                         key={item.name}
                         to={item.path}
-                        className="block px-6 py-3 text-[16px] font-bold text-[#1A1A1A] hover:text-[#00A78E] hover:bg-[#F4F9F8] transition-all duration-200"
-                        onClick={() => setActiveDropdown(null)}
+                        end={item.path === "/"}
+                        className={({ isActive }) =>
+                          `block px-6 py-3 text-[16px] font-semibold transition-all duration-200 ${
+                            isActive
+                              ? "text-[#00A78E] bg-[#F4F9F8]"
+                              : "text-[#1A1A1A] hover:text-[#00A78E] hover:bg-[#F4F9F8]"
+                          }`
+                        }
+                        onClick={() => {
+                          setActiveDropdown(null);
+                          handleLinkClick(); // Added for Dropdown items too
+                        }}
                       >
                         {item.name}
-                      </Link>
+                      </NavLink>
                     ))}
                   </motion.div>
                 )}
@@ -162,7 +191,6 @@ const Navbar = () => {
             </div>
           ))}
         </div>
-
 
         {/* Mobile Menu Button */}
         <div className="lg:hidden flex items-center">
@@ -185,21 +213,32 @@ const Navbar = () => {
             className="lg:hidden mt-4 space-y-4 pb-6 overflow-hidden"
           >
             {navLinks.map((link) => (
-              <Link
+              <NavLink
                 key={link.name}
                 to={link.path}
-                onClick={() => setIsOpen(false)}
+                end={link.path === "/"}
+                onClick={handleLinkClick} // Directly using handleLinkClick here
                 className="flex flex-col border-b border-gray-50 pb-2"
               >
-                <div className="flex items-center justify-between px-2 py-2">
-                  <span className="text-[#1A1A1A] font-bold text-lg">
-                    {link.name}
-                  </span>
-                  {link.hasDropdown && (
-                    <ChevronDown className="w-5 h-5 text-gray-400" />
-                  )}
-                </div>
-              </Link>
+                {({ isActive }) => (
+                  <div className="flex items-center justify-between px-2 py-2">
+                    <span
+                      className={`font-bold text-lg transition-colors duration-300 ${
+                        isActive ? "text-[#00A78E]" : "text-[#1A1A1A]"
+                      }`}
+                    >
+                      {link.name}
+                    </span>
+                    {link.hasDropdown && (
+                      <ChevronDown
+                        className={`w-5 h-5 transition-colors duration-300 ${
+                          isActive ? "text-[#00A78E]" : "text-gray-400"
+                        }`}
+                      />
+                    )}
+                  </div>
+                )}
+              </NavLink>
             ))}
             <div className="flex items-center space-x-4 px-2 pt-4 border-t border-gray-50">
               <div className="w-12 h-12 flex items-center justify-center bg-[#F4F9F8] rounded-full">

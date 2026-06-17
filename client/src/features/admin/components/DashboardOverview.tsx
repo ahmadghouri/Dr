@@ -55,12 +55,12 @@ const DashboardOverview: React.FC = () => {
           <div className="space-y-2 sm:space-y-3">
             <div className="flex items-center space-x-2">
               <div className="w-2 h-2 rounded-full bg-[#C1FF72] animate-pulse"></div>
-              <span className="text-[#C1FF72] text-[10px] sm:text-xs font-black uppercase tracking-widest">System Online</span>
+              <span className="text-[#C1FF72] text-[10px] sm:text-xs font-semibold uppercase tracking-widest">System Online</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight">Welcome back, Admin!</h2>
-            <p className="text-gray-400 font-medium text-sm sm:text-base max-w-lg">Everything is running smoothly. You have <span className="text-white font-bold">{messages?.length || 0} unread messages</span> waiting for your attention.</p>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight">Welcome back, Admin!</h2>
+            <p className="text-gray-400 font-semibold text-sm sm:text-base max-w-lg">Everything is running smoothly. You have <span className="text-white font-bold">{messages?.length || 0} unread messages</span> waiting for your attention.</p>
           </div>
-          <button className="bg-[#C1FF72] text-[#1A1A1A] px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-bold flex items-center group transition-all duration-300 hover:scale-105 shadow-lg shadow-[#C1FF72]/20 text-sm sm:text-base whitespace-nowrap">
+          <button className="bg-[#C1FF72] text-[#1A1A1A] px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-semibold flex items-center group transition-all duration-300 hover:scale-105 shadow-lg shadow-[#C1FF72]/20 text-sm sm:text-base whitespace-nowrap">
             <Zap className="mr-2 w-4 h-4" />
             Quick Actions
             <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform hidden sm:block" />
@@ -80,11 +80,11 @@ const DashboardOverview: React.FC = () => {
                 </div>
                 <div className="flex items-center space-x-1 text-green-500 bg-green-50 px-2 py-1 rounded-full">
                   <TrendingUp size={12} />
-                  <span className="text-xs font-bold">+12%</span>
+                  <span className="text-xs font-semibold">+12%</span>
                 </div>
               </div>
-              <h4 className="text-gray-400 font-bold text-[10px] sm:text-xs uppercase tracking-wider mb-1">{stat.label}</h4>
-              <span className="text-2xl sm:text-3xl font-black text-[#1A1A1A]">{stat.count}</span>
+              <h4 className="text-gray-400 font-semibold text-[10px] sm:text-xs uppercase tracking-wider mb-1">{stat.label}</h4>
+              <span className="text-2xl sm:text-3xl font-semibold text-[#1A1A1A]">{stat.count}</span>
             </div>
           );
         })}
@@ -100,8 +100,8 @@ const DashboardOverview: React.FC = () => {
                 <Activity className="text-[#00A78E]" size={18} />
               </div>
               <div>
-                <h3 className="text-base sm:text-lg font-black text-[#1A1A1A]">Recent Activity</h3>
-                <p className="text-[10px] sm:text-xs text-gray-400 font-medium">Latest updates from your platform</p>
+                <h3 className="text-base sm:text-lg font-semibold text-[#1A1A1A]">Recent Activity</h3>
+                <p className="text-[10px] sm:text-xs text-gray-400 font-semibold">Latest updates from your platform</p>
               </div>
             </div>
             <button className="p-2 hover:bg-gray-50 rounded-lg transition-colors text-gray-400 hover:text-[#1A1A1A]">
@@ -118,13 +118,13 @@ const DashboardOverview: React.FC = () => {
                     <Icon size={16} className="sm:w-[18px] sm:h-[18px]" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-[#1A1A1A] font-bold text-sm truncate">{activity.title}</p>
+                    <p className="text-[#1A1A1A] font-semibold text-sm truncate">{activity.title}</p>
                     <div className="flex items-center text-gray-400 text-xs mt-0.5">
                       <Clock size={12} className="mr-1 flex-shrink-0" />
                       <span className="truncate">{activity.time}</span>
                     </div>
                   </div>
-                  <span className="text-[10px] font-black uppercase tracking-wider px-2 sm:px-3 py-1 sm:py-1.5 rounded-full bg-[#C1FF72]/20 text-[#1A1A1A] flex-shrink-0">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider px-2 sm:px-3 py-1 sm:py-1.5 rounded-full bg-[#C1FF72]/20 text-[#1A1A1A] flex-shrink-0">
                     {activity.status}
                   </span>
                 </div>
@@ -141,13 +141,13 @@ const DashboardOverview: React.FC = () => {
           <div className="relative z-10">
             <div className="flex items-center space-x-2 mb-4 sm:mb-6">
               <Zap size={16} className="sm:w-[18px] sm:h-[18px] text-[#C1FF72]" />
-              <h3 className="font-black text-base sm:text-lg">Performance</h3>
+              <h3 className="font-semibold text-base sm:text-lg">Performance</h3>
             </div>
             
             <div className="space-y-4 sm:space-y-6">
               <div>
                 <div className="flex items-center justify-between mb-1.5 sm:mb-2">
-                  <span className="text-white/70 text-xs sm:text-sm font-medium">Server Uptime</span>
+                  <span className="text-white/70 text-xs sm:text-sm font-semibold">Server Uptime</span>
                   <span className="font-bold text-sm">99.9%</span>
                 </div>
                 <div className="h-1.5 sm:h-2 bg-white/20 rounded-full overflow-hidden">
@@ -157,7 +157,7 @@ const DashboardOverview: React.FC = () => {
               
               <div>
                 <div className="flex items-center justify-between mb-1.5 sm:mb-2">
-                  <span className="text-white/70 text-xs sm:text-sm font-medium">API Health</span>
+                  <span className="text-white/70 text-xs sm:text-sm font-semibold">API Health</span>
                   <span className="font-bold text-sm">100%</span>
                 </div>
                 <div className="h-1.5 sm:h-2 bg-white/20 rounded-full overflow-hidden">
@@ -167,7 +167,7 @@ const DashboardOverview: React.FC = () => {
               
               <div>
                 <div className="flex items-center justify-between mb-1.5 sm:mb-2">
-                  <span className="text-white/70 text-xs sm:text-sm font-medium">Database Load</span>
+                  <span className="text-white/70 text-xs sm:text-sm font-semibold">Database Load</span>
                   <span className="font-bold text-sm">42%</span>
                 </div>
                 <div className="h-1.5 sm:h-2 bg-white/20 rounded-full overflow-hidden">
@@ -179,7 +179,7 @@ const DashboardOverview: React.FC = () => {
             <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-white/10">
               <div className="flex items-center justify-between">
                 <span className="text-white/70 text-xs sm:text-sm">Last backup</span>
-                <span className="font-bold text-xs sm:text-sm">2 hours ago</span>
+                <span className="font-semibold text-xs sm:text-sm">2 hours ago</span>
               </div>
             </div>
           </div>

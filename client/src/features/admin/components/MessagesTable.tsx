@@ -19,7 +19,7 @@ const MessagesTable: React.FC = () => {
   if (isLoading) return (
     <div className="p-12 text-center">
       <div className="w-12 h-12 border-4 border-[#00A78E] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-      <p className="text-gray-400 font-medium">Loading messages...</p>
+      <p className="text-gray-400 font-semibold">Loading messages...</p>
     </div>
   );
 
@@ -34,8 +34,8 @@ const MessagesTable: React.FC = () => {
             <Inbox className="text-pink-500" size={18} />
           </div>
           <div>
-            <h3 className="text-base sm:text-lg font-black text-[#1A1A1A]">Contact Messages</h3>
-            <p className="text-xs sm:text-sm text-gray-400 font-medium">
+            <h3 className="text-base sm:text-lg font-semibold text-[#1A1A1A]">Contact Messages</h3>
+            <p className="text-xs sm:text-sm text-gray-400 font-semibold">
               {messages?.length || 0} total · {unreadCount} unread
             </p>
           </div>
@@ -48,7 +48,7 @@ const MessagesTable: React.FC = () => {
           <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <Inbox className="w-8 h-8 text-gray-400" />
           </div>
-          <p className="text-gray-400 font-medium">No messages yet</p>
+          <p className="text-gray-400 font-semibold">No messages yet</p>
         </div>
       )}
 
@@ -58,10 +58,10 @@ const MessagesTable: React.FC = () => {
           <table className="w-full text-left border-collapse min-w-[700px]">
             <thead>
               <tr className="bg-gray-50/50">
-                <th className="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest rounded-l-xl">Sender</th>
-                <th className="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-wider">Message</th>
-                <th className="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-wider">Date</th>
-                <th className="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-wider text-right rounded-r-xl">Actions</th>
+                <th className="px-6 py-4 text-[10px] font-semibold text-gray-400 uppercase tracking-widest rounded-l-xl">Sender</th>
+                <th className="px-6 py-4 text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Message</th>
+                <th className="px-6 py-4 text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Date</th>
+                <th className="px-6 py-4 text-[10px] font-semibold text-gray-400 uppercase tracking-wider text-right rounded-r-xl">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50">
@@ -73,19 +73,19 @@ const MessagesTable: React.FC = () => {
                         <Mail size={18} />
                       </div>
                       <div>
-                        <h4 className="font-bold text-[#1A1A1A] text-sm">{message.name}</h4>
-                        <p className="text-xs text-gray-400 font-medium">{message.email}</p>
+                        <h4 className="font-semibold text-[#1A1A1A] text-sm">{message.name}</h4>
+                        <p className="text-xs text-gray-400 font-semibold">{message.email}</p>
                       </div>
                     </div>
                   </td>
                   <td className="px-6 py-4 max-w-sm">
                     <div className="space-y-1">
-                      <h5 className="font-black text-xs text-[#00A78E] uppercase tracking-wider">{message.subject || 'No Subject'}</h5>
-                      <p className="text-gray-400 font-medium text-xs line-clamp-2">{message.message}</p>
+                      <h5 className="font-semibold text-xs text-[#00A78E] uppercase tracking-wider">{message.subject || 'No Subject'}</h5>
+                      <p className="text-gray-400 font-semibold text-xs line-clamp-2">{message.message}</p>
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <div className="flex items-center text-gray-400 text-xs font-medium">
+                    <div className="flex items-center text-gray-400 text-xs font-semibold">
                       <Calendar size={12} className="mr-1.5" />
                       {new Date(message.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                     </div>
@@ -100,12 +100,12 @@ const MessagesTable: React.FC = () => {
                         <Eye size={16} />
                       </button>
                       {message.isRead ? (
-                        <span className="inline-flex items-center px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider bg-green-50 text-green-500">
+                        <span className="inline-flex items-center px-3 py-1.5 rounded-lg text-[10px] font-semibold uppercase tracking-wider bg-green-50 text-green-500">
                           <CheckCircle2 size={10} className="mr-1" />
                           Read
                         </span>
                       ) : (
-                        <span className="inline-flex items-center px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider bg-orange-100 text-orange-600">
+                        <span className="inline-flex items-center px-3 py-1.5 rounded-lg text-[10px] font-semibold uppercase tracking-wider bg-orange-100 text-orange-600">
                           <MessageSquare size={10} className="mr-1" />
                           New
                         </span>
@@ -123,9 +123,9 @@ const MessagesTable: React.FC = () => {
       {selectedMessage && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 animate-in fade-in duration-300">
           <div className="bg-white rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl animate-in slide-in-from-bottom-8 duration-500">
-            <div className="p-6 border-b border-gray-100 bg-gray-50/50">
+            <div className="p-6 border-b border-gray-100 bg-gray-50/50 text-left">
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-black text-[#1A1A1A]">Message Details</h3>
+                <h3 className="text-lg font-semibold text-[#1A1A1A]">Message Details</h3>
                 <button
                   onClick={() => setSelectedMessage(null)}
                   className="p-2 hover:bg-gray-200 rounded-xl transition-all text-gray-400 hover:text-[#1A1A1A]"
@@ -134,28 +134,28 @@ const MessagesTable: React.FC = () => {
                 </button>
               </div>
             </div>
-            <div className="p-6 space-y-4">
+            <div className="p-6 space-y-4 text-left">
               <div className="flex items-center space-x-3">
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${!selectedMessage.isRead ? 'bg-gradient-to-br from-orange-400 to-orange-500 text-white' : 'bg-blue-50 text-blue-500'}`}>
                   <Mail size={20} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-[#1A1A1A]">{selectedMessage.name}</h4>
-                  <p className="text-sm text-gray-400">{selectedMessage.email}</p>
+                  <h4 className="font-semibold text-[#1A1A1A]">{selectedMessage.name}</h4>
+                  <p className="text-sm text-gray-400 font-semibold">{selectedMessage.email}</p>
                 </div>
               </div>
               
               <div className="bg-gray-50 rounded-xl p-4">
-                <p className="text-xs font-black text-gray-400 uppercase tracking-wider mb-1">Subject</p>
-                <p className="font-bold text-[#1A1A1A]">{selectedMessage.subject || 'No Subject'}</p>
+                <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Subject</p>
+                <p className="font-semibold text-[#1A1A1A]">{selectedMessage.subject || 'No Subject'}</p>
               </div>
               
               <div className="bg-gray-50 rounded-xl p-4">
-                <p className="text-xs font-black text-gray-400 uppercase tracking-wider mb-1">Message</p>
-                <p className="text-gray-600 whitespace-pre-wrap">{selectedMessage.message}</p>
+                <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Message</p>
+                <p className="text-gray-600 font-semibold whitespace-pre-wrap">{selectedMessage.message}</p>
               </div>
               
-              <div className="flex items-center text-gray-400 text-sm">
+              <div className="flex items-center text-gray-400 text-sm font-semibold">
                 <Calendar size={14} className="mr-2" />
                 {new Date(selectedMessage.createdAt).toLocaleString('en-US', { 
                   month: 'long', 
@@ -169,13 +169,13 @@ const MessagesTable: React.FC = () => {
             <div className="p-6 border-t border-gray-100 flex space-x-3">
               <a
                 href={`mailto:${selectedMessage.email}?subject=Re: ${selectedMessage.subject || 'Your Message'}`}
-                className="flex-1 bg-[#00A78E] text-white px-6 py-3 rounded-xl font-bold text-center hover:bg-[#008F7A] transition-all"
+                className="flex-1 bg-[#00A78E] text-white px-6 py-3 rounded-xl font-semibold text-center hover:bg-[#008F7A] transition-all"
               >
                 Reply via Email
               </a>
               <button
                 onClick={() => setSelectedMessage(null)}
-                className="flex-1 bg-gray-100 text-gray-500 px-6 py-3 rounded-xl font-bold hover:bg-gray-200 transition-all"
+                className="flex-1 bg-gray-100 text-gray-500 px-6 py-3 rounded-xl font-semibold hover:bg-gray-200 transition-all"
               >
                 Close
               </button>

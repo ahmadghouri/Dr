@@ -3,7 +3,7 @@ import hero1Thumb from '../assets/hero1-thumb.jpg';
 
 const TeamImageSection = () => {
   return (
-    <section className="relative w-full pb-20 overflow-visible bg-white">
+    <section className="relative w-full pb-10 overflow-visible bg-white">
       {/* Background Decorative Elements */}
       {/* Left Big Semi-circle */}
       <div className="absolute top-0 left-[-10%] w-[400px] h-[400px] border-[40px] border-[#C1FF72]/20 rounded-full pointer-events-none"></div>
@@ -23,7 +23,7 @@ const TeamImageSection = () => {
                 <defs>
                   <path id="circlePath" d="M 50, 50 m -38, 0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0" />
                 </defs>
-                <text className="text-[10px] font-black uppercase tracking-[0.2em] fill-[#1A1A1A]">
+                <text className="text-[10px] font-semibold uppercase tracking-[0.2em] fill-[#1A1A1A]">
                   <textPath xlinkHref="#circlePath">
                     BEST MEDICAL CARE • WORKING SINCE 1988 •
                   </textPath>
