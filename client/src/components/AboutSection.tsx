@@ -25,7 +25,7 @@ const AboutSection = () => {
           </div>
 
           {/* Heading */}
-          <h2 className="text-4xl md:text-5xl font-semibold text-[#1A1A1A] leading-[1.1] tracking-tight">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-semibold text-[#1A1A1A] leading-[1.1] tracking-tight">
             {about?.title || "Compassionate Care Always There Health First"}
           </h2>
 
