@@ -3,8 +3,8 @@ import { Mail, ArrowRight } from 'lucide-react';
 
 const AppointmentSection = () => {
   return (
-    <section className="py-24 bg-gray-50/30 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 relative flex flex-col lg:flex-row items-center">
+  <section className="py-10 bg-gray-50/30 overflow-hidden">
+      <div className="max-w-[1280px] mx-auto px-6 relative flex flex-col lg:flex-row items-center">
         
         {/* Left Side: Image Container */}
         <div className="w-full lg:w-[60%] relative z-0">
@@ -23,13 +23,13 @@ const AppointmentSection = () => {
           <div className="bg-white rounded-[30px] p-8 md:p-12 shadow-2xl shadow-black/5 border border-gray-100">
             {/* Badge */}
             <div className="inline-block mb-6">
-              <span className="bg-[#C1FF72] text-[#1A1A1A] px-5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
+              <span className="bg-[#C1FF72] text-[#1A1A1A] px-8 py-3 rounded-full text-[16px] font-semibold uppercase tracking-wider">
                 Contact Us
               </span>
             </div>
 
             {/* Heading */}
-            <h2 className="text-4xl md:text-5xl font-black text-[#1A1A1A] mb-10 leading-tight">
+            <h2 className="text-4xl md:text-5xl font-semibold text-[#1A1A1A] mb-10 leading-tight">
               Get an <span className="relative inline-block">
                 Appointment
                 <div className="absolute -bottom-1 left-0 w-full h-3 bg-[#C1FF72]/80 -rotate-1 rounded-full z-0"></div>
@@ -69,7 +69,7 @@ const AppointmentSection = () => {
                 className="w-full bg-[#F4F9F8] border-none rounded-2xl px-6 py-4 text-sm focus:ring-2 focus:ring-[#00A78E] outline-none transition-all resize-none"
               ></textarea>
 
-              <button className="w-full bg-[#00A78E] text-white py-5 rounded-2xl font-bold text-lg flex items-center justify-center group hover:bg-[#008f7a] transition-all shadow-lg shadow-[#00A78E]/20">
+              <button className="w-full bg-[#00A78E] text-white py-5 rounded-2xl font-semibold text-lg flex items-center justify-center group hover:bg-[#008f7a] transition-all shadow-lg shadow-[#00A78E]/20">
                 <span>Book An Appointment</span>
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>

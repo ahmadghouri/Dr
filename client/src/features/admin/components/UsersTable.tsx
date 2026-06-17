@@ -9,7 +9,7 @@ const UsersTable: React.FC = () => {
   if (isLoading) return (
     <div className="p-12 text-center">
       <div className="w-12 h-12 border-4 border-[#00A78E] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-      <p className="text-gray-400 font-medium">Loading users...</p>
+      <p className="text-gray-400 font-semibold">Loading users...</p>
     </div>
   );
 
@@ -22,8 +22,8 @@ const UsersTable: React.FC = () => {
             <Users className="text-blue-500" size={18} />
           </div>
           <div>
-            <h3 className="text-base sm:text-lg font-black text-[#1A1A1A]">All Users</h3>
-            <p className="text-xs sm:text-sm text-gray-400 font-medium">{users?.length || 0} total users</p>
+            <h3 className="text-base sm:text-lg font-semibold text-[#1A1A1A]">All Users</h3>
+            <p className="text-xs sm:text-sm text-gray-400 font-semibold">{users?.length || 0} total users</p>
           </div>
         </div>
       </div>
@@ -33,10 +33,10 @@ const UsersTable: React.FC = () => {
         <table className="w-full text-left border-collapse min-w-[600px]">
           <thead>
             <tr className="bg-gray-50/50">
-              <th className="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest rounded-l-xl">User</th>
-              <th className="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest">Role</th>
-              <th className="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest">Status</th>
-              <th className="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest text-right rounded-r-xl">Actions</th>
+              <th className="px-6 py-4 text-[10px] font-semibold text-gray-400 uppercase tracking-widest rounded-l-xl">User</th>
+              <th className="px-6 py-4 text-[10px] font-semibold text-gray-400 uppercase tracking-widest">Role</th>
+              <th className="px-6 py-4 text-[10px] font-semibold text-gray-400 uppercase tracking-widest">Status</th>
+              <th className="px-6 py-4 text-[10px] font-semibold text-gray-400 uppercase tracking-widest text-right rounded-r-xl">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-50">
@@ -48,13 +48,13 @@ const UsersTable: React.FC = () => {
                       {user.isAdmin ? <Shield size={18} /> : <UserIcon size={18} />}
                     </div>
                     <div>
-                      <h4 className="font-bold text-[#1A1A1A] text-sm">{user.name}</h4>
-                      <p className="text-xs text-gray-400 font-medium">{user.email}</p>
+                      <h4 className="font-semibold text-[#1A1A1A] text-sm">{user.name}</h4>
+                      <p className="text-xs text-gray-400 font-semibold">{user.email}</p>
                     </div>
                   </div>
                 </td>
                 <td className="px-6 py-4">
-                  <span className={`inline-flex items-center px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider ${
+                  <span className={`inline-flex items-center px-3 py-1 rounded-lg text-[10px] font-semibold uppercase tracking-wider ${
                     user.isAdmin 
                       ? 'bg-[#C1FF72]/20 text-[#1A1A1A]' 
                       : 'bg-gray-100 text-gray-500'
@@ -65,7 +65,7 @@ const UsersTable: React.FC = () => {
                 <td className="px-6 py-4">
                   <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                    <span className="text-xs font-medium text-gray-500">Active</span>
+                    <span className="text-xs font-semibold text-gray-500">Active</span>
                   </div>
                 </td>
                 <td className="px-6 py-4 text-right">

@@ -51,7 +51,7 @@ const ProjectDetailsPage = () => {
       <section className="py-24 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
         <div className="flex flex-col items-center text-center space-y-12">
           {/* Main Title */}
-          <h1 className="text-[48px] md:text-[64px] font-black text-[#1A1A1A] max-w-[900px] leading-tight">
+          <h1 className="text-[48px] md:text-[64px] font-semibold text-[#1A1A1A] max-w-[900px] leading-tight">
             {project.title}
           </h1>
 
@@ -62,10 +62,10 @@ const ProjectDetailsPage = () => {
                 key={i}
                 className="flex flex-col items-center md:items-start space-y-2"
               >
-                <span className="text-[#1A1A1A] font-black text-lg">
+                <span className="text-[#1A1A1A] font-semibold text-lg">
                   {item.label}
                 </span>
-                <span className="text-gray-400 font-medium text-sm">
+                <span className="text-gray-400 font-semibold text-sm">
                   {item.value}
                 </span>
               </div>
@@ -110,7 +110,7 @@ const ProjectDetailsPage = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-[28px] font-black text-[#1A1A1A]">
+              <h3 className="text-[28px] font-semibold text-[#1A1A1A]">
                 Health Guardians
               </h3>
               <p className="text-gray-500 leading-relaxed">
@@ -127,7 +127,7 @@ const ProjectDetailsPage = () => {
                 ].map((text, i) => (
                   <li
                     key={i}
-                    className="flex items-center gap-2 text-[#1A1A1A] font-bold group cursor-pointer"
+                    className="flex items-center gap-2 text-[#1A1A1A] font-semibold group cursor-pointer"
                   >
                     <ChevronRight className="w-5 h-5 text-[#00A78E] group-hover:translate-x-1 transition-transform" />
                     {text}
@@ -144,7 +144,7 @@ const ProjectDetailsPage = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-[28px] font-black text-[#1A1A1A]">
+              <h3 className="text-[28px] font-semibold text-[#1A1A1A]">
                 Harmony Health
               </h3>
               <p className="text-gray-500 leading-relaxed">
@@ -161,7 +161,7 @@ const ProjectDetailsPage = () => {
                 ].map((text, i) => (
                   <li
                     key={i}
-                    className="flex items-center gap-2 text-[#1A1A1A] font-bold group cursor-pointer"
+                    className="flex items-center gap-2 text-[#1A1A1A] font-semibold group cursor-pointer"
                   >
                     <ChevronRight className="w-5 h-5 text-[#00A78E] group-hover:translate-x-1 transition-transform" />
                     {text}
@@ -173,7 +173,7 @@ const ProjectDetailsPage = () => {
 
           {/* Bottom Summary Section */}
           <div className="text-left space-y-6 w-full pt-12">
-            <h3 className="text-[32px] font-black text-[#1A1A1A]">
+            <h3 className="text-[32px] font-semibold text-[#1A1A1A]">
               Health Matters We Care
             </h3>
             <p className="text-gray-500 text-lg leading-relaxed">
@@ -198,11 +198,11 @@ const ProjectDetailsPage = () => {
 
           {/* Pagination Buttons (as per screenshot) */}
           <div className="w-full pt-16 flex items-center justify-between border-t border-gray-100">
-            <button className="flex items-center gap-3 px-8 py-4 border border-gray-100 rounded-full font-black text-[#1A1A1A] hover:bg-gray-50 transition-all group">
+            <button className="flex items-center gap-3 px-8 py-4 border border-gray-100 rounded-full font-semibold text-[#1A1A1A] hover:bg-gray-50 transition-all group">
               <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
               Previous post
             </button>
-            <button className="flex items-center gap-3 px-8 py-4 border border-gray-100 rounded-full font-black text-[#1A1A1A] hover:bg-gray-50 transition-all group">
+            <button className="flex items-center gap-3 px-8 py-4 border border-gray-100 rounded-full font-semibold text-[#1A1A1A] hover:bg-gray-50 transition-all group">
               Next post
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>

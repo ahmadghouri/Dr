@@ -50,10 +50,10 @@ const AdminDashboard: React.FC = () => {
           <header className="mb-6 lg:mb-8 pl-12 lg:pl-0">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
-                <h1 className="text-2xl sm:text-3xl font-black text-[#1A1A1A] tracking-tight">
+                <h1 className="text-2xl sm:text-3xl font-semibold text-[#1A1A1A] tracking-tight">
                   {activeTab === 'dashboard' ? 'Dashboard Overview' : `${activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Management`}
                 </h1>
-                <p className="text-gray-500 mt-1 font-medium text-sm sm:text-base">
+                <p className="text-gray-500 mt-1 font-semibold text-sm sm:text-base">
                   {activeTab === 'dashboard' 
                     ? 'Welcome back! Here\'s what\'s happening with your platform.' 
                     : 'Manage your website content and data effortlessly.'}
@@ -61,8 +61,8 @@ const AdminDashboard: React.FC = () => {
               </div>
               <div className="flex items-center space-x-4">
                 <div className="text-right hidden sm:block">
-                  <p className="text-sm font-bold text-[#1A1A1A]">{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
-                  <p className="text-xs text-gray-400 font-medium">{new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</p>
+                  <p className="text-sm font-semibold text-[#1A1A1A]">{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                  <p className="text-xs text-gray-400 font-semibold">{new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</p>
                 </div>
               </div>
             </div>

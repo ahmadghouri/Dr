@@ -115,7 +115,7 @@ const BlogsManager: React.FC = () => {
     return (
       <div className="p-12 text-center">
         <div className="w-12 h-12 border-4 border-[#00A78E] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-        <p className="text-gray-400 font-medium">Loading blogs...</p>
+        <p className="text-gray-400 font-semibold">Loading blogs...</p>
       </div>
     );
 
@@ -124,8 +124,8 @@ const BlogsManager: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4 pb-4 sm:pb-6 border-b border-gray-100">
         <div>
-          <h3 className="text-lg sm:text-xl font-black text-[#1A1A1A]">Manage Blogs</h3>
-          <p className="text-xs sm:text-sm text-gray-400 font-medium mt-1">
+          <h3 className="text-lg sm:text-xl font-semibold text-[#1A1A1A]">Manage Blogs</h3>
+          <p className="text-xs sm:text-sm text-gray-400 font-semibold mt-1">
             {blogs?.length || 0} blog posts
           </p>
         </div>
@@ -150,7 +150,7 @@ const BlogsManager: React.FC = () => {
       <div className="space-y-3 sm:space-y-4">
         {blogs?.length === 0 && (
           <div className="text-center py-12 bg-gray-50 rounded-2xl">
-            <p className="text-gray-400 font-medium">No blogs yet. Create your first blog!</p>
+            <p className="text-gray-400 font-semibold">No blogs yet. Create your first blog!</p>
           </div>
         )}
         {blogs?.map((blog) => (
@@ -167,17 +167,17 @@ const BlogsManager: React.FC = () => {
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center space-x-2 sm:space-x-3 mb-1">
-                <span className="text-[10px] sm:text-xs font-black text-[#00A78E] uppercase tracking-wider flex items-center">
+                <span className="text-[10px] sm:text-xs font-semibold text-[#00A78E] uppercase tracking-wider flex items-center">
                   <Calendar size={10} className="mr-1" />
                   {new Date(blog.createdAt).toLocaleDateString()}
                 </span>
                 {blog.isFeatured && (
-                  <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-[#C1FF72] text-[#1A1A1A] text-[10px] font-black rounded-full uppercase tracking-wider">
+                  <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-[#C1FF72] text-[#1A1A1A] text-[10px] font-semibold rounded-full uppercase tracking-wider">
                     Featured
                   </span>
                 )}
               </div>
-              <h4 className="text-sm sm:text-xl font-black text-[#1A1A1A] group-hover:text-[#00A78E] transition-colors line-clamp-1">
+              <h4 className="text-sm sm:text-xl font-semibold text-[#1A1A1A] group-hover:text-[#00A78E] transition-colors line-clamp-1">
                 {blog.title}
               </h4>
               <p className="text-xs text-gray-400 mt-1 line-clamp-1 hidden sm:block">
@@ -212,10 +212,10 @@ const BlogsManager: React.FC = () => {
           <div className="bg-white rounded-2xl sm:rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl animate-in slide-in-from-bottom-8 duration-500 flex flex-col">
             <div className="p-4 sm:p-6 flex justify-between items-center border-b border-gray-100 bg-gray-50/50 flex-shrink-0">
               <div>
-                <h3 className="text-lg sm:text-xl font-black text-[#1A1A1A]">
+                <h3 className="text-lg sm:text-xl font-semibold text-[#1A1A1A]">
                   {editingBlog ? "Edit Blog" : "Add New Blog"}
                 </h3>
-                <p className="text-xs sm:text-sm text-gray-400 font-medium mt-1">
+                <p className="text-xs sm:text-sm text-gray-400 font-semibold mt-1">
                   {editingBlog ? "Update blog details" : "Create a new blog post"}
                 </p>
               </div>
@@ -233,7 +233,7 @@ const BlogsManager: React.FC = () => {
             >
               <div className="space-y-6">
                 <div className="space-y-2">
-                  <label className="text-sm font-black text-gray-500 uppercase tracking-widest px-1">
+                  <label className="text-sm font-semibold text-gray-500 uppercase tracking-widest px-1">
                     Blog Title
                   </label>
                   <input
@@ -243,14 +243,14 @@ const BlogsManager: React.FC = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, title: e.target.value })
                     }
-                    className="w-full px-8 py-5 bg-gray-50 rounded-2xl border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-bold text-base outline-none transition-all"
+                    className="w-full px-8 py-5 bg-gray-50 rounded-2xl border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-semibold text-base outline-none transition-all"
                     placeholder="Enter blog title"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-sm font-black text-gray-500 uppercase tracking-widest px-1">
+                    <label className="text-sm font-semibold text-gray-500 uppercase tracking-widest px-1">
                       Category
                     </label>
                     <input
@@ -260,12 +260,12 @@ const BlogsManager: React.FC = () => {
                       onChange={(e) =>
                         setFormData({ ...formData, category: e.target.value })
                       }
-                      className="w-full px-8 py-5 bg-gray-50 rounded-2xl border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-bold text-base outline-none transition-all"
+                      className="w-full px-8 py-5 bg-gray-50 rounded-2xl border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-semibold text-base outline-none transition-all"
                       placeholder="e.g. Health, Lifestyle"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-black text-gray-500 uppercase tracking-widest px-1">
+                    <label className="text-sm font-semibold text-gray-500 uppercase tracking-widest px-1">
                       Tags (comma separated)
                     </label>
                     <input
@@ -274,14 +274,14 @@ const BlogsManager: React.FC = () => {
                       onChange={(e) =>
                         setFormData({ ...formData, tags: e.target.value })
                       }
-                      className="w-full px-8 py-5 bg-gray-50 rounded-2xl border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-bold text-base outline-none transition-all"
+                      className="w-full px-8 py-5 bg-gray-50 rounded-2xl border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-semibold text-base outline-none transition-all"
                       placeholder="e.g. Medical, News"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-black text-gray-500 uppercase tracking-widest px-1">
+                  <label className="text-sm font-semibold text-gray-500 uppercase tracking-widest px-1">
                     Summary (for Grid)
                   </label>
                   <textarea
@@ -291,13 +291,13 @@ const BlogsManager: React.FC = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, summary: e.target.value })
                     }
-                    className="w-full px-8 py-5 bg-gray-50 rounded-2xl border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-bold text-base outline-none transition-all resize-none"
+                    className="w-full px-8 py-5 bg-gray-50 rounded-2xl border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-semibold text-base outline-none transition-all resize-none"
                     placeholder="Enter short blog summary"
                   ></textarea>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-black text-gray-500 uppercase tracking-widest px-1">
+                  <label className="text-sm font-semibold text-gray-500 uppercase tracking-widest px-1">
                     Full Content (for Detail Page)
                   </label>
                   <textarea
@@ -307,18 +307,18 @@ const BlogsManager: React.FC = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, fullContent: e.target.value })
                     }
-                    className="w-full px-8 py-5 bg-gray-50 rounded-[32px] border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-bold text-base outline-none transition-all resize-none"
+                    className="w-full px-8 py-5 bg-gray-50 rounded-[32px] border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-semibold text-base outline-none transition-all resize-none"
                     placeholder="Enter full blog post content"
                   ></textarea>
                 </div>
 
                 <div className="bg-gray-50 rounded-[32px] p-8 space-y-6">
-                  <h4 className="text-lg font-black text-[#1A1A1A] border-b border-gray-100 pb-4">
+                  <h4 className="text-lg font-semibold text-[#1A1A1A] border-b border-gray-100 pb-4">
                     Quote Section
                   </h4>
                   <div className="space-y-4">
                     <div className="space-y-2">
-                      <label className="text-sm font-black text-gray-500 uppercase tracking-widest px-1">
+                      <label className="text-sm font-semibold text-gray-500 uppercase tracking-widest px-1">
                         Quote Text
                       </label>
                       <textarea
@@ -327,13 +327,13 @@ const BlogsManager: React.FC = () => {
                         onChange={(e) =>
                           setFormData({ ...formData, quote: e.target.value })
                         }
-                        className="w-full px-8 py-5 bg-white rounded-2xl border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-bold text-base outline-none transition-all resize-none"
+                        className="w-full px-8 py-5 bg-white rounded-2xl border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-semibold text-base outline-none transition-all resize-none"
                         placeholder="Enter quote text"
                       ></textarea>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <label className="text-sm font-black text-gray-500 uppercase tracking-widest px-1">
+                        <label className="text-sm font-semibold text-gray-500 uppercase tracking-widest px-1">
                           Quote Author
                         </label>
                         <input
@@ -345,12 +345,12 @@ const BlogsManager: React.FC = () => {
                               quoteAuthor: e.target.value,
                             })
                           }
-                          className="w-full px-6 py-4 bg-white rounded-xl border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-bold text-base outline-none transition-all"
+                          className="w-full px-6 py-4 bg-white rounded-xl border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-semibold text-base outline-none transition-all"
                           placeholder="e.g. David Bekham"
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-sm font-black text-gray-500 uppercase tracking-widest px-1">
+                        <label className="text-sm font-semibold text-gray-500 uppercase tracking-widest px-1">
                           Author Role
                         </label>
                         <input
@@ -362,7 +362,7 @@ const BlogsManager: React.FC = () => {
                               quoteAuthorRole: e.target.value,
                             })
                           }
-                          className="w-full px-6 py-4 bg-white rounded-xl border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-bold text-base outline-none transition-all"
+                          className="w-full px-6 py-4 bg-white rounded-xl border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-semibold text-base outline-none transition-all"
                           placeholder="e.g. Brand Manager"
                         />
                       </div>
@@ -371,7 +371,7 @@ const BlogsManager: React.FC = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-black text-gray-500 uppercase tracking-widest px-1">
+                  <label className="text-sm font-semibold text-gray-500 uppercase tracking-widest px-1">
                     Key Points (comma separated)
                   </label>
                   <textarea
@@ -380,18 +380,18 @@ const BlogsManager: React.FC = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, points: e.target.value })
                     }
-                    className="w-full px-8 py-5 bg-gray-50 rounded-2xl border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-bold text-base outline-none transition-all resize-none"
+                    className="w-full px-8 py-5 bg-gray-50 rounded-2xl border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-semibold text-base outline-none transition-all resize-none"
                     placeholder="e.g. Dental operations, Medical services, Expert Care"
                   ></textarea>
                 </div>
 
                 <div className="bg-gray-50 rounded-[32px] p-8 space-y-6">
-                  <h4 className="text-lg font-black text-[#1A1A1A] border-b border-gray-100 pb-4">
+                  <h4 className="text-lg font-semibold text-[#1A1A1A] border-b border-gray-100 pb-4">
                     Holistic Section
                   </h4>
                   <div className="space-y-4">
                     <div className="space-y-2">
-                      <label className="text-sm font-black text-gray-500 uppercase tracking-widest px-1">
+                      <label className="text-sm font-semibold text-gray-500 uppercase tracking-widest px-1">
                         Holistic Section Title
                       </label>
                       <input
@@ -403,12 +403,12 @@ const BlogsManager: React.FC = () => {
                             holisticTitle: e.target.value,
                           })
                         }
-                        className="w-full px-8 py-5 bg-white rounded-2xl border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-bold text-base outline-none transition-all"
+                        className="w-full px-8 py-5 bg-white rounded-2xl border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-semibold text-base outline-none transition-all"
                         placeholder="e.g. Holistic Health Consultations"
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm font-black text-gray-500 uppercase tracking-widest px-1">
+                      <label className="text-sm font-semibold text-gray-500 uppercase tracking-widest px-1">
                         Holistic Section Content
                       </label>
                       <textarea
@@ -420,7 +420,7 @@ const BlogsManager: React.FC = () => {
                             holisticContent: e.target.value,
                           })
                         }
-                        className="w-full px-8 py-5 bg-white rounded-2xl border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-bold text-base outline-none transition-all resize-none"
+                        className="w-full px-8 py-5 bg-white rounded-2xl border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-semibold text-base outline-none transition-all resize-none"
                         placeholder="Enter holistic section details"
                       ></textarea>
                     </div>
@@ -439,14 +439,14 @@ const BlogsManager: React.FC = () => {
                   />
                   <label
                     htmlFor="isFeatured"
-                    className="text-sm font-bold text-gray-600 cursor-pointer"
+                    className="text-sm font-semibold text-gray-600 cursor-pointer"
                   >
                     Mark as Featured Post
                   </label>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-black text-gray-500 uppercase tracking-widest px-1">
+                  <label className="text-sm font-semibold text-gray-500 uppercase tracking-widest px-1">
                     Blog Image
                   </label>
                   <div className="relative group">
@@ -471,7 +471,7 @@ const BlogsManager: React.FC = () => {
                       ) : (
                         <div className="flex flex-col items-center text-gray-400 group-hover:text-[#00A78E] space-y-2">
                           <Upload size={40} />
-                          <p className="font-bold text-lg">Upload Blog Image</p>
+                          <p className="font-semibold text-lg">Upload Blog Image</p>
                         </div>
                       )}
                     </label>
@@ -483,14 +483,14 @@ const BlogsManager: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="flex-1 px-6 py-3 bg-gray-100 text-gray-500 rounded-xl font-bold hover:bg-gray-200 transition-all text-sm sm:text-base"
+                  className="flex-1 px-6 py-3 bg-gray-100 text-gray-500 rounded-xl font-semibold hover:bg-gray-200 transition-all text-sm sm:text-base"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={createMutation.isPending || updateMutation.isPending}
-                  className="flex-1 px-6 py-3 bg-[#00A78E] text-white rounded-xl font-bold hover:bg-[#008F7A] transition-all shadow-lg shadow-[#00A78E]/20 flex items-center justify-center disabled:opacity-50 text-sm sm:text-base"
+                  className="flex-1 px-6 py-3 bg-[#00A78E] text-white rounded-xl font-semibold hover:bg-[#008F7A] transition-all shadow-lg shadow-[#00A78E]/20 flex items-center justify-center disabled:opacity-50 text-sm sm:text-base"
                 >
                   <Save className="mr-2" size={18} />
                   {createMutation.isPending || updateMutation.isPending

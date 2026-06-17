@@ -104,7 +104,7 @@ const ServicesManager: React.FC = () => {
 
   if (isLoading)
     return (
-      <div className="p-12 text-center text-gray-500 font-bold">
+      <div className="p-12 text-center text-gray-500 font-semibold">
         Loading services...
       </div>
     );
@@ -114,12 +114,12 @@ const ServicesManager: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4 pb-4 sm:pb-6 border-b border-gray-100">
         <div>
-          <h3 className="text-lg sm:text-xl font-black text-[#1A1A1A]">All Services</h3>
-          <p className="text-xs sm:text-sm text-gray-400 font-medium mt-1">Manage and organize your healthcare services</p>
+          <h3 className="text-lg sm:text-xl font-semibold text-[#1A1A1A]">All Services</h3>
+          <p className="text-xs sm:text-sm text-gray-400 font-semibold mt-1">Manage and organize your healthcare services</p>
         </div>
         <button
           onClick={() => handleOpenModal()}
-          className="bg-[#00A78E] hover:bg-[#008F7A] text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-bold flex items-center transition-all duration-300 shadow-lg shadow-[#00A78E]/20 hover:shadow-xl hover:-translate-y-0.5 text-sm sm:text-base whitespace-nowrap"
+          className="bg-[#00A78E] hover:bg-[#008F7A] text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-semibold flex items-center transition-all duration-300 shadow-lg shadow-[#00A78E]/20 hover:shadow-xl hover:-translate-y-0.5 text-sm sm:text-base whitespace-nowrap"
         >
           <Plus className="mr-2" size={18} />
           Add Service
@@ -159,10 +159,10 @@ const ServicesManager: React.FC = () => {
               </div>
             </div>
             <div className="p-5">
-              <h4 className="text-lg font-black text-[#1A1A1A] mb-2">
+              <h4 className="text-lg font-semibold text-[#1A1A1A] mb-2">
                 {service.title}
               </h4>
-              <p className="text-gray-400 font-medium text-sm line-clamp-2">
+              <p className="text-gray-400 font-semibold text-sm line-clamp-2">
                 {service.description}
               </p>
             </div>

@@ -19,7 +19,7 @@ const ScrollingBanner = () => {
                         {items.map((text, idx) => (
                             <div key={idx} className="flex items-center mx-8">
                                 <Sparkles className="w-5 h-5 text-[#1A1A1A] mr-4 fill-current" />
-                                <span className="text-2xl font-black text-[#1A1A1A] uppercase tracking-tight">
+                                <span className="text-2xl font-semibold text-[#1A1A1A] uppercase tracking-tight">
                                     {text}
                                 </span>
                             </div>

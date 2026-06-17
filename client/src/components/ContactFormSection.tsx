@@ -46,10 +46,10 @@ const ContactFormSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <span className="text-[18px] font-bold text-[#1A1A1A] mb-4 block">
+              <span className="text-[18px] font-semibold text-[#1A1A1A] mb-4 block">
                 Contact Us
               </span>
-              <h2 className="text-[48px] md:text-[64px] font-black text-[#1A1A1A] leading-tight mb-12">
+              <h2 className="text-[48px] md:text-[64px] font-semibold text-[#1A1A1A] leading-tight mb-12">
                 Get an <span className="relative inline-block">
                   Appointment
                   <div className="absolute -bottom-2 left-0 w-full h-[10px] bg-[#C1FF72] rounded-full z-[-1] opacity-80"></div>
@@ -80,7 +80,7 @@ const ContactFormSection = () => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-8 py-5 bg-[#F9FAFB] rounded-full border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-bold text-lg outline-none transition-all"
+                      className="w-full px-8 py-5 bg-[#F9FAFB] rounded-full border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-semibold text-lg outline-none transition-all"
                     />
                     <Mail className="absolute right-8 top-1/2 -translate-y-1/2 w-6 h-6 text-[#00A78E] opacity-40 group-focus-within:opacity-100 transition-opacity" />
                   </div>
@@ -93,7 +93,7 @@ const ContactFormSection = () => {
                       placeholder="Phone Number"
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full px-8 py-5 bg-[#F9FAFB] rounded-full border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-bold text-lg outline-none transition-all"
+                      className="w-full px-8 py-5 bg-[#F9FAFB] rounded-full border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-semibold text-lg outline-none transition-all"
                     />
                   </div>
 
@@ -105,7 +105,7 @@ const ContactFormSection = () => {
                       placeholder="Subject"
                       value={formData.subject}
                       onChange={handleChange}
-                      className="w-full px-8 py-5 bg-[#F9FAFB] rounded-full border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-bold text-lg outline-none transition-all"
+                      className="w-full px-8 py-5 bg-[#F9FAFB] rounded-full border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-semibold text-lg outline-none transition-all"
                     />
                   </div>
                 </div>
@@ -119,7 +119,7 @@ const ContactFormSection = () => {
                     value={formData.message}
                     onChange={handleChange}
                     required
-                    className="w-full px-8 py-6 bg-[#F9FAFB] rounded-[30px] border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-bold text-lg outline-none transition-all resize-none"
+                    className="w-full px-8 py-6 bg-[#F9FAFB] rounded-[30px] border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-semibold text-lg outline-none transition-all resize-none"
                   ></textarea>
                 </div>
 
@@ -127,7 +127,7 @@ const ContactFormSection = () => {
                 <button
                   type="submit"
                   disabled={sendContactMutation.isPending}
-                  className="bg-[#00A78E] hover:bg-[#1A1A1A] text-white px-12 py-5 rounded-full font-bold text-lg flex items-center justify-center transition-all duration-500 group shadow-xl shadow-[#00A78E]/20 disabled:opacity-50"
+                  className="bg-[#00A78E] hover:bg-[#1A1A1A] text-white px-12 py-5 rounded-full font-semibold text-lg flex items-center justify-center transition-all duration-500 group shadow-xl shadow-[#00A78E]/20 disabled:opacity-50"
                 >
                   {sendContactMutation.isPending ? 'Sending...' : 'Book An Appointment'}
                   <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />

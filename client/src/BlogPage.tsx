@@ -29,10 +29,10 @@ const BlogPage = () => {
     );
 
   return (
-    <div className="flex flex-col w-full min-h-screen bg-[#F9FAFB]">
+    <div className="flex flex-col w-full min-h-screen font-semibold bg-[#F9FAFB]">
       <PageHero title="Latest Blog" breadcrumb="Blog" />
 
-      <section className="py-24 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
+      <section className="py-10 max-w-[1440px]  mx-auto px-6 md:px-12 lg:px-24">
         <div className="flex flex-col lg:flex-row gap-10">
           {/* Left Side: Blog List */}
           <div className="lg:w-[65%] space-y-10">
@@ -55,7 +55,7 @@ const BlogPage = () => {
                   {/* Date Badge over image */}
                   <div className="absolute bottom-6 right-6 bg-white/90 backdrop-blur-sm px-5 py-2 rounded-full flex items-center space-x-2 shadow-lg">
                     <Calendar className="w-4 h-4 text-[#00A78E]" />
-                    <span className="text-[#1A1A1A] font-bold text-sm">
+                    <span className="text-[#1A1A1A] font-semibold text-sm">
                       {new Date(blog.createdAt).toLocaleDateString()}
                     </span>
                   </div>
@@ -63,7 +63,7 @@ const BlogPage = () => {
 
                 {/* Content */}
                 <div className="space-y-6 px-2">
-                  <div className="flex items-center space-x-6 text-gray-400 text-sm font-bold uppercase tracking-wider">
+                  <div className="flex items-center space-x-6 text-gray-400 text-sm font-semibold uppercase tracking-wider">
                     <div className="flex items-center space-x-2">
                       <User className="w-4 h-4 text-[#00A78E]" />
                       <span>By Admin</span>
@@ -76,13 +76,13 @@ const BlogPage = () => {
                     </div>
                   </div>
 
-                  <h3 className="text-[28px] md:text-[32px] font-black text-[#1A1A1A] leading-tight group-hover:text-[#00A78E] transition-colors duration-300">
+                  <h3 className="text-[28px] md:text-[32px] font-semibold text-[#1A1A1A] leading-tight group-hover:text-[#00A78E] transition-colors duration-300">
                     {blog.title}
                   </h3>
 
                   <button
                     onClick={() => navigate(`/blog-details/${blog._id}`)}
-                    className="border-2 border-gray-100 hover:border-[#00A78E] hover:bg-[#00A78E] hover:text-white px-8 py-3.5 rounded-full font-black text-[#1A1A1A] transition-all duration-300 flex items-center group/btn"
+                    className="border-2 border-gray-100 hover:border-[#00A78E] hover:bg-[#00A78E] hover:text-white px-8 py-3.5 rounded-full font-semibold text-[#1A1A1A] transition-all duration-300 flex items-center group/btn"
                   >
                     Read More
                     <ArrowRight className="ml-2 w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
@@ -96,7 +96,7 @@ const BlogPage = () => {
               {[1, 2, 3, 4].map((num) => (
                 <button
                   key={num}
-                  className={`w-12 h-12 rounded-full flex items-center justify-center font-bold border-2 transition-all ${num === 1 ? "bg-white border-[#00A78E] text-[#1A1A1A]" : "bg-white border-gray-100 text-gray-400 hover:border-[#00A78E] hover:text-[#1A1A1A]"}`}
+                  className={`w-12 h-12 rounded-full flex items-center justify-center font-semibold border-2 transition-all ${num === 1 ? "bg-white border-[#00A78E] text-[#1A1A1A]" : "bg-white border-gray-100 text-gray-400 hover:border-[#00A78E] hover:text-[#1A1A1A]"}`}
                 >
                   {num}
                 </button>
@@ -117,7 +117,7 @@ const BlogPage = () => {
             <div className="bg-white p-8 rounded-[30px] shadow-sm border border-gray-50">
               <div className="flex items-center space-x-3 mb-6">
                 <div className="w-6 h-1 bg-[#00A78E] rounded-full"></div>
-                <h3 className="text-[20px] font-black text-[#1A1A1A]">
+                <h3 className="text-[20px] font-semibold text-[#1A1A1A]">
                   Search
                 </h3>
               </div>
@@ -125,7 +125,7 @@ const BlogPage = () => {
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="w-full px-6 py-4 bg-[#F9FAFB] rounded-full border border-gray-100 focus:ring-2 focus:ring-[#00A78E] outline-none font-bold text-gray-700"
+                  className="w-full px-6 py-4 bg-[#F9FAFB] rounded-full border border-gray-100 focus:ring-2 focus:ring-[#00A78E] outline-none font-semibold text-gray-700"
                 />
                 <Search className="absolute right-6 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
               </div>
@@ -135,7 +135,7 @@ const BlogPage = () => {
             <div className="bg-white p-8 rounded-[30px] shadow-sm border border-gray-50">
               <div className="flex items-center space-x-3 mb-8">
                 <div className="w-6 h-1 bg-[#00A78E] rounded-full"></div>
-                <h3 className="text-[20px] font-black text-[#1A1A1A]">
+                <h3 className="text-[20px] font-semibold text-[#1A1A1A]">
                   Category
                 </h3>
               </div>
@@ -151,7 +151,7 @@ const BlogPage = () => {
                     key={cat}
                     className="flex items-center justify-between group cursor-pointer border-b border-gray-50 pb-4 last:border-0 last:pb-0"
                   >
-                    <span className="font-bold text-gray-600 group-hover:text-[#00A78E] transition-colors">
+                    <span className="font-semibold text-gray-600 group-hover:text-[#00A78E] transition-colors">
                       {cat}
                     </span>
                     <Plus className="w-4 h-4 text-gray-300 group-hover:text-[#00A78E] group-hover:rotate-90 transition-all" />
@@ -164,7 +164,7 @@ const BlogPage = () => {
             <div className="bg-white p-8 rounded-[30px] shadow-sm border border-gray-50">
               <div className="flex items-center space-x-3 mb-8">
                 <div className="w-6 h-1 bg-[#00A78E] rounded-full"></div>
-                <h3 className="text-[20px] font-black text-[#1A1A1A]">
+                <h3 className="text-[20px] font-semibold text-[#1A1A1A]">
                   Recent post
                 </h3>
               </div>
@@ -186,11 +186,11 @@ const BlogPage = () => {
                       />
                     </div>
                     <div className="space-y-1">
-                      <div className="flex items-center space-x-2 text-[12px] font-bold text-gray-400 uppercase">
+                      <div className="flex items-center space-x-2 text-[12px] font-semibold text-gray-400 uppercase">
                         <div className="w-2 h-2 bg-[#00A78E] rounded-full"></div>
                         <span>Category</span>
                       </div>
-                      <h4 className="font-black text-[#1A1A1A] leading-tight group-hover:text-[#00A78E] transition-colors text-sm">
+                      <h4 className="font-semibold text-[#1A1A1A] leading-tight group-hover:text-[#00A78E] transition-colors text-sm">
                         {title}
                       </h4>
                     </div>
@@ -201,7 +201,7 @@ const BlogPage = () => {
 
             {/* Need Help Card */}
             <div className="bg-white p-10 rounded-[30px] shadow-sm border border-gray-50 text-center space-y-8">
-              <h3 className="text-[22px] font-black text-[#1A1A1A]">
+              <h3 className="text-[22px] font-semibold text-[#1A1A1A]">
                 Need Help? Call Us
               </h3>
               <div className="w-16 h-16 bg-[#C1FF72] rounded-full flex items-center justify-center mx-auto shadow-lg shadow-[#C1FF72]/20">
@@ -211,7 +211,7 @@ const BlogPage = () => {
                 Health care is a vital aspect of maintaining overall well-being,
                 encompassing a range of services from preventive care
               </p>
-              <h2 className="text-[22px] font-black text-[#1A1A1A]">
+              <h2 className="text-[22px] font-semibold text-[#1A1A1A]">
                 (+888) 178 456 765
               </h2>
             </div>
@@ -220,7 +220,7 @@ const BlogPage = () => {
             <div className="bg-white p-8 rounded-[30px] shadow-sm border border-gray-50">
               <div className="flex items-center space-x-3 mb-8">
                 <div className="w-6 h-1 bg-[#00A78E] rounded-full"></div>
-                <h3 className="text-[20px] font-black text-[#1A1A1A]">Tags</h3>
+                <h3 className="text-[20px] font-semibold text-[#1A1A1A]">Tags</h3>
               </div>
               <div className="flex flex-wrap gap-2">
                 {[
@@ -235,7 +235,7 @@ const BlogPage = () => {
                 ].map((tag) => (
                   <span
                     key={tag}
-                    className="px-5 py-2 rounded-full border border-gray-100 text-gray-400 font-bold text-xs hover:bg-[#00A78E] hover:text-white hover:border-[#00A78E] transition-all cursor-pointer"
+                    className="px-5 py-2 rounded-full border border-gray-100 text-gray-400 font-semibold text-xs hover:bg-[#00A78E] hover:text-white hover:border-[#00A78E] transition-all cursor-pointer"
                   >
                     {tag}
                   </span>
