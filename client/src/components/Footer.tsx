@@ -194,7 +194,7 @@ const Footer = () => {
 
         {/* Newsletter Section */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-semibold mb-8 leading-tight">
+          <h2 className="text-3xl md:text-4xl font-semibold mb-8 leading-tight">
             Ready To Turn Dreams Into Reality <br />
             <span className="relative">
               Subscribe to Our Newsletter
@@ -251,7 +251,7 @@ const Footer = () => {
               {[
                 { name: 'About Us', path: '/about' },
                 { name: 'Services', path: '/services' },
-                { name: 'Why Chose Us', path: '/' }, // Yeh standard home target ha
+                { name: 'Why Chose Us', path: 'why-choose-us' }, // Yeh standard home target ha
                 { name: 'Doctors', path: '/doctors' },
                 { name: 'Blog And News', path: '/blog' }
               ].map((link) => (

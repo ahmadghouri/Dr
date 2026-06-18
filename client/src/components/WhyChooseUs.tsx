@@ -3,7 +3,7 @@ import { Play } from 'lucide-react';
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-16 sm:py-20 bg-white overflow-hidden">
+    <section  id="why-choose-us" className="py-16 sm:py-20 bg-white overflow-hidden">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col lg:flex-row gap-10 lg:gap-12">
 
     {/* Left Content and Big Image */}

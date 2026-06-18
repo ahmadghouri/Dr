@@ -13,7 +13,7 @@ const TeamImageSection = () => {
         <div className="relative rounded-[24px] sm:rounded-[40px] overflow-visible shadow-2xl shadow-black/5">
           
           {/* Working Since Badge - Positioned perfectly over the top edge */}
-          <div className="absolute -top-4 sm:-top-6 right-4 sm:right-10 md:right-[15%] -translate-y-1/2 z-30 w-28 h-28 sm:w-36 sm:h-36 lg:w-48 lg:h-48 flex items-center justify-center">
+          <div className="absolute -top-4 sm:-top-6 right-4 sm:right-10 md:right-[15%] -translate-y-1/2 z-30 w-28 h-28 sm:w-35 sm:h-36 lg:w-30 lg:h-30 flex items-center justify-center">
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
