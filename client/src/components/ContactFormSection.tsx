@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Mail } from 'lucide-react';
 import { useSendContact } from '../features/contact/hooks/useContact';
-
+import Imagejfif from '../assets/Image.jfif'; 
 const ContactFormSection = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -34,22 +34,24 @@ const ContactFormSection = () => {
   };
 
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-360 mx-auto px-6 md:px-12">
+    <section className="py-5 bg-white">
+      <div className="max-w-360 mx-auto px-6 md:px-10">
         <div className="bg-white rounded-[40px] shadow-2xl shadow-black/5 overflow-hidden flex flex-col lg:flex-row min-h-175 border border-gray-50">
           
           {/* Left Side: Contact Form */}
-          <div className="flex-1 p-10 md:p-16 lg:p-24 flex flex-col justify-center">
+          <div className="flex-1 p-10 md:p-16 lg:p-10 flex flex-col justify-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <span className="text-[18px] font-semibold text-[#1A1A1A] mb-4 block">
-                Contact Us
-              </span>
-              <h2 className="text-[48px] md:text-[64px] font-semibold text-[#1A1A1A] leading-tight mb-12">
+              <div className="inline-block">
+            <span className="bg-[#C1FF72] text-[#1A1A1A] px-8 py-3 rounded-full text-[16px] font-semibold shadow-sm shadow-[#C1FF72]/20">
+              Contact Us
+            </span>
+          </div>
+              <h2 className="text-[48px] md:text-[60px] font-semibold text-[#1A1A1A] leading-tight mt-5 mb-7">
                 Get an <span className="relative inline-block">
                   Appointment
                   <div className="absolute -bottom-2 left-0 w-full h-[10px] bg-[#C1FF72] rounded-full z-[-1] opacity-80"></div>
@@ -137,7 +139,7 @@ const ContactFormSection = () => {
           </div>
 
           {/* Right Side: Doctor Image */}
-          <motion.div 
+           <motion.div 
             initial={{ opacity: 0, scale: 1.1 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -145,13 +147,14 @@ const ContactFormSection = () => {
             className="lg:w-[45%] relative h-[500px] lg:h-auto"
           >
             <img
-              src="https://images.unsplash.com/photo-1559839734-2b71f1536783?q=80&w=2070&auto=format&fit=crop"
+              src={Imagejfif}
               alt="Medical Professional"
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-contain"
+              
             />
-            {/* Overlay gradient for a smoother look */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent pointer-events-none"></div>
-          </motion.div>
+          </motion.div> 
+        
+
         </div>
       </div>
     </section>
