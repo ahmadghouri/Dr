@@ -21,10 +21,10 @@ const SpecialFeatures = () => {
   ];
 
   return (
-    <section className="py-10 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="py-5 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-5">
         {/* Main Card Container */}
-        <div className="bg-[#FAFAFA] rounded-[40px] p-8 md:p-16 relative overflow-hidden border border-gray-100/50">
+        <div className="bg-[#FAFAFA] rounded-[40px] p-8 md:p-16  relative overflow-hidden border border-gray-100/50">
           {/* Decorative background element */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#E0F2EF] opacity-40 rounded-full blur-[120px] -mr-32 -mt-32 pointer-events-none"></div>
 
@@ -35,7 +35,7 @@ const SpecialFeatures = () => {
                 Our Feature
               </span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-semibold text-[#1A1A1A] leading-[1.15] tracking-tight max-w-2xl">
+            <h2 className="text-4xl md:text-3xl font-semibold text-[#1A1A1A] leading-[1.15] tracking-tight max-w-2xl">
               Compassionate Care <br />
               Health <span className="relative inline-block px-1">
                 <span className="relative z-10">Exceptional Results</span>
@@ -51,11 +51,11 @@ const SpecialFeatures = () => {
                 key={index} 
                 className={`flex flex-col md:flex-row items-start md:items-center justify-between p-6 md:p-8 ${
                   index !== featureList.length - 1 ? 'border-b border-gray-100' : ''
-                } group hover:bg-white hover:shadow-[0_15px_50px_-20px_rgba(0,0,0,0.05)] hover:border-transparent rounded-3xl transition-all duration-300`}
+                } group hover:bg-white hover:shadow-[0_15px_50px_-20px_rgba(0,0,0,0.05)] hover:border-transparent  rounded-3xl transition-all duration-300`}
               >
                 {/* Left: Icon and Title */}
                 <div className="flex items-center space-x-6 mb-4 md:mb-0">
-                  <div className="w-16 h-16 bg-[#C1FF72] rounded-2xl flex items-center justify-center shadow-md shadow-[#C1FF72]/20 transform group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-25 h-15 bg-[#C1FF72] rounded-2xl flex items-center justify-center shadow-md shadow-[#C1FF72]/20 transform group-hover:scale-110 transition-transform duration-300">
                     {item.icon}
                   </div>
                   <h3 className="text-xl md:text-2xl font-semibold text-[#1A1A1A] max-w-[280px] tracking-tight">
@@ -74,7 +74,7 @@ const SpecialFeatures = () => {
                 </div>
 
                 {/* Right: Read More Button */}
-                <button className="flex items-center space-x-3 bg-white border border-gray-200/60 px-7 py-3.5 rounded-full shadow-sm group-hover:bg-[#00A78E] group-hover:text-white group-hover:border-transparent transition-all duration-300 group/btn">
+                <button className="flex items-center space-x-3 bg-white border cursor-pointer border-gray-200/60 px-7 py-3.5 rounded-full shadow-sm group-hover:bg-[#00A78E] group-hover:text-white group-hover:border-transparent transition-all duration-300 group/btn">
                   <span className="text-sm font-semibold tracking-wide">Read More</span>
                   <div className="w-5 h-5 flex items-center justify-center transition-transform group-hover/btn:translate-x-1.5 duration-300">
                     <ArrowRight className="w-4 h-4" />

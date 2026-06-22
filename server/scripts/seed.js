@@ -172,58 +172,28 @@ const seedData = async () => {
     // 5. Seed Doctors
     await Doctor.create([
       {
-        name: "Dr. Alvin Eclair",
-        expertise: "Neurology Expert",
+        name: "Prof. Dr.Awais Malik",
+        expertise: "Advanced Laparoscopic & Bariatric Surgery",
         description:
-          "Medical care encompasses a range of services aimed at promoting health, preventing disease",
+          "A highly respected advanced laparoscopic and bariatric surgeon, recognized for precision surgery, ethical practice, and patient-centered outcomes.",
         biography:
-          "Dr. Alvin Eclair is a world-renowned neurologist with over 15 years of experience in treating complex brain and nervous system disorders. He has published numerous papers on neuroplasticity and recovery.",
+          "Prof. Dr.Awais Malik is an advanced laparoscopic and bariatric surgeon with a commitment to evidence-based medicine, meticulous surgical technique, and compassionate care. Renowned for his calm demeanor, clinical judgment, and commitment to excellence, he believes successful surgery is built on trust, communication, and continuity of care.",
         education: [
-          "MD from Harvard Medical School",
-          "Residency at Mayo Clinic",
+          "Professor of General and Minimally Access Surgery",
+    "Undergraduate and Postgraduate Surgical Trainer & Researcher"
         ],
         experience: [
-          "Chief of Neurology at City Hospital",
-          "Associate Professor at State University",
+       "Over 10 years of clinical, academic, and surgical experience",
+    "Professor at Fatima Memorial College of Medicine & Dentistry",
+    "Consultant Surgeon at Midcity Hospital Lahore"
         ],
-        workingHours: "Mon-Wed, 9AM-4PM",
-        specialization: ["Neuro-oncology", "Multiple Sclerosis"],
+        workingHours: "Available upon appointment",
+        specialization: ["Advanced Laparoscopic Procedures", 
+    "Bariatric (Metabolic) Surgery", 
+    "Modern Weight-Loss Surgeries",
+    "Minimally Invasive Surgical Techniques"],
         image:
           "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=2070&auto=format&fit=crop",
-      },
-      {
-        name: "Dr. Alan Jellybean",
-        expertise: "Dental Care",
-        description:
-          "Medical care encompasses a range of services aimed at promoting health, preventing disease",
-        biography:
-          "Dr. Alan Jellybean is passionate about creating beautiful smiles. With a focus on cosmetic dentistry and oral health, he has helped thousands of patients regain their confidence through advanced dental procedures.",
-        education: [
-          "DDS from University of Michigan",
-          "Fellowship in Cosmetic Dentistry",
-        ],
-        experience: [
-          "Private Practice for 8 years",
-          "Volunteer Dentist at Global Health",
-        ],
-        workingHours: "Tue-Fri, 10AM-6PM",
-        specialization: ["Cosmetic Dentistry", "Oral Surgery"],
-        image:
-          "https://images.unsplash.com/photo-1594824476967-48c8b964273f?q=80&w=1974&auto=format&fit=crop",
-      },
-      {
-        name: "Dr. Dean R. Chassay",
-        expertise: "Eye Expert",
-        description:
-          "Medical care encompasses a range of services aimed at promoting health, preventing disease",
-        biography:
-          "Dr. Dean Chassay specializes in advanced ophthalmology. He is a pioneer in laser eye surgery and has dedicated his career to improving vision through innovative surgical techniques and preventive eye care.",
-        education: ["MD from Johns Hopkins", "Ophthalmology Residency at UCLA"],
-        experience: ["Director of Vision Center", "Ophthalmic Consultant"],
-        workingHours: "Mon-Thu, 8AM-3PM",
-        specialization: ["LASIK", "Cataract Surgery"],
-        image:
-          "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1928&auto=format&fit=crop",
       },
     ]);
 

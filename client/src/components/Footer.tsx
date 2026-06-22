@@ -193,8 +193,8 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
 
         {/* Newsletter Section */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-semibold mb-8 leading-tight">
+        {/* <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-semibold mb-8 leading-tight">
             Ready To Turn Dreams Into Reality <br />
             <span className="relative">
               Subscribe to Our Newsletter
@@ -216,7 +216,38 @@ const Footer = () => {
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
-        </div>
+        </div> */}
+        <div className="text-center mb-16 px-4">
+  {/* Heading Section */}
+  <h2 className="text-2xl md:text-3xl font-semibold mb-8 leading-tight text-[#FFFFFF]">
+    Ready To Turn Dreams Into Reality <span className="block md:inline"><br className="hidden md:block" /></span>
+    <span className="relative inline-block mt-2 md:mt-0">
+      Subscribe to Our Newsletter
+      <div className="absolute -bottom-2 left-0 w-full h-[6px] bg-[#C1FF72] rounded-full z-[-1] opacity-80"></div>
+    </span>
+  </h2>
+
+  {/* Form Container: Mobile par vertical, desktop par rounded bar */}
+  <div className="max-w-xl mx-auto flex flex-col sm:flex-row items-stretch sm:items-center bg-[#1A1A1A] rounded-[24px] sm:rounded-full p-2.5 sm:p-2 border border-gray-800 shadow-2xl shadow-black/10">
+    
+    {/* Input Area */}
+    <div className="flex items-center flex-1 px-3 py-3 sm:py-0">
+      <Mail className="w-5 h-5 text-gray-400 flex-shrink-0" />
+      <input
+        type="email"
+        placeholder="Enter your email"
+        className="bg-transparent flex-1 outline-none text-sm pl-3 text-white placeholder-gray-500 w-full"
+      />
+    </div>
+    
+    {/* Action Button: Mobile par full-width, desktop par pill-shape */}
+    <button className="bg-[#C1FF72] text-[#1A1A1A] px-8 py-4 sm:py-3 rounded-[16px] sm:rounded-full font-bold text-sm flex items-center justify-center space-x-2 hover:bg-[#b5f265] transition-all duration-300 active:scale-[0.98] mt-2 sm:mt-0 shadow-lg shadow-[#C1FF72]/10">
+      <span>Subscribe Now</span>
+      <ArrowRight className="w-4 h-4" />
+    </button>
+
+  </div>
+</div>
 
         {/* Main Footer Box */}
         <div className="bg-[#151515] rounded-3xl p-8 md:p-12 border border-gray-800 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
@@ -251,7 +282,7 @@ const Footer = () => {
               {[
                 { name: 'About Us', path: '/about' },
                 { name: 'Services', path: '/services' },
-                { name: 'Why Chose Us', path: '/' }, // Yeh standard home target ha
+                { name: 'Why Chose Us', path: 'why-choose-us' }, // Yeh standard home target ha
                 { name: 'Doctors', path: '/doctors' },
                 { name: 'Blog And News', path: '/blog' }
               ].map((link) => (
