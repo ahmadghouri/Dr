@@ -33,14 +33,14 @@ const ServicesGrid = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               // Cards par soft subte premium shadow aur borderline border-gray-50 lagayi hai
-              className="bg-white rounded-[32px] p-8 md:p-10 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col h-full border border-gray-50 relative"
+              className="bg-white rounded-[32px] p-8 md:p-10 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer duration-300 group flex flex-col h-full border border-gray-50 relative"
             >
               {/* Header: Icon + Title */}
               <div className="flex items-center space-x-5 mb-6">
-                <div
-                  className={`w-16 h-16 ${
-                    service.iconBg || "bg-[#F4F9F8]"
-                  } rounded-2xl flex items-center justify-center shadow-inner transition-transform duration-300 group-hover:rotate-6`}
+             <div
+                 className={`w-16 h-16 rounded-2xl flex items-center justify-center shadow-inner transition-all duration-300 ${
+                service.iconBg || "bg-[#F4F9F8]"
+                  } group-hover:bg-[#C1FF72] group-hover:rotate-6`}
                 >
                   {service.icon && iconMap[service.icon] ? (
                     iconMap[service.icon]

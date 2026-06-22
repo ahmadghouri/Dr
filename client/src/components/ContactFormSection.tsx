@@ -88,17 +88,25 @@ const ContactFormSection = () => {
                   </div>
 
                   {/* Phone Input */}
+                  
                   <div className="relative group">
-                    <input
-                      type="tel"
+                   <input
+                     type="text" 
+                      inputMode="numeric" 
+                      pattern="[0-9]*"
                       name="phone"
                       placeholder="Phone Number"
                       value={formData.phone}
-                      onChange={handleChange}
-                      className="w-full px-8 py-5 bg-[#F9FAFB] rounded-full border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-semibold text-lg outline-none transition-all"
-                    />
-                  </div>
-
+   
+                      onChange={(e) => {
+                  const onlyNums = e.target.value.replace(/[^0-9]/g, '');
+  
+                    e.target.value = onlyNums;
+                         handleChange(e);
+                       }}
+                   className="w-full px-8 py-5 bg-[#F9FAFB] rounded-full border-none focus:ring-2 focus:ring-[#00A78E] text-[#1A1A1A] font-semibold text-lg outline-none transition-all"
+                       />
+                     </div>
                   {/* Subject Input */}
                   <div className="relative group">
                     <input

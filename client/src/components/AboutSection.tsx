@@ -13,10 +13,10 @@ const AboutSection = () => {
     );
 
   return (
-  <section className="py-12 bg-white overflow-hidden">
+  <section className="py-5 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-15 flex flex-col lg:flex-row items-center gap-16">
         {/* Left Content Column */}
-        <div className="flex-1 space-y-3">
+        <div className="flex-1 space-y-4">
           {/* Badge */}
           <div className="inline-block">
             <span className="bg-[#C1FF72] text-[#1A1A1A] px-8 py-3 rounded-full text-[16px] font-semibold shadow-sm shadow-[#C1FF72]/20">
@@ -67,7 +67,7 @@ const AboutSection = () => {
             <img
               src={about?.image || Dr}
               alt="MediZen Healthcare"
-              className="w-full max-h-[600px] object-cover rounded-[100px] shadow-2xl shadow-black/5"
+              className="w-full max-h-[670px] object-cover rounded-[100px] shadow-2xl shadow-black/5"
             />
           </div>
         </div>

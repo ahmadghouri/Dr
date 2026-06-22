@@ -7,7 +7,6 @@ import {
   Mail, ArrowRight, ChevronDown, CalendarCheck,
   HeartPulse,
 } from "lucide-react";
-
 const DoctorDetailsPage = () => {
   const { id } = useParams<{ id: string }>();
   const { data: doctor, isLoading, error } = useDoctor(id || "");
@@ -113,7 +112,7 @@ const DoctorDetailsPage = () => {
                 Write your message
               </h3>
 
-              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+               <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
                 <textarea
                   placeholder="Describe your concern or question…"
                   className="w-full h-[100px] bg-[#F7F7F5] border border-[#E8E8E4] rounded-xl p-4 text-[13px] text-gray-600 placeholder-gray-400 focus:outline-none focus:border-[#00A78E] transition-colors resize-none"
@@ -149,11 +148,12 @@ const DoctorDetailsPage = () => {
                   </div>
                 </div>
 
-                <button className="inline-flex items-center gap-2 bg-[#0A0A0A] text-[#C1FF72] text-[13px] font-semibold px-6 py-3 rounded-full hover:bg-[#00A78E] hover:text-white transition-all group">
+                <button className="inline-flex items-center gap-2 bg-[#008F7A] text-[#ffff] text-[13px] font-semibold px-6 py-3 rounded-full cursor-pointer hover:bg-[#00A78E] hover:text-white transition-all group">
                   <CalendarCheck className="w-4 h-4" />
-                  Book an appointment
+                  Book an Appointment
                 </button>
-              </form>
+              </form> 
+              
             </div>
           </div>
 
@@ -162,13 +162,13 @@ const DoctorDetailsPage = () => {
 
             {/* Profile Card */}
             <div className="bg-white border border-[#E8E8E4] rounded-2xl overflow-hidden">
-              <div className="relative h-56 bg-[#0A0A0A]">
+              <div className="relative  bg-[#0A0A0A]">
                 <img
                   src={doctor.image}
                   alt={doctor.name}
                   className="w-full h-full object-cover object-top"
                 />
-                <span className="absolute bottom-3 left-3 bg-[#C1FF72] text-[#0A0A0A] text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">
+                <span className="absolute bottom-3 left-3 bg-[#00A78E] text-[#F7F7F5] text-[10px] font-semibold tracking-widest uppercase px-3 py-1 rounded-full">
                   Available
                 </span>
               </div>
@@ -198,7 +198,7 @@ const DoctorDetailsPage = () => {
             {/* Stats Grid */}
             <div className="grid grid-cols-2 gap-3">
               {[
-                { num: "15+", label: "Years exp." },
+                { num: "10+", label: "Years exp." },
                 { num: "2.4k", label: "Patients" },
                 { num: "4.9", label: "Rating" },
                 { num: "98%", label: "Success rate" },

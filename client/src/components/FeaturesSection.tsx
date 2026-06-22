@@ -8,22 +8,23 @@ const FeaturesSection = () => {
       title: "Your health our priority wellness Healing with heart",
       link: "Read More",
       color: "text-[#1A1A1A]",
-      linkColor: "text-[#1A1A1A]"
+      linkColor: "text-[#00A78E]"
     },
     {
       icon: <FolderHeart className="w-10 h-10" />,
       title: "A healthy tomorrow starts today Where health meets hope",
       link: "Read More",
       color: "text-[#1A1A1A]",
-      linkColor: "text-[#00A78E]"
+      linkColor: "text-[#00A78E]",
     },
     {
       icon: <HeartPulse className="w-10 h-10" />,
       title: "Your health our priority wellness Healing with heart",
       link: "Read More",
       color: "text-[#1A1A1A]",
-      linkColor: "text-[#1A1A1A]"
+      linkColor: "text-[#00A78E]",
     }
+ 
   ];
 
   return (
@@ -31,12 +32,11 @@ const FeaturesSection = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <div key={index} className="flex flex-col items-start bg-white border border-gray-100 rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 space-y-6 group">
+            <div key={index} className="flex flex-col items-start bg-white border cursor-pointer border-gray-100 rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 space-y-6 group">
               {/* Icon Container */}
-              <div className="text-[#1A1A1A] bg-gray-50 p-4  rounded-2xl transform group-hover:scale-110 transition-transform duration-300">
-                {feature.icon}
+              <div className="text-[#1A1A1A]  p-4 rounded-2xl transform group-hover:bg-[#C1FF72] scale-110 transition-transform duration-300">
+              {feature.icon}
               </div>
-
               {/* Title */}
               <h3 className={`text-2xl font-semibold leading-tight ${feature.color} max-w-[280px]`}>
                 {feature.title}
