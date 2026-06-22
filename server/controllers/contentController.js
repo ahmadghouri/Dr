@@ -30,18 +30,26 @@ const getItemById = (Model) => async (req, res) => {
 const createItem = (Model) => async (req, res) => {
   try {
     const data = { ...req.body };
-    
+
     // Handle image upload
     if (req.file && req.file.path) {
       data.image = req.file.path;
     }
 
     // Handle boolean fields
-    if (data.isFeatured === 'true') data.isFeatured = true;
-    if (data.isFeatured === 'false') data.isFeatured = false;
+    if (data.isFeatured === "true") data.isFeatured = true;
+    if (data.isFeatured === "false") data.isFeatured = false;
 
     // Handle array fields if they come as strings
-    const arrayFields = ["features", "benefits", "tags", "education", "experience", "specialization", "points"];
+    const arrayFields = [
+      "features",
+      "benefits",
+      "tags",
+      "education",
+      "experience",
+      "specialization",
+      "points",
+    ];
     arrayFields.forEach((key) => {
       if (data[key] !== undefined) {
         if (typeof data[key] === "string") {
@@ -51,22 +59,32 @@ const createItem = (Model) => async (req, res) => {
             data[key] = Array.isArray(parsed) ? parsed : [parsed];
           } catch (e) {
             // If JSON parse fails, split by comma
-            data[key] = data[key].split(",").map((item) => item.trim()).filter((item) => item !== "");
+            data[key] = data[key]
+              .split(",")
+              .map((item) => item.trim())
+              .filter((item) => item !== "");
           }
         }
       }
     });
 
-    console.log('Creating item with data:', { ...data, image: data.image ? 'Image present' : 'No image' });
+    console.log("Creating item with data:", {
+      ...data,
+      image: data.image ? "Image present" : "No image",
+    });
 
     const newItem = new Model(data);
     const savedItem = await newItem.save();
-    
-    console.log('Item saved successfully:', savedItem._id);
+
+    console.log("Item saved successfully:", savedItem._id);
     res.status(201).json(savedItem);
   } catch (error) {
-    console.error('Error creating item:', error);
-    res.status(400).json({ message: error.message, stack: error.stack });
+    console.error("Error creating item:", error);
+    const response = { message: error.message };
+    if (process.env.NODE_ENV !== "production") {
+      response.stack = error.stack;
+    }
+    res.status(400).json(response);
   }
 };
 
@@ -74,18 +92,26 @@ const createItem = (Model) => async (req, res) => {
 const updateItem = (Model) => async (req, res) => {
   try {
     const data = { ...req.body };
-    
+
     // Handle image upload
     if (req.file && req.file.path) {
       data.image = req.file.path;
     }
 
     // Handle boolean fields
-    if (data.isFeatured === 'true') data.isFeatured = true;
-    if (data.isFeatured === 'false') data.isFeatured = false;
+    if (data.isFeatured === "true") data.isFeatured = true;
+    if (data.isFeatured === "false") data.isFeatured = false;
 
     // Handle array fields if they come as strings
-    const arrayFields = ["features", "benefits", "tags", "education", "experience", "specialization", "points"];
+    const arrayFields = [
+      "features",
+      "benefits",
+      "tags",
+      "education",
+      "experience",
+      "specialization",
+      "points",
+    ];
     arrayFields.forEach((key) => {
       if (data[key] !== undefined) {
         if (typeof data[key] === "string") {
@@ -93,28 +119,38 @@ const updateItem = (Model) => async (req, res) => {
             const parsed = JSON.parse(data[key]);
             data[key] = Array.isArray(parsed) ? parsed : [parsed];
           } catch (e) {
-            data[key] = data[key].split(",").map((item) => item.trim()).filter((item) => item !== "");
+            data[key] = data[key]
+              .split(",")
+              .map((item) => item.trim())
+              .filter((item) => item !== "");
           }
         }
       }
     });
 
-    console.log('Updating item:', req.params.id, 'with data:', { ...data, image: data.image ? 'Image present' : 'No image' });
+    console.log("Updating item:", req.params.id, "with data:", {
+      ...data,
+      image: data.image ? "Image present" : "No image",
+    });
 
     const updatedItem = await Model.findByIdAndUpdate(req.params.id, data, {
       new: true,
     });
-    
+
     if (!updatedItem) {
-      console.log('Item not found:', req.params.id);
+      console.log("Item not found:", req.params.id);
       return res.status(404).json({ message: "Item not found" });
     }
-    
-    console.log('Item updated successfully:', updatedItem._id);
+
+    console.log("Item updated successfully:", updatedItem._id);
     res.status(200).json(updatedItem);
   } catch (error) {
-    console.error('Error updating item:', error);
-    res.status(400).json({ message: error.message, stack: error.stack });
+    console.error("Error updating item:", error);
+    const response = { message: error.message };
+    if (process.env.NODE_ENV !== "production") {
+      response.stack = error.stack;
+    }
+    res.status(400).json(response);
   }
 };
 
@@ -174,9 +210,20 @@ const updateAbout = async (req, res) => {
       data.image = req.file.path;
     }
     // Handle nested JSON for stats and features if they come as strings
-    if (typeof data.stats === "string") data.stats = JSON.parse(data.stats);
-    if (typeof data.features === "string")
-      data.features = JSON.parse(data.features);
+    if (typeof data.stats === "string") {
+      try {
+        data.stats = JSON.parse(data.stats);
+      } catch (e) {
+        // If JSON parse fails, leave it as is or handle appropriately
+      }
+    }
+    if (typeof data.features === "string") {
+      try {
+        data.features = JSON.parse(data.features);
+      } catch (e) {
+        // If JSON parse fails, leave it as is or handle appropriately
+      }
+    }
 
     let about = await About.findOne().sort({ createdAt: -1 });
     if (about) {
