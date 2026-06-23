@@ -87,16 +87,16 @@ const Hero = () => {
         </div>
 
         {/* Buttons Section */}
-        <div className="flex flex-col sm:flex-row items-center justify-center space-y-5 sm:space-y-0 sm:space-x-10 mt-10 sm:mt-12 w-full">
+        <div className="flex flex-col sm:flex-row items-center justify-center space-y-5  sm:space-y-0 sm:space-x-10 mt-10 sm:mt-12 w-full">
          <button
   onClick={() => navigate("/contact")}
-  className="w-full sm:w-auto bg-[#1A1A1A] text-white px-8 sm:px-12 py-4 sm:py-5 rounded-full font-semibold text-base sm:text-lg flex items-center justify-center group hover:bg-[#00A78E] transition-all duration-500 shadow-2xl shadow-black/10"
+  className="w-full sm:w-auto bg-[#1A1A1A] text-white px-8 cursor-pointer sm:px-12 py-4 sm:py-5 rounded-full font-semibold text-base sm:text-lg flex items-center justify-center group hover:bg-[#00A78E] transition-all duration-500 shadow-2xl shadow-black/10"
 >
   Make Appointment
   <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
 </button>
 
-          <button className="flex items-center space-x-4 group shrink-0">
+          <button className="flex items-center cursor-pointer space-x-4 group shrink-0">
             <div className="w-14 h-14 sm:w-16 sm:h-16 bg-[#00A78E] rounded-full flex items-center justify-center text-white shadow-xl shadow-[#00A78E]/30 group-hover:scale-110 transition-transform duration-500">
               <Play className="w-6 h-6 sm:w-7 sm:h-7 fill-white ml-1" />
             </div>
