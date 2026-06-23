@@ -1,38 +1,39 @@
 import React, { useEffect } from 'react';
-import Hero from './components/Hero';
+// import Hero from './components/Hero';
 import AboutSection from './components/AboutSection';
-import TeamImageSection from './components/TeamImageSection';
+import StatsSection from './components/StatsSection';
 import FeaturesSection from './components/FeaturesSection';
-import AppointmentSection from './components/AppointmentSection';
 import SpecialFeatures from './components/SpecialFeatures';
 import WhyChooseUs from './components/WhyChooseUs';
-import ScrollingBanner from './components/ScrollingBanner';
-import StatsSection from './components/StatsSection';
+import TeamImageSection from './components/TeamImageSection';
 import ProjectsSection from './components/ProjectsSection';
-import TestimonialsPriority from './components/TestimonialsPriority';
+import GoogleReviews from "./components/GoogleReviews";
 import BlogSection from './components/BlogSection';
-
+import AppointmentSection from './components/AppointmentSection';
+import ScrollingBanner from './components/ScrollingBanner';
+//  import TestimonialsPriority from './components/TestimonialsPriority';
 const HomePage = () => {
-  // Scroll to top when page loads
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <main className="grow">
-      <Hero />
-      <TeamImageSection />
-      <FeaturesSection />
+    <main>
+      {/* <Hero /> */}       
       <AboutSection />
-      <AppointmentSection />
+      <StatsSection />
+      <FeaturesSection />
       <SpecialFeatures />
       <WhyChooseUs />
-      <StatsSection />
-      <ScrollingBanner />
+      <TeamImageSection />
       <ProjectsSection />
-      <TestimonialsPriority />
-      <BlogSection />
-    </main>
+        <GoogleReviews />
+        <BlogSection />
+         
+         <AppointmentSection />
+          {/* <TestimonialsPriority /> */}
+          <ScrollingBanner />
+         </main>
   );
 };
 

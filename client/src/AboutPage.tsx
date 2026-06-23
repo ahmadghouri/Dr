@@ -13,7 +13,7 @@ const AboutPage = () => {
 
   return (
     <div className="flex flex-col w-full min-h-screen bg-white">
-      <PageHero title="About Us" breadcrumb="About Us" />
+      {/* <PageHero title="About Us" breadcrumb="About Us" /> */}
 
       <AboutSection />
 

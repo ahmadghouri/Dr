@@ -30,7 +30,7 @@ const BlogPage = () => {
 
   return (
     <div className="flex flex-col w-full min-h-screen font-semibold bg-[#F9FAFB] overflow-x-hidden">
-      <PageHero title="Latest Blog" breadcrumb="Blog" />
+      {/* <PageHero title="Latest Blog" breadcrumb="Blog" /> */}
 
       {/* Main Container Section */}
       <section className="py-10 lg:py-16 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-12 lg:px-24 w-full">
