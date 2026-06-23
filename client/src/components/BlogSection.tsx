@@ -19,7 +19,7 @@ const BlogSection = () => {
     blogs?.filter((b) => b._id !== featuredBlog?._id).slice(0, 3) || [];
 
   return (
-    <section className="py-10  bg-white">
+    <section className="py-2  bg-white">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header Section */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 gap-8">
