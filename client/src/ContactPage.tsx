@@ -13,10 +13,10 @@ const ContactPage = () => {
   return (
     <div className="flex flex-col w-full min-h-screen bg-white">
       {/* Hero Section for Contact Page */}
-      <PageHero
+      {/* <PageHero
         title="Contact Us"
         breadcrumb="Contact Us"
-      />
+      /> */}
 
       {/* Contact Info Cards (Address, Email, Phone) */}
       <ContactInfoCards />

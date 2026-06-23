@@ -19,7 +19,7 @@ import DoctorsPage from "./DoctorsPage";
 import DoctorDetailsPage from "./DoctorDetailsPage";
 import ProjectsPage from "./ProjectsPage";
 import ProjectDetailsPage from "./ProjectDetailsPage";
-
+import WhyChooseUs from './components/WhyChooseUs';
 import LoginForm from "./features/auth/components/LoginForm";
 import RegisterForm from "./features/auth/components/RegisterForm";
 import AdminDashboard from "./features/admin/components/AdminDashboard";
@@ -29,13 +29,13 @@ const AppContent = () => {
   const isAdminPath = location.pathname.startsWith("/admin");
 
   // 2. Global Smooth Scroll Logic: 
-  // Jab bhi URL ya route (location.pathname) change hoga, page automatic smooth scroll up ho jayega.
+  
   useEffect(() => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth", // Jhatke ke bajaye premium smooth transition dega
+      behavior: "smooth", 
     });
-  }, [location.pathname]); // <-- pathname badalne par yeh trigger hoga
+  }, [location.pathname]); 
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
@@ -57,6 +57,7 @@ const AppContent = () => {
         <Route path="/doctor-details/:id" element={<DoctorDetailsPage />} />
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/project-details/:id" element={<ProjectDetailsPage />} />
+        <Route path="why-choose-us" element={<WhyChooseUs />} />
       </Routes>
 
       {!isAdminPath && <Footer />}

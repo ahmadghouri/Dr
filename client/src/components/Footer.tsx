@@ -61,7 +61,7 @@ const Footer = () => {
     </div>
     
     {/* Action Button: Mobile par full-width, desktop par pill-shape */}
-    <button className="bg-[#C1FF72] text-[#1A1A1A] px-8 py-4 sm:py-3 rounded-[16px] sm:rounded-full font-bold text-sm flex items-center justify-center space-x-2 hover:bg-[#b5f265] transition-all duration-300 active:scale-[0.98] mt-2 sm:mt-0 shadow-lg shadow-[#C1FF72]/10">
+    <button className="bg-[#C1FF72] text-[#1A1A1A] px-8 py-4 sm:py-3 cursor-pointer rounded-[16px] sm:rounded-full font-bold text-sm flex items-center justify-center space-x-2 hover:bg-[#b5f265] transition-all duration-300 active:scale-[0.98] mt-2 sm:mt-0 shadow-lg shadow-[#C1FF72]/10">
       <span>Subscribe Now</span>
       <ArrowRight className="w-4 h-4" />
     </button>
@@ -102,7 +102,7 @@ const Footer = () => {
               {[
                 { name: 'About Us', path: '/about' },
                 { name: 'Services', path: '/services' },
-                { name: 'Why Chose Us', path: 'why-choose-us' }, // Yeh standard home target ha
+              { name: 'Why Choose Us', path: 'why-choose-us' },
                 { name: 'Doctors', path: '/doctors' },
                 { name: 'Blog And News', path: '/blog' }
               ].map((link) => (
@@ -152,7 +152,8 @@ const Footer = () => {
                 </div>
                 <div>
                   <p className="text-xs text-gray-500 font-medium">Address</p>
-                  <p className="text-sm text-gray-300">66 Broklyant, India</p>
+                  <p className="text-sm text-gray-300">Lahore,Pakistan
+                  </p>
                 </div>
               </div>
 
@@ -162,7 +163,7 @@ const Footer = () => {
                 </div>
                 <div>
                   <p className="text-xs text-gray-500 font-medium">Phone Number</p>
-                  <p className="text-sm text-gray-300">012 345 678 9101</p>
+                  <p className="text-sm text-gray-300">0300 3968500</p>
                 </div>
               </div>
 

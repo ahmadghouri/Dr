@@ -19,7 +19,7 @@ const Navbar = () => {
       top: 0,
       behavior: "smooth",
     });
-    setIsOpen(false); // Mobile menu ko click par close karne ke liye
+    setIsOpen(false); 
   };
 
   const navLinks = [
@@ -32,7 +32,7 @@ const Navbar = () => {
       ],
     },
     {
-      name: "About Us",
+      name: "About",
       path: "/about",
       hasDropdown: false,
       dropdownItems: [
@@ -42,7 +42,7 @@ const Navbar = () => {
       ],
     },
     {
-      name: "Service",
+      name: "Services",
       path: "/services",
       hasDropdown: false,
       dropdownItems: [{ name: "All Services", path: "/services" }],
@@ -54,7 +54,7 @@ const Navbar = () => {
       dropdownItems: [{ name: "All Projects", path: "/projects" }],
     },
     {
-      name: "Blog",
+      name: "Blogs",
       path: "/blog",
       hasDropdown: false,
       dropdownItems: [{ name: "All Blogs", path: "/blog" }],

@@ -46,7 +46,7 @@ const ProjectDetailsPage = () => {
 
   return (
     <div className="flex flex-col w-full min-h-screen bg-white font-sans overflow-x-hidden">
-      <PageHero title="Project Details" breadcrumb="Project Details" />
+      {/* <PageHero title="Project Details" breadcrumb="Project Details" /> */}
 
       {/* Main Section - Adjusted padding dynamically */}
       <section className="py-12 sm:py-20 lg:py-24 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-12 lg:px-24 w-full">

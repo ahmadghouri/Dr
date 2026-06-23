@@ -33,14 +33,14 @@ const ContactFormSection = () => {
   };
 
   return (
-    <section className="py-20 lg:py-28 bg-gradient-to-br from-slate-50 via-zinc-50 to-emerald-50/10 overflow-hidden select-none">    
+    <section className="py-6 lg:py-6 bg-gradient-to-br from-slate-50 via-zinc-50 to-emerald-50/10 overflow-hidden select-none">    
       {/* Grid container with items-stretch keeps both sides exactly equal in height */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-12 items-stretch gap-8 lg:gap-0">
         
         {/* Left Side: Modern Operation Theater Image Container */}
         <div className="lg:col-span-6 relative z-0 flex rounded-[2.5rem] bg-white p-3 border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.04)] overflow-hidden h-full min-h-[450px] lg:min-h-full">
           <img 
-            src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=800&q=80" 
+            src="https://images.unsplash.com/photo-1734094546615-045bf5f7ea0e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHN1cmdlcnl8ZW58MHx8MHx8fDA%3D" 
             alt="Modern Operation Theater Surgical Suite" 
             className="w-full h-full object-cover rounded-[2.2rem]"
           />

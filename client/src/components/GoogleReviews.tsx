@@ -244,7 +244,7 @@ const GoogleReviews = () => {
   };
 
   return (
-    <div className="w-full bg-[#F7F7F5] py-2  px-4 sm:px-6 md:px-12 lg:px-10 overflow-hidden select-none">
+    <div className="w-full bg-[#F7F7F5] py-8  px-4 sm:px-6 md:px-12 lg:px-10 overflow-hidden select-none">
       <div className="max-w-[1400px] mx-auto">
         
         {/* Header Block */}

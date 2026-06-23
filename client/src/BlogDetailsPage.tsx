@@ -69,7 +69,7 @@ const BlogDetailsPage = () => {
 
   return (
     <div className="flex flex-col w-full min-h-screen bg-[#F9FAFB]">
-      <PageHero title="Blog Details" breadcrumb="Blog Details" />
+      {/* <PageHero title="Blog Details" breadcrumb="Blog Details" /> */}
 
       <section className="py-12 sm:py-16 lg:py-24 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-12 lg:px-24 w-full">
         <div className="flex flex-col lg:flex-row gap-8 sm:gap-10">
