@@ -1,36 +1,144 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import PageHero from "./components/PageHero";
 import { useBlog, useBlogs } from "./features/blogs/hooks/useBlogs";
-import { motion } from "framer-motion";
 import {
   Calendar,
   User,
-  ChevronRight,
   Facebook,
   Twitter,
   Instagram,
   Linkedin,
-  MessageCircle,
-  Send,
   Search,
   Plus,
   Phone,
   Quote,
   ChevronsRight,
   ArrowRight,
+  X,
 } from "lucide-react";
+
+interface LocalComment {
+  id: string;
+  name: string;
+  email: string;
+  message: string;
+  date: string;
+  parentId?: string;
+  replies?: LocalComment[];
+}
 
 const BlogDetailsPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { data: blog, isLoading, error } = useBlog(id || "");
   const { data: allBlogs } = useBlogs();
+
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Comment form state
+  const [commentName, setCommentName] = useState("");
+  const [commentEmail, setCommentEmail] = useState("");
+  const [commentMessage, setCommentMessage] = useState("");
+  const [commentError, setCommentError] = useState("");
+  const [commentSuccess, setCommentSuccess] = useState(false);
+  
+  // Initialize comments state as empty array first
+  const [localComments, setLocalComments] = useState<LocalComment[]>([]);
+  const [replyToComment, setReplyToComment] = useState<LocalComment | null>(null);
+
   const recentBlogs = allBlogs?.filter((b) => b._id !== id).slice(0, 3) || [];
 
+  const categories = Array.from(
+    new Set((allBlogs || []).map((b) => b.category).filter(Boolean))
+  ) as string[];
+
+  // 1. Load specific blog comments from localStorage whenever blog ID changes
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+    
+    if (id) {
+      const savedComments = localStorage.getItem(`blog_comments_${id}`);
+      if (savedComments) {
+        setLocalComments(JSON.parse(savedComments));
+      } else {
+        setLocalComments([]); // Reset if no comments found for this blog
+      }
+    }
+    
+    // Clear notifications or reply targets on page shift
+    setReplyToComment(null);
+    setCommentSuccess(false);
+    setCommentError("");
+  }, [id]);
+
+  // 2. Save comments to localStorage whenever localComments state changes
+  useEffect(() => {
+    if (id && localComments.length > 0) {
+      localStorage.setItem(`blog_comments_${id}`, JSON.stringify(localComments));
+    } else if (id && localComments.length === 0) {
+      localStorage.removeItem(`blog_comments_${id}`);
+    }
+  }, [localComments, id]);
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/blog?search=${encodeURIComponent(searchQuery.trim())}`);
+    }
+  };
+
+  const handleCategoryClick = (categoryName: string) => {
+    navigate(`/blog?category=${encodeURIComponent(categoryName)}`);
+  };
+
+  const handleCommentSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setCommentError("");
+    setCommentSuccess(false);
+
+    if (!commentName.trim() || !commentEmail.trim() || !commentMessage.trim()) {
+      setCommentError("Please fill in all fields before submitting.");
+      return;
+    }
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(commentEmail.trim())) {
+      setCommentError("Please enter a valid email address.");
+      return;
+    }
+
+    const newComment: LocalComment = {
+      id: `${Date.now()}`,
+      name: commentName.trim(),
+      email: commentEmail.trim(),
+      message: commentMessage.trim(),
+      date: new Date().toLocaleString([], { hour: '2-digit', minute: '2-digit', year: 'numeric', month: 'short', day: 'numeric' }),
+      replies: [],
+    };
+
+    if (replyToComment) {
+      newComment.parentId = replyToComment.id;
+      setLocalComments((prev) =>
+        prev.map((comment) => {
+          if (comment.id === replyToComment.id) {
+            return {
+              ...comment,
+              replies: [...(comment.replies || []), newComment],
+            };
+          }
+          return comment;
+        })
+      );
+      setReplyToComment(null);
+    } else {
+      setLocalComments((prev) => [newComment, ...prev]);
+    }
+
+    setCommentName("");
+    setCommentEmail("");
+    setCommentMessage("");
+    setCommentSuccess(true);
+  };
 
   if (isLoading) {
     return (
@@ -53,11 +161,11 @@ const BlogDetailsPage = () => {
           </p>
           {error && (
             <p className="text-red-400 text-sm bg-red-50 p-3 rounded-xl">
-              Error: {(error as any)?.message || 'Failed to load blog'}
+              Error: {error instanceof Error ? error.message : "Failed to load blog"}
             </p>
           )}
-          <button 
-            onClick={() => navigate('/blog')}
+          <button
+            onClick={() => navigate("/blog")}
             className="mt-4 bg-[#00A78E] text-white px-6 py-3 rounded-xl font-semibold hover:bg-[#008F7A] transition-all"
           >
             Back to Blogs
@@ -69,13 +177,11 @@ const BlogDetailsPage = () => {
 
   return (
     <div className="flex flex-col w-full min-h-screen bg-[#F9FAFB]">
-      {/* <PageHero title="Blog Details" breadcrumb="Blog Details" /> */}
-
-      <section className="py-12 sm:py-16 lg:py-24 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-12 lg:px-24 w-full">
+      <section className="py-12 sm:py-16 lg:py-6 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-12 lg:px-24 w-full">
         <div className="flex flex-col lg:flex-row gap-8 sm:gap-10">
+          
           {/* Left Side: Blog Content */}
           <div className="w-full lg:w-[65%] space-y-8 sm:space-y-10">
-            {/* Blog Title & Meta */}
             <div className="space-y-4 sm:space-y-6">
               <h2 className="text-2xl sm:text-3xl md:text-[42px] lg:text-[52px] font-semibold text-[#1A1A1A] leading-tight">
                 {blog.title}
@@ -89,19 +195,19 @@ const BlogDetailsPage = () => {
                   <User className="w-4 h-4 text-[#00A78E]" />
                   <span>By Admin</span>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div
+                  className="flex items-center space-x-2 cursor-pointer hover:text-[#00A78E] transition-colors"
+                  onClick={() => blog.category && handleCategoryClick(blog.category)}
+                >
                   <div className="w-4 h-4 bg-[#00A78E]/20 rounded-sm flex items-center justify-center">
                     <div className="w-2 h-2 bg-[#00A78E] rounded-full"></div>
                   </div>
                   <span>{blog.category || "Medical"}</span>
                 </div>
               </div>
-              <p className="text-gray-500 text-base sm:text-lg leading-relaxed">
-                {blog.summary}
-              </p>
+              <p className="text-gray-500 text-base sm:text-lg leading-relaxed">{blog.summary}</p>
             </div>
 
-            {/* Main Blog Image */}
             <div className="rounded-2xl sm:rounded-[40px] overflow-hidden shadow-2xl">
               <img
                 src={blog.image}
@@ -110,7 +216,6 @@ const BlogDetailsPage = () => {
               />
             </div>
 
-            {/* Body Content */}
             <div className="space-y-6 sm:space-y-8">
               <div className="space-y-4">
                 <p className="text-gray-500 text-base sm:text-lg leading-relaxed whitespace-pre-wrap">
@@ -118,7 +223,6 @@ const BlogDetailsPage = () => {
                 </p>
               </div>
 
-              {/* Quote Section */}
               {blog.quote && (
                 <div className="bg-white p-6 sm:p-10 md:p-12 rounded-2xl sm:rounded-[30px] border border-gray-100 relative overflow-hidden flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6 shadow-sm">
                   <div className="flex-shrink-0">
@@ -144,7 +248,6 @@ const BlogDetailsPage = () => {
                 </div>
               )}
 
-              {/* Points List */}
               {blog.points && blog.points.length > 0 && (
                 <div className="space-y-4 sm:space-y-6">
                   <h3 className="text-xl sm:text-2xl md:text-[28px] font-semibold text-[#1A1A1A]">
@@ -164,7 +267,6 @@ const BlogDetailsPage = () => {
                 </div>
               )}
 
-              {/* Holistic Section */}
               {blog.holisticTitle && (
                 <div className="space-y-4">
                   <h3 className="text-xl sm:text-2xl md:text-[28px] font-semibold text-[#1A1A1A]">
@@ -185,6 +287,7 @@ const BlogDetailsPage = () => {
                   {blog.tags?.map((tag: string) => (
                     <span
                       key={tag}
+                      onClick={() => navigate(`/blog?tag=${encodeURIComponent(tag)}`)}
                       className="px-4 sm:px-5 py-2 rounded-full border border-gray-100 text-gray-400 font-semibold text-xs hover:bg-[#00A78E] hover:text-white transition-all cursor-pointer"
                     >
                       {tag}
@@ -193,86 +296,142 @@ const BlogDetailsPage = () => {
                 </div>
               </div>
               <div className="flex items-center space-x-3">
-                {[Facebook, Instagram, Twitter, Linkedin].map((Icon, i) => (
-                  <div
+                {[
+                  { Icon: Facebook, href: "https://facebook.com" },
+                  { Icon: Instagram, href: "https://instagram.com" },
+                  { Icon: Twitter, href: "https://twitter.com" },
+                  { Icon: Linkedin, href: "https://linkedin.com" },
+                ].map(({ Icon, href }, i) => (
+                  <a
                     key={i}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-9 h-9 sm:w-10 sm:h-10 bg-white border border-gray-100 rounded-full flex items-center justify-center text-gray-400 hover:bg-[#00A78E] hover:text-white transition-all cursor-pointer"
                   >
                     <Icon className="w-4 h-4" />
-                  </div>
+                  </a>
                 ))}
               </div>
             </div>
 
-            {/* Unity Health Services Section (Comments) */}
-            <div className="space-y-8 sm:space-y-10 pt-8 sm:pt-10">
+            {/* Comments Thread Section */}
+            <div className="space-y-3 sm:space-y-4 pt-8 sm:pt-2">
               <h3 className="text-2xl sm:text-[32px] font-semibold text-[#1A1A1A]">
-                Unity Health Services
+                Comments ({localComments.reduce((acc, curr) => acc + 1 + (curr.replies?.length || 0), 0)})
               </h3>
-              <div className="space-y-6">
-                {[1, 2].map((i) => (
-                  <div
-                    key={i}
-                    className="bg-white p-5 sm:p-8 rounded-2xl sm:rounded-[30px] border border-gray-50 flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6 relative"
-                  >
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden flex-shrink-0">
-                      <img
-                        src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1974&auto=format&fit=crop"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="space-y-2 flex-1 w-full">
-                      <div className="flex flex-wrap items-center justify-between gap-3">
-                        <h4 className="font-semibold text-[#1A1A1A] text-lg sm:text-xl">
-                          Theresa Webb
-                        </h4>
-                        <button className="bg-[#C1FF72] text-[#1A1A1A] px-5 sm:px-6 py-2 rounded-full font-semibold text-sm hover:bg-[#00A78E] hover:text-white transition-all">
-                          Reply
-                        </button>
+              {localComments.length === 0 ? (
+                <p className="text-gray-400 font-medium">
+                  No comments yet. Be the first to share your thoughts.
+                </p>
+              ) : (
+                <div className="space-y-6">
+                  {localComments.map((c) => (
+                    <div key={c.id} className="space-y-4">
+                      {/* Parent Comment */}
+                      <div className="bg-white p-5 sm:p-8 rounded-2xl sm:rounded-[30px] border border-gray-50 flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6 relative">
+                        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden flex-shrink-0 bg-[#F4F9F8] flex items-center justify-center text-[#00A78E] font-semibold text-xl">
+                          {c.name.charAt(0).toUpperCase()}
+                        </div>
+                        <div className="space-y-2 flex-1 w-full">
+                          <div className="flex flex-wrap items-center justify-between gap-3">
+                            <h4 className="font-semibold text-[#1A1A1A] text-lg sm:text-xl">{c.name}</h4>
+                            <button
+                              onClick={() => {
+                                setReplyToComment(c);
+                                document.getElementById("message-form")?.scrollIntoView({ behavior: "smooth" });
+                              }}
+                              className="bg-[#C1FF72] text-[#1A1A1A] px-5 sm:px-6 py-2 rounded-full font-semibold text-sm hover:bg-[#00A78E] hover:text-white transition-all"
+                            >
+                              Reply
+                            </button>
+                          </div>
+                          <p className="text-gray-400 font-semibold text-xs sm:text-sm">{c.date}</p>
+                          <p className="text-gray-500 leading-relaxed text-sm sm:text-base">{c.message}</p>
+                        </div>
                       </div>
-                      <p className="text-gray-400 font-semibold text-xs sm:text-sm">
-                        August 13, 2023 at 8:30 PM
-                      </p>
-                      <p className="text-gray-500 leading-relaxed text-sm sm:text-base">
-                        Medical services are an essential part of our lives,
-                        offering care and treatment for various health
-                        conditions. These services encompass a wide range of
-                        specialties, including primary.
-                      </p>
+
+                      {/* Nested Replies Rendering */}
+                      {c.replies && c.replies.length > 0 && (
+                        <div className="pl-8 sm:pl-16 space-y-4">
+                          {c.replies.map((reply) => (
+                            <div key={reply.id} className="bg-white/70 p-5 sm:p-6 rounded-2xl border border-gray-100 flex flex-col sm:flex-row items-start space-y-3 sm:space-y-0 sm:space-x-4 relative">
+                              <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 bg-[#00A78E]/10 flex items-center justify-center text-[#00A78E] font-semibold text-base">
+                                {reply.name.charAt(0).toUpperCase()}
+                              </div>
+                              <div className="space-y-1 flex-1 w-full">
+                                <h5 className="font-semibold text-[#1A1A1A] text-base">{reply.name}</h5>
+                                <p className="text-gray-400 font-semibold text-[11px] sm:text-xs">{reply.date}</p>
+                                <p className="text-gray-500 leading-relaxed text-sm">{reply.message}</p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
 
-            {/* Write Message Form */}
-            <div className="bg-white p-6 sm:p-10 md:p-12 rounded-2xl sm:rounded-[40px] shadow-sm border border-gray-50 space-y-8 sm:space-y-10">
-              <h3 className="text-2xl sm:text-[32px] font-semibold text-[#1A1A1A]">
-                Write Your Message
-              </h3>
-              <form className="space-y-6">
+            {/* Message Form */}
+            <div id="message-form" className="bg-white p-6 sm:p-10 md:p-12 rounded-2xl sm:rounded-[40px] shadow-sm border border-gray-50 space-y-8 sm:space-y-10">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <h3 className="text-2xl sm:text-[32px] font-semibold text-[#1A1A1A]">
+                  {replyToComment ? `Reply to ${replyToComment.name}` : "Write Your Message"}
+                </h3>
+                {replyToComment && (
+                  <button
+                    onClick={() => setReplyToComment(null)}
+                    className="flex items-center space-x-1 text-xs font-semibold text-red-500 bg-red-50 px-3 py-1.5 rounded-full hover:bg-red-100 transition-colors w-max"
+                  >
+                    <span>Cancel Reply</span>
+                    <X className="w-3 h-3" />
+                  </button>
+                )}
+              </div>
+              
+              <form onSubmit={handleCommentSubmit} className="space-y-6">
                 <textarea
-                  placeholder="Message here..."
+                  value={commentMessage}
+                  onChange={(e) => setCommentMessage(e.target.value)}
+                  placeholder={replyToComment ? "Write your reply here..." : "Message here..."}
                   rows={6}
                   className="w-full px-6 sm:px-8 py-5 sm:py-6 bg-[#F9FAFB] rounded-2xl sm:rounded-[30px] border border-gray-100 focus:ring-2 focus:ring-[#00A78E] outline-none font-semibold text-gray-700 resize-none"
                 ></textarea>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <input
                     type="text"
+                    value={commentName}
+                    onChange={(e) => setCommentName(e.target.value)}
                     placeholder="Your Name"
                     className="w-full px-6 sm:px-8 py-4 sm:py-5 bg-[#F9FAFB] rounded-full border border-gray-100 focus:ring-2 focus:ring-[#00A78E] outline-none font-semibold text-gray-700"
                   />
-                  <div className="relative">
-                    <input
-                      type="email"
-                      placeholder="Your Email"
-                      className="w-full px-6 sm:px-8 py-4 sm:py-5 bg-[#F9FAFB] rounded-full border border-gray-100 focus:ring-2 focus:ring-[#00A78E] outline-none font-semibold text-gray-700"
-                    />
-                    <Send className="absolute right-6 sm:right-8 top-1/2 -translate-y-1/2 w-5 h-5 text-[#00A78E] opacity-40" />
-                  </div>
+                  <input
+                    type="email"
+                    value={commentEmail}
+                    onChange={(e) => setCommentEmail(e.target.value)}
+                    placeholder="Your Email"
+                    className="w-full px-6 sm:px-8 py-4 sm:py-5 bg-[#F9FAFB] rounded-full border border-gray-100 focus:ring-2 focus:ring-[#00A78E] outline-none font-semibold text-gray-700"
+                  />
                 </div>
-                <button className="w-full sm:w-auto justify-center bg-[#00A78E] text-white px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-semibold text-base sm:text-lg flex items-center hover:bg-[#1A1A1A] transition-all group">
-                  Reply
+
+                {commentError && (
+                  <p className="text-red-500 text-sm font-semibold bg-red-50 px-4 py-3 rounded-xl">
+                    {commentError}
+                  </p>
+                )}
+                {commentSuccess && (
+                  <p className="text-[#00A78E] text-sm font-semibold bg-[#F4F9F8] px-4 py-3 rounded-xl">
+                    Your message has been posted.
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  className="w-full sm:w-auto justify-center bg-[#00A78E] text-white px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-semibold text-base sm:text-lg flex items-center hover:bg-[#1A1A1A] transition-all group"
+                >
+                  {replyToComment ? "Post Reply" : "Post Comment"}
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
               </form>
@@ -285,46 +444,48 @@ const BlogDetailsPage = () => {
             <div className="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-[30px] shadow-sm border border-gray-50">
               <div className="flex items-center space-x-3 mb-6">
                 <div className="w-6 h-1 bg-[#00A78E] rounded-full"></div>
-                <h3 className="text-lg sm:text-[20px] font-semibold text-[#1A1A1A]">
-                  Search
-                </h3>
+                <h3 className="text-lg sm:text-[20px] font-semibold text-[#1A1A1A]">Search</h3>
               </div>
-              <div className="relative">
+              <form onSubmit={handleSearchSubmit} className="relative block">
                 <input
                   type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search..."
-                  className="w-full px-5 sm:px-6 py-3.5 sm:py-4 bg-[#F9FAFB] rounded-full border border-gray-100 focus:ring-2 focus:ring-[#00A78E] outline-none font-semibold text-gray-700"
+                  className="w-full px-5 sm:px-6 py-3.5 sm:py-4 bg-[#F9FAFB] rounded-full border border-gray-100 focus:ring-2 focus:ring-[#00A78E] outline-none font-semibold text-gray-700 pr-12"
                 />
-                <Search className="absolute right-5 sm:right-6 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-              </div>
+                <button 
+                  type="submit" 
+                  className="absolute right-5 sm:right-6 top-1/2 -translate-y-1/2 p-1 z-10 hover:text-[#00A78E] transition-colors text-gray-400"
+                >
+                  <Search className="w-5 h-5" />
+                </button>
+              </form>
             </div>
 
             {/* Category Widget */}
             <div className="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-[30px] shadow-sm border border-gray-50">
               <div className="flex items-center space-x-3 mb-6 sm:mb-8">
                 <div className="w-6 h-1 bg-[#00A78E] rounded-full"></div>
-                <h3 className="text-lg sm:text-[20px] font-semibold text-[#1A1A1A]">
-                  Category
-                </h3>
+                <h3 className="text-lg sm:text-[20px] font-semibold text-[#1A1A1A]">Category</h3>
               </div>
               <div className="space-y-4">
-                {[
-                  "Serenity Med",
-                  "Serenity Health Center",
-                  "Unity Health Services",
-                  "Revive Medical Care",
-                  "Harmony Holistic Health",
-                ].map((cat) => (
-                  <div
-                    key={cat}
-                    className="flex items-center justify-between group cursor-pointer border-b border-gray-50 pb-4 last:border-0 last:pb-0"
-                  >
-                    <span className="font-semibold text-gray-600 group-hover:text-[#00A78E] transition-colors text-sm sm:text-base">
-                      {cat}
-                    </span>
-                    <Plus className="w-4 h-4 text-gray-300 group-hover:text-[#00A78E] group-hover:rotate-90 transition-all shrink-0" />
-                  </div>
-                ))}
+                {categories.length === 0 ? (
+                  <p className="text-gray-400 text-sm font-medium">No categories found.</p>
+                ) : (
+                  categories.map((cat) => (
+                    <div
+                      key={cat}
+                      onClick={() => handleCategoryClick(cat)}
+                      className="flex items-center justify-between group cursor-pointer border-b border-gray-50 pb-4 last:border-0 last:pb-0"
+                    >
+                      <span className="font-semibold text-gray-600 group-hover:text-[#00A78E] transition-colors text-sm sm:text-base">
+                        {cat}
+                      </span>
+                      <Plus className="w-4 h-4 text-gray-300 group-hover:text-[#00A78E] group-hover:rotate-90 transition-all shrink-0" />
+                    </div>
+                  ))
+                )}
               </div>
             </div>
 
@@ -332,52 +493,50 @@ const BlogDetailsPage = () => {
             <div className="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-[30px] shadow-sm border border-gray-50">
               <div className="flex items-center space-x-3 mb-6 sm:mb-8">
                 <div className="w-6 h-1 bg-[#00A78E] rounded-full"></div>
-                <h3 className="text-lg sm:text-[20px] font-semibold text-[#1A1A1A]">
-                  Recent post
-                </h3>
+                <h3 className="text-lg sm:text-[20px] font-semibold text-[#1A1A1A]">Recent post</h3>
               </div>
               <div className="space-y-6">
-                {recentBlogs.map((b) => (
-                  <div
-                    key={b._id}
-                    onClick={() => navigate(`/blog-details/${b._id}`)}
-                    className="flex items-center space-x-4 group cursor-pointer"
-                  >
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden flex-shrink-0">
-                      <img
-                        src={b.image}
-                        className="w-full h-full object-cover"
-                        alt="Recent post"
-                      />
-                    </div>
-                    <div className="space-y-1 min-w-0">
-                      <div className="flex items-center space-x-2 text-[11px] sm:text-[12px] font-semibold text-gray-400 uppercase">
-                        <div className="w-2 h-2 bg-[#00A78E] rounded-full shrink-0"></div>
-                        <span>{b.category || "Medical"}</span>
+                {recentBlogs.length === 0 ? (
+                  <p className="text-gray-400 text-sm font-medium">No other posts yet.</p>
+                ) : (
+                  recentBlogs.map((b) => (
+                    <div
+                      key={b._id}
+                      onClick={() => navigate(`/blog-details/${b._id}`)}
+                      className="flex items-center space-x-4 group cursor-pointer"
+                    >
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden flex-shrink-0">
+                        <img src={b.image} className="w-full h-full object-cover" alt="Recent post thumbnail" />
                       </div>
-                      <h4 className="font-semibold text-[#1A1A1A] leading-tight group-hover:text-[#00A78E] transition-colors text-sm line-clamp-2">
-                        {b.title}
-                      </h4>
+                      <div className="space-y-1 min-w-0">
+                        <div className="flex items-center space-x-2 text-[11px] sm:text-[12px] font-semibold text-gray-400 uppercase">
+                          <div className="w-2 h-2 bg-[#00A78E] rounded-full shrink-0"></div>
+                          <span>{b.category || "Medical"}</span>
+                        </div>
+                        <h4 className="font-semibold text-[#1A1A1A] leading-tight group-hover:text-[#00A78E] transition-colors text-sm line-clamp-2">
+                          {b.title}
+                        </h4>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))
+                )}
               </div>
             </div>
 
             {/* Need Help Card */}
             <div className="bg-white p-6 sm:p-10 rounded-2xl sm:rounded-[30px] shadow-sm border border-gray-50 text-center space-y-6 sm:space-y-8">
-              <h3 className="text-lg sm:text-[22px] font-semibold text-[#1A1A1A]">
-                Need Help? Call Us
-              </h3>
-              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-[#C1FF72] rounded-full flex items-center justify-center mx-auto shadow-lg shadow-[#C1FF72]/20">
+              <h3 className="text-lg sm:text-[22px] font-semibold text-[#1A1A1A]">Need Help? Call Us</h3>
+              <a
+                href="tel:+923003968500"
+                className="w-14 h-14 sm:w-16 sm:h-16 bg-[#C1FF72] rounded-full flex items-center justify-center mx-auto shadow-lg shadow-[#C1FF72]/20"
+              >
                 <Phone className="w-7 h-7 sm:w-8 sm:h-8 text-[#1A1A1A]" />
-              </div>
+              </a>
               <p className="text-gray-500 text-sm font-medium leading-relaxed">
-                Health care is a vital aspect of maintaining overall well-being,
-                encompassing a range of services from preventive care
+                Health care is a vital aspect of maintaining overall well-being, encompassing a range of services from preventive care.
               </p>
               <h2 className="text-lg sm:text-[22px] font-semibold text-[#1A1A1A]">
-                (+888) 178 456 765
+                <a href="tel:+923003968500">(+92) 30003968500</a>
               </h2>
             </div>
 
@@ -386,14 +545,13 @@ const BlogDetailsPage = () => {
               <div className="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-[30px] shadow-sm border border-gray-50">
                 <div className="flex items-center space-x-3 mb-6 sm:mb-8">
                   <div className="w-6 h-1 bg-[#00A78E] rounded-full"></div>
-                  <h3 className="text-lg sm:text-[20px] font-semibold text-[#1A1A1A]">
-                    Tags
-                  </h3>
+                  <h3 className="text-lg sm:text-[20px] font-semibold text-[#1A1A1A]">Tags</h3>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {blog.tags.map((tag: string) => (
                     <span
                       key={tag}
+                      onClick={() => navigate(`/blog?tag=${encodeURIComponent(tag)}`)}
                       className="px-4 sm:px-5 py-2 rounded-full border border-gray-100 text-gray-400 font-semibold text-xs hover:bg-[#00A78E] hover:text-white hover:border-[#00A78E] transition-all cursor-pointer"
                     >
                       {tag}

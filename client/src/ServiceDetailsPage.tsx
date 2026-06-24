@@ -4,6 +4,7 @@ import PageHero from './components/PageHero';
 import { useService } from './features/services/hooks/useServices';
 import { ChevronRight, Phone, Facebook, Twitter, Instagram, Linkedin, FileText, Download, Stethoscope, Droplets } from 'lucide-react';
 import { motion } from 'framer-motion';
+import immjpg from './assets/imm.jpg';
 
 const ServiceDetailsPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -44,7 +45,7 @@ const ServiceDetailsPage = () => {
       {/* Hero Section */}
       {/* <PageHero title="Service Details" breadcrumb="Service Details" /> */}
 
-      <section className="py-12 sm:py-16 lg:py-24 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-12 lg:px-24 w-full">
+      <section className="py-12 sm:py-16 lg:py-10 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-12 lg:px-24 w-full">
         <div className="flex flex-col lg:flex-row gap-10 sm:gap-12">
 
           {/* Left Side: Main Content */}
@@ -190,21 +191,21 @@ const ServiceDetailsPage = () => {
                 <Phone className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
               </div>
               <p className="text-gray-500 font-medium text-sm sm:text-base">Health care is a vital aspect of maintaining overall well-being, encompassing a range of services from preventive care</p>
-              <h2 className="text-xl sm:text-[28px] font-semibold text-[#1A1A1A]">(+888) 178 456 765</h2>
+              <h2 className="text-xl sm:text-[28px] font-semibold text-[#1A1A1A]">+92 3003968500</h2>
             </div>
 
             {/* Doctor Profile Card */}
             <div className="bg-white p-6 sm:p-10 rounded-2xl sm:rounded-[30px] shadow-sm border border-gray-50 text-center space-y-5 sm:space-y-6">
               <div className="w-32 h-32 sm:w-48 sm:h-48 mx-auto rounded-full overflow-hidden border-4 sm:border-8 border-[#E0F2F1]">
                 <img 
-                  src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=2070&auto=format&fit=crop" 
-                  alt="Dr. Chira Bekham" 
+                  src={immjpg}
+                  alt="Dr. Awais Malik" 
                   className="w-full h-full object-cover"
                 />
               </div>
               <div>
-                <h3 className="text-xl sm:text-[24px] font-semibold text-[#1A1A1A]">Dr. Chira Bekham</h3>
-                <p className="text-gray-400 font-semibold text-xs sm:text-sm uppercase tracking-wider mt-1">Cardiac Surgeon</p>
+                <h3 className="text-xl sm:text-[24px] font-semibold text-[#1A1A1A]">Dr. Awais Malik</h3>
+                <p className="text-gray-400 font-semibold text-xs sm:text-sm uppercase tracking-wider mt-1">Laparoscopic and Bariatric Surgeon</p>
               </div>
               <div className="flex items-center justify-center space-x-3 sm:space-x-4 pt-2">
                 {[Facebook, Instagram, Twitter, Linkedin].map((Icon, i) => (

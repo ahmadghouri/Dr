@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom'; // 1. Link tag ko yahan import kiya ha
+import { Link } from 'react-router-dom';  
 import {
   Facebook,
   Linkedin,
@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 
 const Footer = () => {
-  // Global helper function jo click karne par page makhkhan ki tarah upar scroll karega
+
   const handleFooterLinkClick = () => {
     window.scrollTo({
       top: 0,

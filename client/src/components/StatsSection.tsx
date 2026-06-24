@@ -62,6 +62,7 @@ const AnimatedCounter = ({ targetValue }) => {
   );
 };
 
+
 const StatsSection = () => {
   const { data: about } = useAbout();
   const stats = about?.stats || [
@@ -71,7 +72,7 @@ const StatsSection = () => {
   ];
 
   return (
- <section className="py-10 sm:py-16 bg-white">
+ <section className="py-10 sm:py-2  bg-white">
   <div className="max-w-7xl mx-auto px-4 sm:px-6">
     <div className="bg-[#1A1A1A] rounded-[30px] sm:rounded-[40px] p-8 sm:p-12 md:p-16 flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-16">
 
