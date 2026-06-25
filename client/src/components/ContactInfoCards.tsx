@@ -7,17 +7,17 @@ const ContactInfoCards = () => {
     {
       icon: <MapPin className="w-6 h-6  text-[#1A1A1A]" />,
       title: 'Address',
-      details: ['Mirpur, 10 Road 1 House 12 Mirpur Dhaka', 'Bangladesh'],
+      details: ["Lahore","Pakistan"],
     },
     {
       icon: <Mail className="w-6 h-6 text-[#1A1A1A]" />,
       title: 'Email',
-      details: ['chirsbekham12@gmail.com', 'simmons12@gmail.com'],
+      details: ['drawais12@gmail.com'],
     },
     {
       icon: <Phone className="w-6 h-6 text-[#1A1A1A]" />,
       title: 'Phone',
-      details: ['017 5552-0127', '017458632718'],
+      details: ['03003968500'],
     },
   ];
 

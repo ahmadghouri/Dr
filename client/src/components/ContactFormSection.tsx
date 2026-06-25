@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Mail, Facebook, Youtube, MapPin, Clock, Award } from 'lucide-react';
 import { useSendContact } from '../features/contact/hooks/useContact';
-import imjfif from '../assets/im.jfif'; 
+import immjpg from '../assets/imm.jpg'; 
 
 const ContactFormSection = () => {
   const [formData, setFormData] = useState({
@@ -152,7 +152,7 @@ const ContactFormSection = () => {
             <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 pb-8 border-b border-gray-100">
               <div className="w-28 h-28 rounded-full overflow-hidden bg-white border border-gray-200 shrink-0 shadow-md">
                 <img
-                  src={imjfif}
+                  src={immjpg}
                   alt="Dr. Awais Malik"
                   className="w-full h-full object-cover rounded-full" 
                 />

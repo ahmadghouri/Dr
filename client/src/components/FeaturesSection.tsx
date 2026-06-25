@@ -1,68 +1,129 @@
 import React from 'react';
-import { ArrowRight, Leaf, FolderHeart, HeartPulse } from 'lucide-react';
+import { Award, Activity, ShieldCheck, HeartPulse, Clock, Zap, MapPin } from 'lucide-react';
 
-const FeaturesSection = () => {
+const WhyChooseSection = () => {
   const features = [
     {
-      icon: <Leaf className="w-10 h-10" />,
-      title: "Your health our priority wellness Healing with heart",
-      link: "Read More",
-      color: "text-[#1A1A1A]",
-      linkColor: "text-[#00A78E]"
+      icon: <Award className="w-5 h-5 text-[#00A78E]" />,
+      title: "Board Certified Surgeon",
+      desc: "MBBS, FCPS with international training and certifications in bariatric surgery."
     },
     {
-      icon: <FolderHeart className="w-10 h-10" />,
-      title: "A healthy tomorrow starts today Where health meets hope",
-      link: "Read More",
-      color: "text-[#1A1A1A]",
-      linkColor: "text-[#00A78E]",
+      icon: <Zap className="w-5 h-5 text-[#00A78E]" />,
+      title: "Advanced Technology",
+      desc: "State-of-the-art surgical equipment and minimally invasive techniques for better outcomes."
     },
     {
-      icon: <HeartPulse className="w-10 h-10" />,
-      title: "Your health our priority wellness Healing with heart",
-      link: "Read More",
-      color: "text-[#1A1A1A]",
-      linkColor: "text-[#00A78E]",
+      icon: <Activity className="w-5 h-5 text-[#00A78E]" />,
+      title: "20000+ Surgeries",
+      desc: "Extensive experience with thousands of successful surgeries and satisfied patients."
+    },
+    {
+      icon: <ShieldCheck className="w-5 h-5 text-[#00A78E]" />,
+      title: "Safe Procedures",
+      desc: "Highest safety standards with comprehensive pre and post-operative care protocols."
+    },
+    {
+      icon: <Clock className="w-5 h-5 text-[#00A78E]" />,
+      title: "Quick Recovery",
+      desc: "Minimally invasive techniques ensuring faster recovery and shorter hospital stays."
+    },
+    {
+      icon: <HeartPulse className="w-5 h-5 text-[#00A78E]" />,
+      title: "Lifetime Support",
+      desc: "Continuous follow-up care and support throughout your weight loss journey."
     }
- 
   ];
 
   return (
-<section className="py-10 bg-gray-50/50">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <div key={index} className="flex flex-col items-start bg-white border cursor-pointer border-gray-100 rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 space-y-6 group">
-              {/* Icon Container */}
-              <div className="text-[#1A1A1A]  p-4 rounded-2xl transform group-hover:bg-[#C1FF72] scale-110 transition-transform duration-300">
-              {feature.icon}
-              </div>
-              {/* Title */}
-              <h3 className={`text-2xl font-semibold leading-tight ${feature.color} max-w-[280px]`}>
-                {feature.title}
-              </h3>
+    <section className="py-10 bg-[#F9FAFB] select-none">
+      <div className="max-w-7xl mx-auto px-6 md:px-10">
+        <div className="flex flex-col lg:flex-row items-stretch gap-12">
+          
+          {/* Left Side Content & Features Grid */}
+          <div className="flex-1 flex flex-col justify-center">
+            <h2 className="text-[36px] md:text-[42px] font-semibold text-[#1A1A1A] leading-tight mb-4">
+              Why Choose <span className="text-[#8B263E]">Dr. Awais</span> <span className="text-[#00A78E]">Malik?</span>
+            </h2>
+            <p className="text-gray-500 font-medium text-base md:text-lg leading-relaxed mb-10 max-w-2xl">
+              With over 10 years of experience and thousands of successful surgeries, Prof. Dr. Awais Malik is one of Pakistan's most trusted bariatric and laparoscopic surgeons.
+            </p>
 
-             {/* Link */}
-              <div className="relative pt-2 w-full mt-auto">
-                <a 
-                  href="#" 
-                  className={`inline-flex items-center font-semibold text-sm tracking-wide transition-all duration-300 group/link relative pb-1 ${feature.linkColor}`}
-                >
-                  {feature.link}
-                  <ArrowRight className="ml-2 w-4 h-4 transform group-hover/link:translate-x-1.5 transition-transform duration-300" />
-                  
-                  {/* Simple underline like in the image */}
-                  <span className="absolute bottom-0 left-0 w-12 h-[2px] bg-current opacity-30 group-hover/link:w-full group-hover/link:opacity-100 transition-all duration-300 ease-out"></span>
-                </a>
-                {/* Simple underline like in the image */}
-                <div className={`mt-1 h-[1px] w-12 bg-current opacity-20`}></div>
+            {/* 2-Column Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8">
+              {features.map((item, idx) => (
+                <div key={idx} className="flex items-start gap-4">
+                  <div className="p-3 bg-[#00A78E]/10 rounded-xl shrink-0 mt-0.5">
+                    {item.icon}
+                  </div>
+                  <div className="space-y-1">
+                    <h3 className="text-lg font-semibold text-[#1A1A1A]">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm font-semibold text-gray-400 leading-snug">
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Side: Solid Teal Card */}
+          <div className="lg:w-[45%] bg-[#2A9D8F] p-8 sm:p-12 rounded-[32px] text-white flex flex-col justify-between shadow-xl shadow-[#2A9D8F]/10 relative overflow-hidden">
+            
+            {/* Upper Content */}
+            <div className="space-y-3">
+              <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight">
+                Our Hospital Locations
+              </h3>
+              <p className="text-emerald-50/80 font-semibold text-sm sm:text-base leading-relaxed">
+                World-class medical facilities with modern infrastructure and dedicated bariatric surgery centers.
+              </p>
+            </div>
+
+            {/* Stats Grid */}
+            <div className="grid grid-cols-2 gap-x-6 gap-y-8 my-10 border-b border-white/20 pb-10">
+              <div className="space-y-0.5">
+                <div className="text-3xl sm:text-4xl font-semibold tracking-tight">10+</div>
+                <div className="text-emerald-100/70 font-semibold text-xs sm:text-sm">Years of Excellence</div>
+              </div>
+              <div className="space-y-0.5">
+                <div className="text-3xl sm:text-4xl font-semibold tracking-tight">99%</div>
+                <div className="text-emerald-100/70 font-semibold text-xs sm:text-sm">Success Rate</div>
+              </div>
+              <div className="space-y-0.5">
+                <div className="text-3xl sm:text-4xl font-semibold tracking-tight">20000+</div>
+                <div className="text-emerald-100/70 font-semibold text-xs sm:text-sm">Happy Patients</div>
+              </div>
+              <div className="space-y-0.5">
+                <div className="text-3xl sm:text-4xl font-semibold tracking-tight">24/7</div>
+                <div className="text-emerald-100/70 font-semibold text-xs sm:text-sm">Emergency Care</div>
               </div>
             </div>
-          ))}
+
+            {/* Locations List */}
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-[#C1FF72] shrink-0 mt-0.5" />
+                <p className="text-sm font-semibold text-emerald-50 leading-snug">
+                  Mid City Hospital, 10 C Jail Rd, Shadman, Lahore
+                </p>
+              </div>
+              <div className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-[#C1FF72] shrink-0 mt-0.5" />
+                <p className="text-sm font-semibold text-emerald-50 leading-snug">
+                  Fatima Memorial Hospital, Shadman, Lahore
+                </p>
+              </div>
+            </div>
+
+          </div>
+
         </div>
       </div>
     </section>
   );
 };
 
-export default FeaturesSection;
+export default WhyChooseSection;
