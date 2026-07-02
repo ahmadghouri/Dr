@@ -1,4 +1,4 @@
-import { useEffect } from "react"; 
+import { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -19,26 +19,28 @@ import DoctorsPage from "./DoctorsPage";
 import DoctorDetailsPage from "./DoctorDetailsPage";
 import ProjectsPage from "./ProjectsPage";
 import ProjectDetailsPage from "./ProjectDetailsPage";
-import WhyChooseUs from './components/WhyChooseUs';
+import WhyChooseUs from "./components/WhyChooseUs";
 import LoginForm from "./features/auth/components/LoginForm";
 import RegisterForm from "./features/auth/components/RegisterForm";
 import AdminDashboard from "./features/admin/components/AdminDashboard";
+import WelcomePopup from "./components/WelcomePopup";
 
 const AppContent = () => {
   const location = useLocation();
   const isAdminPath = location.pathname.startsWith("/admin");
 
-  // 2. Global Smooth Scroll Logic: 
-  
+  // 2. Global Smooth Scroll Logic:
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth", 
+      behavior: "smooth",
     });
-  }, [location.pathname]); 
+  }, [location.pathname]);
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
+      <WelcomePopup />
       <CustomCursor />
       {!isAdminPath && <Navbar />}
 
