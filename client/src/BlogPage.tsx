@@ -219,7 +219,7 @@ const BlogPage = () => {
                 encompassing a range of services from preventive care
               </p>
               <h2 className="text-lg sm:text-[22px] font-semibold text-[#1A1A1A] tracking-wide">
-                (+888) 178 456 765
+                (+92) 30003968500
               </h2>
             </div>
 
