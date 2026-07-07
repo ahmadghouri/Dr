@@ -6,6 +6,13 @@ export interface Doctor {
   expertise: string;
   description: string;
   image: string;
+  biography?: string;
+  education?: string[];
+  experience?: string[];
+  workingHours?: string;
+  specialization?: string[];
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export const getDoctors = async (): Promise<Doctor[]> => {

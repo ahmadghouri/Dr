@@ -25,12 +25,15 @@ import RegisterForm from "./features/auth/components/RegisterForm";
 import AdminDashboard from "./features/admin/components/AdminDashboard";
 import WelcomePopup from "./components/WelcomePopup";
 import BookingPopup from "./components/BookingPopup";
+import { useDoctors } from "./features/doctors/hooks/useDoctors";
 
 const AppContent = () => {
   const location = useLocation();
   const isAdminPath = location.pathname.startsWith("/admin");
+  const { data: doctors } = useDoctors();
 
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const doctorId = doctors?.[0]?._id || "";
 
   useEffect(() => {
     window.scrollTo({
@@ -95,6 +98,7 @@ const AppContent = () => {
       <BookingPopup
         isVisible={isBookingOpen}
         onClose={() => setIsBookingOpen(false)}
+        doctorId={doctorId}
       />
     </div>
   );

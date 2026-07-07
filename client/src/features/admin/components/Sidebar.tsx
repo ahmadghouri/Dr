@@ -9,7 +9,9 @@ import {
   MessageSquare,
   LogOut,
   LayoutDashboard,
-  ChevronRight
+  ChevronRight,
+  Calendar,
+  Clock
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -28,6 +30,8 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, logout }) =>
     { id: 'projects', label: 'Projects', icon: Briefcase },
     { id: 'blogs', label: 'Blogs', icon: FileText },
     { id: 'doctors', label: 'Doctors', icon: UserPlus },
+    { id: 'appointments', label: 'Appointments', icon: Calendar },
+    { id: 'availability', label: 'Availability', icon: Clock },
     { id: 'about', label: 'About Us', icon: Info },
     { id: 'contact', label: 'Messages', icon: MessageSquare },
   ];
