@@ -334,9 +334,47 @@ const getDoctorAppointments = async (req, res) => {
   }
 };
 
+
+const getBookedSlots = async (req, res) => {
+  try {
+    const { doctorId, date } = req.query;
+
+    if (!doctorId || !date) {
+      return res.status(400).json({
+        message: "doctorId and date are required",
+      });
+    }
+
+    const startOfDay = new Date(date);
+    startOfDay.setHours(0, 0, 0, 0);
+    const endOfDay = new Date(date);
+    endOfDay.setHours(23, 59, 59, 999);
+
+    const appointments = await Appointment.find({
+      doctorId,
+      active: true,
+      status: { $ne: "cancelled" },
+      startAt: { $gte: startOfDay, $lte: endOfDay },
+    }).select("startAt");
+
+    // Convert stored startAt back into "HH:mm" slot strings
+    const bookedTimes = appointments.map((appt) => {
+      const d = new Date(appt.startAt);
+      const hours = String(d.getHours()).padStart(2, "0");
+      const minutes = String(d.getMinutes()).padStart(2, "0");
+      return `${hours}:${minutes}`;
+    });
+
+    return res.status(200).json({ bookedTimes });
+  } catch (error) {
+    console.error("Error getting booked slots:", error);
+    res.status(500).json({ message: error.message });
+  }
+};
 module.exports = {
   bookAppointment,
   cancelAppointment,
   getAllAppointments,
   getDoctorAppointments,
+  getBookedSlots,
 };

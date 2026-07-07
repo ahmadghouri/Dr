@@ -1,11 +1,26 @@
 import React, { useState } from "react";
-import { useBookAppointment } from "../features/appointments/hooks/useAppointments";
+import {
+  useBookAppointment,
+  useDoctorSlots,
+} from "../features/appointments/hooks/useAppointments";
+import type { Slot } from "../api/appointmentApi";
 
 interface BookingPopupProps {
   isVisible: boolean;
   onClose: () => void;
   doctorId: string;
 }
+
+const TIME_SLOTS = [
+  { value: "09:00", label: "09:00 AM" },
+  { value: "10:00", label: "10:00 AM" },
+  { value: "11:00", label: "11:00 AM" },
+  { value: "12:00", label: "12:00 PM" },
+  { value: "14:00", label: "02:00 PM" },
+  { value: "15:00", label: "03:00 PM" },
+  { value: "16:00", label: "04:00 PM" },
+  { value: "17:00", label: "05:00 PM" },
+];
 
 const BookingPopup: React.FC<BookingPopupProps> = ({
   isVisible,
@@ -25,10 +40,50 @@ const BookingPopup: React.FC<BookingPopupProps> = ({
   });
   const bookMutation = useBookAppointment();
 
+ 
+  const today = new Date();
+  const minDate = today.toISOString().split("T")[0]; // Today's date
+
+  const sevenDaysLater = new Date();
+  sevenDaysLater.setDate(today.getDate() + 7);
+  const maxDate = sevenDaysLater.toISOString().split("T")[0]; // Exactly 7 days from now
+
+  // fetch slots (with isBooked flag) for the selected doctor + date
+  const {
+    data: slotsResponse,
+    isFetching: isCheckingSlots,
+  } = useDoctorSlots(doctorId, formData.date);
+
+  
+  
+  const slots: Slot[] = Array.isArray(slotsResponse)
+    ? slotsResponse
+    : Array.isArray((slotsResponse as any)?.slots)
+      ? (slotsResponse as any).slots
+      : Array.isArray((slotsResponse as any)?.data)
+        ? (slotsResponse as any).data
+        : [];
+
+  const bookedTimes = slots
+    .filter((slot) => slot.isBooked)
+    .map((slot) => {
+      const d = new Date(slot.startAt);
+      const hours = String(d.getHours()).padStart(2, "0");
+      const minutes = String(d.getMinutes()).padStart(2, "0");
+      return `${hours}:${minutes}`;
+    });
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    if (name === "date") {
+      setFormData((prev) => ({ ...prev, date: value, time: "" }));
+      return;
+    }
+
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -317,8 +372,9 @@ const BookingPopup: React.FC<BookingPopupProps> = ({
               </div>
             </div>
 
-            {/* Date and Time (Responsive Grid: Stacked on mobile, 2 cols on small tablet/desktop) */}
+            {/* Date and Time Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Date Input */}
               <div>
                 <label className="block text-[14px] sm:text-[15px] font-semibold text-[#092642] mb-1.5 flex items-center gap-2">
                   <svg
@@ -342,10 +398,13 @@ const BookingPopup: React.FC<BookingPopupProps> = ({
                   value={formData.date}
                   onChange={handleChange}
                   required
+                  min={minDate} 
+                  max={maxDate} 
                   className="w-full px-4 py-2.5 sm:py-3 rounded-xl border border-gray-200 text-[13px] text-gray-500 bg-white focus:outline-none focus:border-2 focus:border-[#059781] font-semibold cursor-pointer transition-all dynamic-date-input"
                 />
               </div>
 
+              {/* Time Input */}
               <div>
                 <label className="block text-[14px] sm:text-[15px] font-semibold text-[#092642] mb-1.5 flex items-center gap-2">
                   <svg
@@ -362,6 +421,11 @@ const BookingPopup: React.FC<BookingPopupProps> = ({
                     />
                   </svg>
                   Time *
+                  {isCheckingSlots && (
+                    <span className="text-[11px] font-normal text-gray-400">
+                      (checking availability...)
+                    </span>
+                  )}
                 </label>
                 <div className="relative">
                   <select
@@ -369,19 +433,24 @@ const BookingPopup: React.FC<BookingPopupProps> = ({
                     value={formData.time}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2.5 sm:py-3 rounded-xl border text-[13px] border-gray-200 bg-white focus:outline-none focus:border-2 focus:border-[#059781] text-gray-500 font-semibold appearance-none cursor-pointer transition-all"
+                    disabled={!formData.date}
+                    className="w-full px-4 py-2.5 sm:py-3 rounded-xl border text-[13px] border-gray-200 bg-white focus:outline-none focus:border-2 focus:border-[#059781] text-gray-500 font-semibold appearance-none cursor-pointer transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <option value="" className="text-gray-400 font-semibold ">
-                      Date first
+                      {formData.date ? "Select a time" : "Date first"}
                     </option>
-                    <option value="09:00">09:00 AM</option>
-                    <option value="10:00">10:00 AM</option>
-                    <option value="11:00">11:00 AM</option>
-                    <option value="12:00">12:00 PM</option>
-                    <option value="14:00">02:00 PM</option>
-                    <option value="15:00">03:00 PM</option>
-                    <option value="16:00">04:00 PM</option>
-                    <option value="17:00">05:00 PM</option>
+                    {TIME_SLOTS.map((slot) => {
+                      const isBooked = bookedTimes.includes(slot.value);
+                      return (
+                        <option
+                          key={slot.value}
+                          value={slot.value}
+                          disabled={isBooked}
+                        >
+                          {slot.label} {isBooked ? "(Booked)" : ""}
+                        </option>
+                      );
+                    })}
                   </select>
                   <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
                     <svg
@@ -439,7 +508,7 @@ const BookingPopup: React.FC<BookingPopupProps> = ({
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
-                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93 $.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                   </svg>
                 </a>
               </div>
