@@ -6,6 +6,8 @@ const doctorSchema = new mongoose.Schema(
     expertise: { type: String, required: true },
     description: { type: String, required: true },
     image: { type: String, required: true }, // Cloudinary URL
+    email: { type: String },
+    phoneNumber: { type: String },
     // Detailed fields
     biography: { type: String },
     education: [{ type: String }],
