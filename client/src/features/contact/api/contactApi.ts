@@ -13,11 +13,11 @@ export interface ContactMessage {
 export const sendContactMessage = async (
   data: any,
 ): Promise<ContactMessage> => {
-  const response = await axiosInstance.post("/content/contact", data);
+  const response = await axiosInstance.post("/v1/content/contact", data);
   return response.data;
 };
 
 export const getContactMessages = async (): Promise<ContactMessage[]> => {
-  const response = await axiosInstance.get("/content/contact");
+  const response = await axiosInstance.get("/v1/content/contact");
   return response.data;
 };

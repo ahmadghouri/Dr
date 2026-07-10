@@ -16,7 +16,7 @@ export const getDoctorAvailabilities = async (
   doctorId: string,
 ): Promise<DoctorAvailability[]> => {
   const response = await axiosInstance.get(
-    `/doctors/${doctorId}/availabilities`,
+    `/v1/doctors/${doctorId}/availabilities`,
   );
   return response.data;
 };
