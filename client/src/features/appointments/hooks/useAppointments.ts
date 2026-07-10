@@ -3,19 +3,18 @@ import { bookAppointment, getDoctorSlots } from "../api/appointmentApi";
 import type { BookAppointmentRequest } from "../api/appointmentApi";
 import { toast } from "react-hot-toast";
 
-
 import type { Slot } from "../api/appointmentApi";
 
 export const useDoctorSlots = (doctorId: string, date: string) => {
   return useQuery<Slot[]>({
     queryKey: ["doctorSlots", doctorId, date],
     queryFn: () => getDoctorSlots(doctorId, date),
-    enabled: Boolean(doctorId) && Boolean(date), 
-    refetchInterval: 5000, 
-    refetchIntervalInBackground: true,
+    enabled: Boolean(doctorId) && Boolean(date),
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    staleTime: 5 * 60 * 1000, // 5 minutes
   });
 };
-
 
 export const useBookAppointment = () => {
   return useMutation({
@@ -30,8 +29,6 @@ export const useBookAppointment = () => {
     },
   });
 };
-
-
 
 // export const useDoctorSlots = (doctorId: string, date: string) => {
 //   return useQuery({

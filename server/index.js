@@ -21,8 +21,8 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/content", contentRoutes);
-app.use("/api", doctorAvailabilityRoutes);
-app.use("/api", appointmentRoutes);
+app.use("/api/doctors", doctorAvailabilityRoutes);
+app.use("/api/appointments", appointmentRoutes);
 
 // Basic Route
 app.get("/", (req, res) => {

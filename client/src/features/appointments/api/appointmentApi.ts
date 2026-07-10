@@ -47,5 +47,6 @@ export const getDoctorSlots = async (
   const response = await axiosInstance.get(`/doctors/${doctorId}/slots`, {
     params: { date },
   });
-  return response.data;
+  // Server returns { success: true, slots: [...] }, so extract the slots array
+  return response.data.slots || response.data;
 };
