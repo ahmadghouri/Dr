@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const path = require("path");
 
 const authRoutes = require("./routes/authRoutes");
 const adminRoutes = require("./routes/adminRoutes");
@@ -24,9 +25,12 @@ app.use("/api/content", contentRoutes);
 app.use("/api/doctors", doctorAvailabilityRoutes);
 app.use("/api/appointments", appointmentRoutes);
 
-// Basic Route
-app.get("/", (req, res) => {
-  res.send("API is running...");
+// Serve static files from React's build directory
+app.use(express.static(path.join(__dirname, "../client/dist")));
+
+// Handle React client-side routing
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
 
 // Error Handling Middleware
