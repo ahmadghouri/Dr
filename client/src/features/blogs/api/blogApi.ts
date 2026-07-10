@@ -21,29 +21,29 @@ export interface Blog {
 }
 
 export const getBlogs = async (): Promise<Blog[]> => {
-  const response = await axiosInstance.get('/content/blogs');
+  const response = await axiosInstance.get('/v1/content/blogs');
   return response.data;
 };
 
 export const getBlogById = async (id: string): Promise<Blog> => {
-  const response = await axiosInstance.get(`/content/blogs/${id}`);
+  const response = await axiosInstance.get(`/v1/content/blogs/${id}`);
   return response.data;
 };
 
 export const createBlog = async (data: FormData): Promise<Blog> => {
-  const response = await axiosInstance.post("/content/blogs", data, {
+  const response = await axiosInstance.post("/v1/content/blogs", data, {
     headers: { "Content-Type": "multipart/form-data" },
   });
   return response.data;
 };
 
 export const updateBlog = async (id: string, data: FormData): Promise<Blog> => {
-  const response = await axiosInstance.put(`/content/blogs/${id}`, data, {
+  const response = await axiosInstance.put(`/v1/content/blogs/${id}`, data, {
     headers: { "Content-Type": "multipart/form-data" },
   });
   return response.data;
 };
 
 export const deleteBlog = async (id: string): Promise<void> => {
-  await axiosInstance.delete(`/content/blogs/${id}`);
+  await axiosInstance.delete(`/v1/content/blogs/${id}`);
 };

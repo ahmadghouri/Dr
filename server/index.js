@@ -19,11 +19,11 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use("/api/auth", authRoutes);
-app.use("/api/admin", adminRoutes);
-app.use("/api/content", contentRoutes);
-app.use("/api/doctors", doctorAvailabilityRoutes);
-app.use("/api/appointments", appointmentRoutes);
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/admin", adminRoutes);
+app.use("/api/v1/content", contentRoutes);
+app.use("/api/v1/doctors", doctorAvailabilityRoutes);
+app.use("/api/v1/appointments", appointmentRoutes);
 
 // Serve static files from React's build directory
 app.use(express.static(path.join(__dirname, "../client/dist")));
