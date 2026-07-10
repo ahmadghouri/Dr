@@ -27,12 +27,12 @@ export const getAppointments = async (filters?: {
   visitType?: string;
 }): Promise<Appointment[]> => {
   const params = new URLSearchParams();
-  if (filters?.doctorId) params.append('doctorId', filters.doctorId);
-  if (filters?.status) params.append('status', filters.status);
-  if (filters?.visitType) params.append('visitType', filters.visitType);
-  if (filters?.startDate) params.append('startDate', filters.startDate);
-  if (filters?.endDate) params.append('endDate', filters.endDate);
-  const response = await axiosInstance.get('/appointments', { params });
+  if (filters?.doctorId) params.append("doctorId", filters.doctorId);
+  if (filters?.status) params.append("status", filters.status);
+  if (filters?.visitType) params.append("visitType", filters.visitType);
+  if (filters?.startDate) params.append("startDate", filters.startDate);
+  if (filters?.endDate) params.append("endDate", filters.endDate);
+  const response = await axiosInstance.get("/appointments", { params });
   return response.data;
 };
 
@@ -72,12 +72,12 @@ export const addAvailability = async (data: {
   endTime: string;
   slotDuration?: number;
 }): Promise<DoctorAvailability> => {
-  const response = await axiosInstance.post("/doctor/availability", data);
+  const response = await axiosInstance.post("/doctors/availability", data);
   return response.data.availability;
 };
 
 export const getAllAvailabilities = async (): Promise<DoctorAvailability[]> => {
-  const response = await axiosInstance.get("/doctor/availabilities");
+  const response = await axiosInstance.get("/doctors/availabilities");
   return response.data;
 };
 
@@ -85,13 +85,13 @@ export const getDoctorAvailabilities = async (
   doctorId: string,
 ): Promise<DoctorAvailability[]> => {
   const response = await axiosInstance.get(
-    `/doctor/${doctorId}/availabilities`,
+    `/doctors/${doctorId}/availabilities`,
   );
   return response.data;
 };
 
 export const deleteAvailability = async (id: string): Promise<void> => {
-  await axiosInstance.delete(`/doctor/availability/${id}`);
+  await axiosInstance.delete(`/doctors/availability/${id}`);
 };
 
 // --- Existing User API ---
