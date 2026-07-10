@@ -72,7 +72,7 @@ const seedData = async () => {
         dayOfWeek,
         startTime: "09:00",
         endTime: "17:00",
-        slotDuration: 60, // 60 minutes per slot
+        slotDuration: 30, // 30 minutes per slot
         isActive: true,
       });
     }
