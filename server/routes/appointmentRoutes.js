@@ -6,6 +6,7 @@ const {
   cancelAppointment,
   getAllAppointments,
   getDoctorAppointments,
+  getBookedSlots,
 } = require('../controllers/appointmentController');
 
 // Book an appointment (public)

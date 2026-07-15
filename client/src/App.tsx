@@ -26,7 +26,7 @@ import AdminDashboard from "./features/admin/components/AdminDashboard";
 import WelcomePopup from "./components/WelcomePopup";
 import BookingPopup from "./components/BookingPopup";
 import { useDoctors } from "./features/doctors/hooks/useDoctors";
-
+import { WhatsAppWidget } from './components/WhatsAppWidget';
 const AppContent = () => {
   const location = useLocation();
   const isAdminPath = location.pathname.startsWith("/admin");
@@ -73,7 +73,7 @@ const AppContent = () => {
           </button>
         </div>
       )}
-
+    {!isAdminPath && <WhatsAppWidget />}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginForm />} />
