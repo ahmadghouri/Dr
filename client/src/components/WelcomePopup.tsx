@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BookingPopup from "./BookingPopup";
 import { useDoctors } from "../features/doctors/hooks/useDoctors";
+import Image from "../assets/imm.jpg"
 
 const WelcomePopup: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -93,7 +94,7 @@ const WelcomePopup: React.FC = () => {
                 <div className="mt-4 bg-white/10 rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 sm:gap-4 border border-white/5">
                   <div className="relative flex-shrink-0">
                     <img
-                      src="imm.jpg"
+                      src={Image}
                       alt="Dr. Awais Malik"
                       className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover border-2 border-white/20 shadow-sm"
                     />

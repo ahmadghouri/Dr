@@ -10,18 +10,14 @@ const {
 } = require('../controllers/appointmentController');
 
 // Book an appointment (public)
-router.post('/appointments/book', bookAppointment);
+router.post('/book', bookAppointment);
 
 // Get all appointments (admin only)
-router.get('/appointments', protect, admin, getAllAppointments);
+router.get('/', protect, admin, getAllAppointments);
 
 // Cancel an appointment (admin only)
-router.patch('/appointments/:id/cancel', protect, admin, cancelAppointment);
-
-// Get doctor's appointments (admin only)
-router.get('/doctors/:doctorId/appointments', protect, admin, getDoctorAppointments);
-
-
+router.patch('/:id/cancel', protect, admin, cancelAppointment);
 
 router.get("/booked-slots", getBookedSlots);
+
 module.exports = router;

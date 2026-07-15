@@ -1,14 +1,3 @@
-// Placeholder for email sending functionality
-// You can integrate with nodemailer, SendGrid, etc.
-const sendEmail = async ({ to, subject, text, html }) => {
-  console.log(`Sending email to ${to}: ${subject}`);
-  console.log("Text:", text);
-  console.log("HTML:", html);
-  // TODO: Implement actual email sending
-  return { success: true };
-};
-
-module.exports = sendEmail;
 const parseLocalDate = (date) => {
   const [year, month, day] = date.split("-").map(Number);
   return new Date(year, month - 1, day);

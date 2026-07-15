@@ -27,12 +27,12 @@ export const getAppointments = async (filters?: {
   visitType?: string;
 }): Promise<Appointment[]> => {
   const params = new URLSearchParams();
-  if (filters?.doctorId) params.append('doctorId', filters.doctorId);
-  if (filters?.status) params.append('status', filters.status);
-  if (filters?.visitType) params.append('visitType', filters.visitType);
-  if (filters?.startDate) params.append('startDate', filters.startDate);
-  if (filters?.endDate) params.append('endDate', filters.endDate);
-  const response = await axiosInstance.get('/appointments', { params });
+  if (filters?.doctorId) params.append("doctorId", filters.doctorId);
+  if (filters?.status) params.append("status", filters.status);
+  if (filters?.visitType) params.append("visitType", filters.visitType);
+  if (filters?.startDate) params.append("startDate", filters.startDate);
+  if (filters?.endDate) params.append("endDate", filters.endDate);
+  const response = await axiosInstance.get("/v1/appointments", { params });
   return response.data;
 };
 
@@ -42,14 +42,14 @@ export const getDoctorAppointments = async (
 ): Promise<Appointment[]> => {
   const params = date ? { date } : {};
   const response = await axiosInstance.get(
-    `/doctors/${doctorId}/appointments`,
+    `/v1/doctors/${doctorId}/appointments`,
     { params },
   );
   return response.data;
 };
 
 export const cancelAppointment = async (id: string): Promise<void> => {
-  await axiosInstance.patch(`/appointments/${id}/cancel`);
+  await axiosInstance.patch(`/v1/appointments/${id}/cancel`);
 };
 
 // --- Doctor Availability Types & API ---
@@ -72,12 +72,12 @@ export const addAvailability = async (data: {
   endTime: string;
   slotDuration?: number;
 }): Promise<DoctorAvailability> => {
-  const response = await axiosInstance.post("/doctor/availability", data);
+  const response = await axiosInstance.post("/v1/doctors/availability", data);
   return response.data.availability;
 };
 
 export const getAllAvailabilities = async (): Promise<DoctorAvailability[]> => {
-  const response = await axiosInstance.get("/doctor/availabilities");
+  const response = await axiosInstance.get("/v1/doctors/availabilities");
   return response.data;
 };
 
@@ -85,21 +85,21 @@ export const getDoctorAvailabilities = async (
   doctorId: string,
 ): Promise<DoctorAvailability[]> => {
   const response = await axiosInstance.get(
-    `/doctor/${doctorId}/availabilities`,
+    `/v1/doctors/${doctorId}/availabilities`,
   );
   return response.data;
 };
 
 export const deleteAvailability = async (id: string): Promise<void> => {
-  await axiosInstance.delete(`/doctor/availability/${id}`);
+  await axiosInstance.delete(`/v1/doctors/availability/${id}`);
 };
 
 // --- Existing User API ---
 export const getUsers = async (): Promise<User[]> => {
-  const response = await axiosInstance.get("/admin/users");
+  const response = await axiosInstance.get("/v1/admin/users");
   return response.data;
 };
 
 export const deleteUser = async (id: string): Promise<void> => {
-  await axiosInstance.delete(`/admin/users/${id}`);
+  await axiosInstance.delete(`/v1/admin/users/${id}`);
 };

@@ -36,7 +36,7 @@ export interface Slot {
 export const bookAppointment = async (
   data: BookAppointmentRequest,
 ): Promise<Appointment> => {
-  const response = await axiosInstance.post("/appointments/book", data);
+  const response = await axiosInstance.post("/v1/appointments/book", data);
   return response.data;
 };
 
@@ -44,8 +44,9 @@ export const getDoctorSlots = async (
   doctorId: string,
   date: string,
 ): Promise<Slot[]> => {
-  const response = await axiosInstance.get(`/doctors/${doctorId}/slots`, {
+  const response = await axiosInstance.get(`/v1/doctors/${doctorId}/slots`, {
     params: { date },
   });
-  return response.data;
+  // Server returns { success: true, slots: [...] }, so extract the slots array
+  return response.data.slots || response.data;
 };
