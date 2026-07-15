@@ -5,6 +5,7 @@ const {
   bookAppointment,
   cancelAppointment,
   getAllAppointments,
+  getDoctorAppointments,
   getBookedSlots,
 } = require('../controllers/appointmentController');
 
